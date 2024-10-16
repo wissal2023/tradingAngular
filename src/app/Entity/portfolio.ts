@@ -8,7 +8,7 @@ export class Portfolio {
     dateCreated!: Date;
     accVal: number = 99000.000;
     buyPow!: number;
-    cash!: number;
+    cash!: number;    
     tdyChange?: number;
     annReturn?: number;
     totGainLoss?: number;

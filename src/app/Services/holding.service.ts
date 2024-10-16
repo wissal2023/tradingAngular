@@ -8,7 +8,7 @@ import { Holding } from '../Entity/holding';
 })
 export class HoldingService {
 
-  private baseUrl = 'http://localhost:8089/holding';
+  private baseUrl = 'http://localhost:8090/home/holding';
 
   constructor(private http: HttpClient) {}
 

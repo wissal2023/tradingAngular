@@ -15,6 +15,10 @@ import { PortfolioComponent } from './Front/portfolio/portfolio.component';
 import { StockQuoteComponent } from './Front/stock-quote/stock-quote.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { IntraDayComponent } from './Front/intra-day/intra-day.component';
+import { HoldingComponent } from './Front/holding/holding.component';
+import { TransactionComponent } from './Front/transaction/transaction.component';
+import { PlaceOrderComponent } from './Front/place-order/place-order.component';
 
 
 
@@ -31,7 +35,11 @@ import { FormsModule } from '@angular/forms';
   FooterFrontComponent,
   HeaderComponent,
   PortfolioComponent,
-  StockQuoteComponent
+  StockQuoteComponent,
+  IntraDayComponent,
+  HoldingComponent,
+  TransactionComponent,
+  PlaceOrderComponent
     
   ],
   imports: [

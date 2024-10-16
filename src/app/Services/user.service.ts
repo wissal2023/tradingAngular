@@ -8,7 +8,7 @@ import { User } from '../Entity/user';
 })
 export class UserService {
 
-  private baseUrl = 'http://localhost:8080/user';  // Your Spring Boot API base URL
+  private baseUrl = 'http://localhost:8090/home/user'; 
 
   constructor(private http: HttpClient) { }
 

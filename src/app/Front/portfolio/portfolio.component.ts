@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Portfolio } from 'src/app/Entity/portfolio';
 import { MarketStatusService } from 'src/app/Services/market-status.service';
 import { PortfolioService } from 'src/app/Services/portfolio.service';
 
@@ -11,25 +12,21 @@ import { PortfolioService } from 'src/app/Services/portfolio.service';
 export class PortfolioComponent implements OnInit{
 
   marketStatus: any;
-  portfolios!: any[];
+  portfolios: Portfolio[] = [];
+
 
   constructor(private marketStatusService: MarketStatusService,   
               private portfolioService: PortfolioService) {}
 
   ngOnInit() {
     this.fetchPortfolios();
-    //this.fetchMarketStatus();
+    this.fetchMarketStatus();
   }
   fetchPortfolios() {
-    this.portfolioService.getAllPortfolios().subscribe(
-      (data) => {
-        this.portfolios = data;
-        console.log(this.portfolios);  
-      },
-      (error) => {
-        console.error('Error fetching portfolios:', error);
-      }
-    );
+    this.portfolioService.getAllPortfolios().subscribe((data: Portfolio[]) => {
+      this.portfolios = data;
+      console.log(this.portfolios); 
+    });
   }
   fetchMarketStatus() {
     this.marketStatusService.getMarketStatus().subscribe(

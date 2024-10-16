@@ -8,7 +8,7 @@ import { PlacingOrder } from '../Entity/placing-order';
 })
 export class PlacingOrderService {
 
-  private baseUrl = 'http://localhost:8089/placingOrder';
+  private baseUrl = 'http://localhost:8090/home/placingOrder';
 
   constructor(private http: HttpClient) {}
 
