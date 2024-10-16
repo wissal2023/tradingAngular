@@ -4,6 +4,7 @@ import { StockQuoteService } from 'src/app/Services/stock-quote-service.service'
 @Component({
   selector: 'app-stock-quote',
   templateUrl: './stock-quote.component.html',
+  styleUrls: ['./stock-quote.component.css']
 })
 export class StockQuoteComponent {
   symbol: string = '';
