@@ -1,0 +1,254 @@
+<app-header></app-header>
+<div class="container-fluid about py-5">
+<div class="page-heading">
+    <h3>Portfolio overview</h3>
+</div>
+
+<div>
+    <h5>Global Market Status</h5>
+    <div *ngIf="marketStatus">
+      <h5>Market Status: </h5>
+      <pre>{{ marketStatus | json }}</pre> 
+    </div>
+  </div>
+
+
+  <div class="page-content">
+    <section class="row">
+      <div class="col-12 col-lg-9">
+        <div class="row" *ngFor="let portfolio of portfolios">
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card">
+                <div class="card-body px-3 py-4-5">
+                    <div class="row">
+                    <div class="col-md-4">
+                        <div class="stats-icon purple">
+                        <i class="iconly-boldShow"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="text-muted font-semibold">Account value</h6>
+                        <h6 class="font-extrabold mb-0">{{ portfolio.accVal }}</h6>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div> 
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card">
+                <div class="card-body px-3 py-4-5">
+                    <div class="row">
+                    <div class="col-md-4">
+                        <div class="stats-icon blue">
+                        <i class="iconly-boldProfile"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h6 class="text-muted font-semibold">Buying power</h6>
+                        <h6 class="font-extrabold mb-0">{{ portfolio.buyPow }}</h6>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div> 
+            <div class="col-6 col-lg-3 col-md-6">
+            <div class="card">
+              <div class="card-body px-3 py-4-5">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="stats-icon green">
+                      <i class="iconly-boldAdd-User"></i>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <h6 class="text-muted font-semibold">Cash</h6>
+                    <h6 class="font-extrabold mb-0">{{ portfolio.cash }}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div> 
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card">
+                <div class="card-body px-3 py-4-5">
+                        <div class="row">
+                        <div class="col-md-4">
+                            <div class="stats-icon red">
+                            <i class="iconly-boldBookmark"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h6 class="text-muted font-semibold">Rank</h6>
+                            <h6 class="font-extrabold mb-0">{{ portfolio.rank }}</h6>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    
+              
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>line chart for the stocks performance of the portfolio </h4>
+                        </div>
+                        <div class="card-body">
+                            <app-stock-quote></app-stock-quote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Holdings-->
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="card">
+                        <section class="section">
+                            <div class="row" id="table-hover-row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Holdings</h4>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>NAME</th>
+                                                            <th>RATE</th>
+                                                            <th>SKILL</th>
+                                                            <th>TYPE</th>
+                                                            <th>LOCATION</th>
+                                                            <th>ACTION</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-bold-500">Michael Right</td>
+                                                            <td>$15/hr</td>
+                                                            <td class="text-bold-500">UI/UX</td>
+                                                            <td>Remote</td>
+                                                            <td>Austin,Taxes</td>
+                                                            <td><a href="#"><i
+                                                                        class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                        data-feather="mail"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-bold-500">Morgan Vanblum</td>
+                                                            <td>$13/hr</td>
+                                                            <td class="text-bold-500">Graphic concepts</td>
+                                                            <td>Remote</td>
+                                                            <td>Shangai,China</td>
+                                                            <td><a href="#"><i
+                                                                        class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                        data-feather="mail"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-bold-500">Tiffani Blogz</td>
+                                                            <td>$15/hr</td>
+                                                            <td class="text-bold-500">Animation</td>
+                                                            <td>Remote</td>
+                                                            <td>Austin,Texas</td>
+                                                            <td><a href="#"><i
+                                                                        class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                        data-feather="mail"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-bold-500">Ashley Boul</td>
+                                                            <td>$15/hr</td>
+                                                            <td class="text-bold-500">Animation</td>
+                                                            <td>Remote</td>
+                                                            <td>Austin,Texas</td>
+                                                            <td><a href="#"><i
+                                                                        class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                        data-feather="mail"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-bold-500">Mikkey Mice</td>
+                                                            <td>$15/hr</td>
+                                                            <td class="text-bold-500">Animation</td>
+                                                            <td>Remote</td>
+                                                            <td>Austin,Texas</td>
+                                                            <td><a href="#"><i
+                                                                        class="badge-circle badge-circle-light-secondary font-medium-1"
+                                                                        data-feather="mail"></i></a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3">
+            <div class="card">
+                <div class="card-body py-4 px-5">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar avatar-xl">
+                            <img src="assets/Back/images/faces/1.jpg" alt="Face 1">
+                        </div>
+                        <div class="ms-3 name">
+                            <h5 class="font-bold">John Duck</h5>
+                            <h6 class="text-muted mb-0">johnducky</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>watchlist</h4>
+                </div>
+                <div class="card-content pb-4">
+                    <div class="recent-message d-flex px-4 py-3">
+                        <div class="avatar avatar-lg">
+                            <img src="assets/Back/images/faces/4.jpg">
+                        </div>
+                        <div class="name ms-4">
+                            <h5 class="mb-1">Hank Schrader</h5>
+                            <h6 class="text-muted mb-0">johnducky</h6>
+                        </div>
+                    </div>
+                    <div class="recent-message d-flex px-4 py-3">
+                        <div class="avatar avatar-lg">
+                            <img src="assets/Back/images/faces/5.jpg">
+                        </div>
+                        <div class="name ms-4">
+                            <h5 class="mb-1">Dean Winchester</h5>
+                            <h6 class="text-muted mb-0">imdean</h6>
+                        </div>
+                    </div>
+                    <div class="recent-message d-flex px-4 py-3">
+                        <div class="avatar avatar-lg">
+                            <img src="assets/Back/images/faces/1.jpg">
+                        </div>
+                        <div class="name ms-4">
+                            <h5 class="mb-1">John Dodol</h5>
+                            <h6 class="text-muted mb-0">dodoljohn</h6>
+                        </div>
+                    </div>
+                    <div class="px-4">
+                        <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
+                            Conversation</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Visitors Profile</h4>
+                </div>
+                <div class="card-body">
+                    <div id="chart-visitors-profile"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+<app-footer-front></app-footer-front>
