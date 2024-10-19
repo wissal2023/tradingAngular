@@ -12,22 +12,16 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  // Fetch all users
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}/Get-all-users`);
   }
-
-  // Fetch a single user by ID
   getUserById(userId: number): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/Get-user/${userId}`);
   }
-
-  // Add a user and assign a portfolio
-  addUserAndAssignPortfolio(user: User): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/add-user-and-assign-portfolio`, user);
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/addAndAssignPortfolio`, user);
   }
-
-  // Modify a user
+ 
   modifyUser(user: User): Observable<User> {
     return this.http.put<User>(`${this.baseUrl}/modify-user`, user);
   }

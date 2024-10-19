@@ -1,0 +1,107 @@
+<app-header></app-header>
+<div class="page-content">
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+                <h4>Order Form </h4>
+            </div>
+            <div class="card-body">
+                <div class="modal-body">
+                    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+                        <div class="form-body">
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="input-group mb-3">
+                                <label class="input-group-text" for="tradeType">Trade type</label>
+                                <select class="form-select" formControlName="tradeType" id="tradeType">
+                                  <option *ngFor="let type of tradeTypes" [value]="type">{{type}}</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group has-icon-left">
+                                <label for="symbol">Symbole</label>
+                                <div class="position-relative">
+                                  <input type="text" class="form-control" formControlName="symbol" id="symbol" placeholder="Look up symbol/ Company name/ index">
+                                  <div class="form-control-icon"><i class="bi bi-search"></i></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="input-group mb-3">
+                                <label class="input-group-text" for="transacType">Transaction Type</label>
+                                <select formControlName="transacType" id="transacType">
+                                  <option *ngFor="let type of transacTypes" [value]="type">{{type}}</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group has-icon-left">
+                                <label for="qty">Quantity</label>
+                                <div class="position-relative">
+                                  <input type="number" class="form-control" formControlName="qty" id="qty" min="1">
+                                  <div class="form-control-icon">
+                                    <svg class="bi" width="1em" height="1em" fill="currentColor">
+                                      <use xlink:href="assets/Back/vendors/bootstrap-icons/bootstrap-icons.svg#minecart-loaded"></use>
+                                    </svg>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="input-group mb-3">
+                                <label class="input-group-text" for="orderType">Order type</label>
+                                <select formControlName="orderType" id="orderType">
+                                  <option *ngFor="let type of orderTypes" [value]="type">{{type}}</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group has-icon-left">
+                                <label for="duration">Duration</label>
+                                <div class="position-relative">
+                                  <input type="number" class="form-control" formControlName="duration" id="duration" min="1">
+                                  <div class="form-control-icon"><i class="bi bi-phone"></i></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="input-group mb-3">
+                                <label class="input-group-text" for="param">Parameter</label>
+                                <select formControlName="param" id="param" class="form-select">
+                                  <option value="$">$</option>
+                                  <option value="%">%</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group has-icon-left">
+                                <label for="price">Price / percentage</label>
+                                <div class="position-relative">
+                                  <input type="number" class="form-control" formControlName="price" id="price" min="0">
+                                  <div class="form-control-icon"><i class="bi bi-lock"></i></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="form-group has-icon-left">
+                                <div class="position-relative">
+                                  <label for="notes" class="form-label">Notes</label>
+                                  <textarea class="form-control" rows="3" formControlName="notes" id="notes"></textarea>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="reset" class="btn btn-light-secondary">Reset</button>
+                              <button type="submit" class="btn btn-primary ml-1" [disabled]="orderForm.invalid">Submit</button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                      
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<app-footer-front></app-footer-front>

@@ -13,7 +13,7 @@ export class PlacingOrder {
     tradeType!: TradeType;
     orderType!: OrderType;
     transacType!: TransacType;
-    status!: Status;
+    status!: Status ;
     
     transactions!: Transaction[];
 }
@@ -46,5 +46,6 @@ export enum TransacType {
 export enum Status {
     OPEN = 'OPEN',
     FILLED = 'FILLED',
-    CANCELLED = 'CANCELLED'
+    CANCELLED = 'CANCELLED',
+    PENDING = 'PENDING'
 }

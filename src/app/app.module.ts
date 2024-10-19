@@ -14,11 +14,15 @@ import { HeaderComponent } from './Front/header/header.component';
 import { PortfolioComponent } from './Front/portfolio/portfolio.component';
 import { StockQuoteComponent } from './Front/stock-quote/stock-quote.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IntraDayComponent } from './Front/intra-day/intra-day.component';
 import { HoldingComponent } from './Front/holding/holding.component';
 import { TransactionComponent } from './Front/transaction/transaction.component';
 import { PlaceOrderComponent } from './Front/place-order/place-order.component';
+import { LoginComponent } from './Front/login/login.component';
+import { OrderFormComponent } from './Front/order-form/order-form.component';
+import { ListPortfolioComponent } from './Back/list-portfolio/list-portfolio.component';
+import { ListOrdersComponent } from './Back/list-orders/list-orders.component';
 
 
 
@@ -39,14 +43,20 @@ import { PlaceOrderComponent } from './Front/place-order/place-order.component';
   IntraDayComponent,
   HoldingComponent,
   TransactionComponent,
-  PlaceOrderComponent
+  PlaceOrderComponent,
+  LoginComponent,
+  OrderFormComponent,
+  ListPortfolioComponent,
+  ListOrdersComponent
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, 
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

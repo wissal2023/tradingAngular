@@ -9,8 +9,8 @@ import { IntradayService } from 'src/app/Services/IntradayService';
 export class IntraDayComponent implements OnInit {
 
   stockData: any;
-  symbol: string = 'MSFT';  // Example
-  interval!: string;
+  symbol: string = 'MSFT';  
+  interval: string= '5min';
   constructor(private stockService: IntradayService) {}
 
   ngOnInit(): void {

@@ -6,7 +6,7 @@ export class User {
     email!: string;
     username!: string;
     password!: string;
-    role!: [Role_User];
+    role!: [Role_User];//u
     rank!: number;
     portfolio!: Portfolio;
     //registrationDate?: string;
