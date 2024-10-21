@@ -1,3 +1,4 @@
+import { Portfolio } from "./portfolio";
 import { Transaction } from "./transaction";
 
 export class PlacingOrder {
@@ -8,7 +9,7 @@ export class PlacingOrder {
     date!: Date;
     note?: string;
     param!: string;
-    duration!: number;
+    duration!: string;
     stopLoss?: number;
     takeProfit?: number;
     leverage?: number;    
@@ -32,7 +33,8 @@ export class PlacingOrder {
     transacType!: TransacType;
     status!: Status;
 
-    transactions!: Transaction[];               
+    transactions!: Transaction[];  
+    portfolio!: Portfolio;  // to ge the id of portfolio           
 }
     
 export enum TradeType {
@@ -42,7 +44,8 @@ export enum TradeType {
     COMMODITIES = 'COMMODITIES',
     FOREX = 'FOREX',
     MUTUAL_FUNDS = 'MUTUAL_FUNDS',
-    ETF = 'ETF'
+    ETF = 'ETF',
+    CRYPTO='CRYPTO'
 }
 
 export enum OrderType {

@@ -7,11 +7,15 @@ import { PlacingOrder } from '../Entity/placing-order';
   providedIn: 'root'
 })
 export class PlacingOrderService {
+  // url in spring:  http://localhost:8090/home/placingOrder/{{portfolioId}}/add-order
   private baseUrl = 'http://localhost:8090/home/placingOrder';
   constructor(private http: HttpClient) {}
-  addPlacingOrder(order: PlacingOrder): Observable<PlacingOrder> {
-    return this.http.post<PlacingOrder>(`${this.baseUrl}/Add-Order`, order);
-  }
+
+  addPlacingOrder(portfolioId: string, order: PlacingOrder): Observable<PlacingOrder> {
+    const url = `${this.baseUrl}/${portfolioId}/add-order`;
+    console.log('Making POST request to:', url);
+    return this.http.post<PlacingOrder>(url, order);
+}
   getAllPlacingOrders(): Observable<PlacingOrder[]> {
     return this.http.get<PlacingOrder[]>(`${this.baseUrl}/Get-all-placingOrders`);
   }

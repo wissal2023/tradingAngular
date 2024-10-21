@@ -10,16 +10,12 @@ import { StockQuoteService } from 'src/app/Services/stock-quote-service.service'
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent implements OnInit{
-
   //marketStatus: any;
   portfolios: Portfolio[] = [];
-  
   searchResults: any[] = [];
   searchTerm: string = '';//keywore= symbol
   apiKey: string = 'GB675A5CC0KN3LWL__'; 
-
-
-
+  
   constructor(private stockQuoteService: StockQuoteService,   
               private portfolioService: PortfolioService) {}
 
