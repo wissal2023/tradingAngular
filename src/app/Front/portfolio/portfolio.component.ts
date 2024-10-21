@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Portfolio } from 'src/app/Entity/portfolio';
-import { MarketStatusService } from 'src/app/Services/market-status.service';
 import { PortfolioService } from 'src/app/Services/portfolio.service';
+import { StockQuoteService } from 'src/app/Services/stock-quote-service.service';
 
 
 @Component({
@@ -10,17 +10,18 @@ import { PortfolioService } from 'src/app/Services/portfolio.service';
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent implements OnInit{
-
-  marketStatus: any;
+  //marketStatus: any;
   portfolios: Portfolio[] = [];
-
-
-  constructor(private marketStatusService: MarketStatusService,   
+  searchResults: any[] = [];
+  searchTerm: string = '';//keywore= symbol
+  apiKey: string = 'GB675A5CC0KN3LWL__'; 
+  
+  constructor(private stockQuoteService: StockQuoteService,   
               private portfolioService: PortfolioService) {}
 
   ngOnInit() {
     this.fetchPortfolios();
-    this.fetchMarketStatus();
+    //this.fetchMarketStatus();
   }
   fetchPortfolios() {
     this.portfolioService.getAllPortfolios().subscribe((data: Portfolio[]) => {
@@ -28,6 +29,22 @@ export class PortfolioComponent implements OnInit{
       console.log(this.portfolios); 
     });
   }
+// search if Market Open/ closed
+search() {
+  if (this.searchTerm) {
+    this.stockQuoteService.searchStockSymbols(this.searchTerm, this.apiKey).subscribe(
+      (data: any) => {
+        this.searchResults = data.bestMatches; 
+      },
+      (error) => {
+        console.error('Error fetching stock data', error);
+      }
+    );
+  }
+}
+
+
+  /*
   fetchMarketStatus() {
     this.marketStatusService.getMarketStatus().subscribe(
       (data) => {
@@ -39,4 +56,9 @@ export class PortfolioComponent implements OnInit{
       }
     );
   }
+    */
+
+
+
+  
 }

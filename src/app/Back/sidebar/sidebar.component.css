@@ -1,0 +1,4 @@
+.sidebar-link.active {
+    background-color: #435ebe; /* Change to your desired active color */
+    color: white; /* Change to your desired text color */
+}

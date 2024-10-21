@@ -1,6 +1,23 @@
 <div id="app">
-<app-nav></app-nav>
-<app-sidebar></app-sidebar>
+    <app-sidebar></app-sidebar>
+    <div id="main">
+        <div class="page-heading">
+            <app-nav></app-nav>
+            <section class="section">
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <ng-container [ngSwitch]="currentComponent">
+                            <app-dashboard  *ngSwitchCase="'dash'"></app-dashboard>
+                            <app-list-portfolio *ngSwitchCase="'portfolio'"></app-list-portfolio>
+                            <app-list-orders *ngSwitchCase="'orders'"></app-list-orders>
+                        </ng-container>
+                    </div>
+                </div>
+            </section>
+        </div>
 
-<app-footer></app-footer> 
+       <app-footer></app-footer>
+    </div>
 </div>

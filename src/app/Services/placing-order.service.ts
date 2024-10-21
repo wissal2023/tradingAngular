@@ -7,32 +7,24 @@ import { PlacingOrder } from '../Entity/placing-order';
   providedIn: 'root'
 })
 export class PlacingOrderService {
-
+  // url in spring:  http://localhost:8090/home/placingOrder/{{portfolioId}}/add-order
   private baseUrl = 'http://localhost:8090/home/placingOrder';
-
   constructor(private http: HttpClient) {}
 
-  // Get all placing orders
+  addPlacingOrder(portfolioId: string, order: PlacingOrder): Observable<PlacingOrder> {
+    const url = `${this.baseUrl}/${portfolioId}/add-order`;
+    console.log('Making POST request to:', url);
+    return this.http.post<PlacingOrder>(url, order);
+}
   getAllPlacingOrders(): Observable<PlacingOrder[]> {
     return this.http.get<PlacingOrder[]>(`${this.baseUrl}/Get-all-placingOrders`);
   }
-
-  // Get a placing order by ID
   getPlacingOrder(placingOrderId: number): Observable<PlacingOrder> {
     return this.http.get<PlacingOrder>(`${this.baseUrl}/Get-placingOrder/${placingOrderId}`);
   }
-
-  // Add a placing order
-  addPlacingOrder(order: PlacingOrder): Observable<PlacingOrder> {
-    return this.http.post<PlacingOrder>(`${this.baseUrl}/Add-PlacingOrder`, order);
-  }
-
-  // Modify a placing order
   modifyPlacingOrder(order: PlacingOrder): Observable<PlacingOrder> {
     return this.http.put<PlacingOrder>(`${this.baseUrl}/modify-placingOrder`, order);
   }
-
-  // Remove a placing order by ID
   removePlacingOrder(placingOrderId: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/remove-placingOrder/${placingOrderId}`);
   }

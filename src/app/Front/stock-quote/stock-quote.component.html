@@ -1,58 +1,28 @@
-<div>
-  <input [(ngModel)]="symbol" placeholder="Enter stock symbol" />
-  <button (click)="getQuote()">Get Quote</button>
-  
-  <div *ngIf="quote">
-    <h3>Stock Quote for {{ symbol }}</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Attribute</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr>
-            <td>Symbol</td>
-            <td>{{ quote['01. symbol'] }}</td>
-          </tr>
-          <tr>
-            <td>Open</td>
-            <td>{{ quote['02. open'] }}</td>
-          </tr>
-          <tr>
-            <td>High</td>
-            <td>{{ quote['03. high'] }}</td>
-          </tr>
-          <tr>
-            <td>Low</td>
-            <td>{{ quote['04. low'] }}</td>
-          </tr>
-          <tr>
-            <td>Price</td>
-            <td>{{ quote['05. price'] }}</td>
-          </tr>
-          <tr>
-            <td>Volume</td>
-            <td>{{ quote['06. volume'] }}</td>
-          </tr>
-          <tr>
-            <td>Latest Trading Day</td>
-            <td>{{ quote['07. latest trading day'] }}</td>
-          </tr>
-          <tr>
-            <td>Previous Close</td>
-            <td>{{ quote['08. previous close'] }}</td>
-          </tr>
-          <tr>
-            <td>Change</td>
-            <td>{{ quote['09. change'] }}</td>
-          </tr>
-          <tr>
-            <td>Change Percent</td>
-            <td>{{ quote['10. change percent'] }}</td>
-          </tr>
-        </tbody>
-    </table>
+
+
+
+<div class="col-md-6 mb-1">
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+  <input type="text" class="form-control"  [(ngModel)]="searchTerm" placeholder="Look up symbol/ Company name/" id="symbol">
+  <button class="btn btn-outline-secondary" type="button" (click)="searchSymbol()">search</button>
+</div>
+</div>
+
+<div *ngIf="stockData" class="stock-quote-card">
+  <h3>Stock Quote for {{ symbol }}:</h3>
+  <div class="card">
+    <ul>
+      <li><strong>Symbol:</strong> {{ stockData['01. symbol'] }}</li>
+      <li><strong>Open:</strong> {{ stockData['02. open'] }}</li>
+      <li><strong>High:</strong> {{ stockData['03. high'] }}</li>
+      <li><strong>Low:</strong> {{ stockData['04. low'] }}</li>
+      <li><strong>Price:</strong> {{ stockData['05. price'] }}</li>
+      <li><strong>Volume:</strong> {{ stockData['06. volume'] }}</li>
+      <li><strong>Latest Trading Day:</strong> {{ stockData['07. latest trading day'] }}</li>
+      <li><strong>Previous Close:</strong> {{ stockData['08. previous close'] }}</li>
+      <li><strong>Change:</strong> {{ stockData['09. change'] }}</li>
+      <li><strong>Change Percent:</strong> {{ stockData['10. change percent'] }}</li>
+    </ul>
   </div>
 </div>

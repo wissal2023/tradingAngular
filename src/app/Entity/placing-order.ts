@@ -1,3 +1,4 @@
+import { Portfolio } from "./portfolio";
 import { Transaction } from "./transaction";
 
 export class PlacingOrder {
@@ -8,15 +9,34 @@ export class PlacingOrder {
     date!: Date;
     note?: string;
     param!: string;
-    duration!: number;
+    duration!: string;
+    stopLoss?: number;
+    takeProfit?: number;
+    leverage?: number;    
+    // Specific Fields For Bonds
+    faceValue?: number;
+    couponRate?: number;
+    maturityDate?: Date;
+    //  Specific Fields For Options
+    strikePrice?: number;
+    expirationDate?: Date;
+    //  Specific Fields For Commodities
+    contractSize?: number;
+    expiryDate?: Date;
+    //  Specific Fields For Mutual Funds and ETFs
+    nav?: number;
 
+
+    // Enums
     tradeType!: TradeType;
     orderType!: OrderType;
     transacType!: TransacType;
     status!: Status;
-    
-    transactions!: Transaction[];
+
+    transactions!: Transaction[];  
+    portfolio!: Portfolio;  // to ge the id of portfolio           
 }
+    
 export enum TradeType {
     STOCKS = 'STOCKS',
     OPTIONS = 'OPTIONS',
@@ -24,7 +44,8 @@ export enum TradeType {
     COMMODITIES = 'COMMODITIES',
     FOREX = 'FOREX',
     MUTUAL_FUNDS = 'MUTUAL_FUNDS',
-    ETF = 'ETF'
+    ETF = 'ETF',
+    CRYPTO='CRYPTO'
 }
 
 export enum OrderType {
@@ -46,5 +67,6 @@ export enum TransacType {
 export enum Status {
     OPEN = 'OPEN',
     FILLED = 'FILLED',
-    CANCELLED = 'CANCELLED'
+    CANCELLED = 'CANCELLED',
+    PENDING = 'PENDING'
 }
