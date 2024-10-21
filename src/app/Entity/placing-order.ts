@@ -9,14 +9,32 @@ export class PlacingOrder {
     note?: string;
     param!: string;
     duration!: number;
+    stopLoss?: number;
+    takeProfit?: number;
+    leverage?: number;    
+    // Specific Fields For Bonds
+    faceValue?: number;
+    couponRate?: number;
+    maturityDate?: Date;
+    //  Specific Fields For Options
+    strikePrice?: number;
+    expirationDate?: Date;
+    //  Specific Fields For Commodities
+    contractSize?: number;
+    expiryDate?: Date;
+    //  Specific Fields For Mutual Funds and ETFs
+    nav?: number;
 
+
+    // Enums
     tradeType!: TradeType;
     orderType!: OrderType;
     transacType!: TransacType;
-    status!: Status ;
-    
-    transactions!: Transaction[];
+    status!: Status;
+
+    transactions!: Transaction[];               
 }
+    
 export enum TradeType {
     STOCKS = 'STOCKS',
     OPTIONS = 'OPTIONS',

@@ -90,7 +90,7 @@
                         <h4>line chart for the stocks performance of the portfolio </h4>
                     </div>
                     <div class="card-body">
-                        <app-stock-quote></app-stock-quote>
+                        <app-dashboard></app-dashboard>
                     </div>
                 </div>
             </div>
@@ -120,10 +120,28 @@
                 <div class="card-header">
                     <h4>Global Market Status</h4>
                 </div>
-                <div *ngIf="marketStatus">
-                    <h5>Market Status: </h5>
-                    <pre>{{ marketStatus | json }}</pre> 
+                <!--Market Open/ closed-->
+                <div>
+                    <input [(ngModel)]="searchTerm" placeholder="Enter stock symbol">
+                    <button (click)="search()">Search</button>
                 </div>
+                <div *ngIf="searchResults.length">
+                    <h3>Search Results:</h3>
+                    <ul>
+                    <li *ngFor="let result of searchResults">
+                        <strong>{{ result['1. symbol'] }} - {{ result['2. name'] }}</strong>
+                        <ul>
+                        <li>Type: {{ result['3. type'] }}</li>
+                        <li>Region: {{ result['4. region'] }}</li>
+                        <li>Market Open: {{ result['5. marketOpen'] }}</li>
+                        <li>Market Close: {{ result['6. marketClose'] }}</li>
+                        <li>Timezone: {{ result['7. timezone'] }}</li>
+                        <li>Currency: {{ result['8. currency'] }}</li>
+                        <li>Match Score: {{ result['9. matchScore'] }}</li>
+                        </ul>
+                    </li>
+                    </ul>
+                </div>  
             </div>
         </div>
     </section>

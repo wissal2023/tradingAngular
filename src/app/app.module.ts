@@ -23,6 +23,7 @@ import { LoginComponent } from './Front/login/login.component';
 import { OrderFormComponent } from './Front/order-form/order-form.component';
 import { ListPortfolioComponent } from './Back/list-portfolio/list-portfolio.component';
 import { ListOrdersComponent } from './Back/list-orders/list-orders.component';
+import { DashboardComponent } from './Back/dashboard/dashboard.component';
 
 
 
@@ -47,7 +48,8 @@ import { ListOrdersComponent } from './Back/list-orders/list-orders.component';
   LoginComponent,
   OrderFormComponent,
   ListPortfolioComponent,
-  ListOrdersComponent
+  ListOrdersComponent,
+  DashboardComponent
     
   ],
   imports: [

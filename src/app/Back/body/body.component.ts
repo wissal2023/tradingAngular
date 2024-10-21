@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as ApexCharts from 'apexcharts';
 import { ComponentStateService } from 'src/app/component-state.service';
 
 @Component({
