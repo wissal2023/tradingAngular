@@ -12,7 +12,7 @@ export class PlacingOrder {
     duration!: string;
     stopLoss?: number;
     takeProfit?: number;
-    leverage?: number;    
+    margin?: number;    
     // Specific Fields For Bonds
     faceValue?: number;
     couponRate?: number;
@@ -34,7 +34,7 @@ export class PlacingOrder {
     status!: Status;
 
     transactions!: Transaction[];  
-    portfolio!: Portfolio;  // to ge the id of portfolio           
+    //portfolio!: Portfolio;  // to ge the id of portfolio           
 }
     
 export enum TradeType {

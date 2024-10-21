@@ -57,7 +57,7 @@ export class OrderFormComponent implements OnInit {
       nav: [null],             
       stopLoss: [null],
       takeProfit: [null],
-      leverage: [null]
+      margin: [null]
     });
   }
   
@@ -142,7 +142,7 @@ export class OrderFormComponent implements OnInit {
   get nav() { return this.orderForm.get('nav')?.value; }
   get stopLoss() { return this.orderForm.get('stopLoss')?.value; }
   get takeProfit() { return this.orderForm.get('takeProfit')?.value; }
-  get leverage() { return this.orderForm.get('leverage')?.value; }
+  get margin() { return this.orderForm.get('margin')?.value; }
 
   logInvalidControls() {
     Object.keys(this.orderForm.controls).forEach(key => {
