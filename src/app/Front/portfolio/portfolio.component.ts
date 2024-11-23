@@ -25,9 +25,12 @@ export class PortfolioComponent implements OnInit{
   portfolioId!:number;
 
   constructor(private stockQuoteService: StockQuoteService,   
-              private portfolioService: PortfolioService) {}
+              private portfolioService: PortfolioService,
+              private actR:ActivatedRoute) {}
 
   ngOnInit() {    
+
+    this.portfolioId=Number(this.actR.snapshot.paramMap.get('id'));
 
     this.fetchPortfolios();
     this.getMarketStatus();
