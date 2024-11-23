@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartData, ChartOptions, ChartType } from 'chart.js';
 import { StockQuoteService } from 'src/app/Services/stock-quote-service.service';
 
 @Component({
@@ -8,11 +9,26 @@ import { StockQuoteService } from 'src/app/Services/stock-quote-service.service'
 })
 export class OilPricesQuoteComponent implements OnInit {
   oilPrices: any[] = [];
-  errorMessage: string = '';
+  lastPrice: { date: string; value: number } | null = null;
   interval: string = 'monthly';
+  errorMessage: string = '';
 
-  chartData: any[] = [];  // Data for the chart
-  chartLabels: string[] = [];  // Labels (dates) for the chart
+  // Chart.js properties
+  public barChartData: ChartData = { datasets: [] };
+  public barChartLabels: string[] = [];
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    scales: {
+      x: {
+        beginAtZero: true,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
 
   constructor(private stockQuoteService: StockQuoteService) {}
 
@@ -23,24 +39,33 @@ export class OilPricesQuoteComponent implements OnInit {
   fetchBrentCrudePrices(): void {
     this.stockQuoteService.getBrentCrudePrices(this.interval).subscribe(
       (response: any) => {
-        this.oilPrices = response.data || [];
+        this.oilPrices = (response.data || []).sort(
+          (a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime()
+        ); // Sort by ascending date
         this.errorMessage = '';
 
-        // Prepare data for the chart
-        this.chartLabels = this.oilPrices.map((price: any) => price.date);
-        this.chartData = [
-          {
-            data: this.oilPrices.map((price: any) => price.value),
-            label: 'Brent Crude Oil Price',
-            borderColor: '#FF5733',
-            fill: false,
-          }
-        ];
+        if (this.oilPrices.length > 0) {
+          // Update lastPrice with the most recent data
+          this.lastPrice = this.oilPrices[this.oilPrices.length - 1];
+        }
+
+        // Prepare chart data
+        this.barChartLabels = this.oilPrices.map(price => price.date);
+        this.barChartData = {
+          datasets: [
+            {
+              data: this.oilPrices.map(price => price.value),
+              label: 'Brent Crude Oil Price',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1,
+            },
+          ],
+        };
       },
       (error) => {
-        console.error('Error fetching oil prices:', error);
-        this.oilPrices = [];
         this.errorMessage = 'Failed to fetch oil prices data.';
+        this.lastPrice = null;
       }
     );
   }
@@ -49,4 +74,8 @@ export class OilPricesQuoteComponent implements OnInit {
     this.interval = newInterval;
     this.fetchBrentCrudePrices();
   }
+
+
+
+
 }

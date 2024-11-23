@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'home', component: LandingComponent }, 
   {path: 'login', component: LoginComponent }, 
   {path: 'dash', component: BodyComponent },   
-  {path: 'portfolio', component: PortfolioComponent}, 
+  {path: 'portfolio/:id', component: PortfolioComponent}, 
   {path: 'form/:portfolioId', component: OrderFormComponent},
   {path: 'holding', component: HoldingComponent},  
   {path: 'transaction', component: TransactionComponent}, 

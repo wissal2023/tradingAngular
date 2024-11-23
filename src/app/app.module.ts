@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -69,7 +70,9 @@ import { OilPricesQuoteComponent } from './Front/oil-prices-quote/oil-prices-quo
     AppRoutingModule,
     HttpClientModule, 
     FormsModule,
-    ReactiveFormsModule    
+    ReactiveFormsModule,
+    NgChartsModule
+      
   ],
   providers: [],
   bootstrap: [AppComponent]
