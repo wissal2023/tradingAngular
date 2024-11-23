@@ -13,8 +13,10 @@ import { FooterFrontComponent } from './Front/footer-Front/footerFront.component
 import { HeaderComponent } from './Front/header/header.component';
 import { PortfolioComponent } from './Front/portfolio/portfolio.component';
 import { StockQuoteComponent } from './Front/stock-quote/stock-quote.component';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { IntraDayComponent } from './Front/intra-day/intra-day.component';
 import { HoldingComponent } from './Front/holding/holding.component';
 import { TransactionComponent } from './Front/transaction/transaction.component';
@@ -24,7 +26,15 @@ import { OrderFormComponent } from './Front/order-form/order-form.component';
 import { ListPortfolioComponent } from './Back/list-portfolio/list-portfolio.component';
 import { ListOrdersComponent } from './Back/list-orders/list-orders.component';
 import { DashboardComponent } from './Back/dashboard/dashboard.component';
-
+import { RegisterComponent } from './Front/register/register.component';
+import { ListUsersComponent } from './Back/list-users/list-users.component';
+import { UserProfileComponent } from './Back/user-profile/user-profile.component';
+import { SearchfilterPipe } from './Pipes/searchFilter.pipe';
+import { UserDetailsComponent } from './Back/user-details/user-details.component';
+import { ResetPasswordComponent } from './Front/reset-password/reset-password.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { NotAuthorizedComponent } from './Front/not-authorized/not-authorized.component';
+import { ActivateAccountComponent } from './Front/activate-account/activate-account.component';
 
 
 @NgModule({
@@ -49,7 +59,15 @@ import { DashboardComponent } from './Back/dashboard/dashboard.component';
   OrderFormComponent,
   ListPortfolioComponent,
   ListOrdersComponent,
-  DashboardComponent
+  RegisterComponent,
+  DashboardComponent,
+  ListUsersComponent,
+  UserProfileComponent,
+  SearchfilterPipe,
+  UserDetailsComponent,
+  ResetPasswordComponent,
+  NotAuthorizedComponent,
+  ActivateAccountComponent,
     
   ],
   imports: [
@@ -60,7 +78,9 @@ import { DashboardComponent } from './Back/dashboard/dashboard.component';
     ReactiveFormsModule,
     
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
