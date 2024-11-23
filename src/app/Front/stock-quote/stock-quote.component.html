@@ -1,28 +1,16 @@
-
-
-
-<div class="col-md-6 mb-1">
-<div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-  <input type="text" class="form-control"  [(ngModel)]="searchTerm" placeholder="Look up symbol/ Company name/" id="symbol">
-  <button class="btn btn-outline-secondary" type="button" (click)="searchSymbol()">search</button>
-</div>
-</div>
-
-<div *ngIf="stockData" class="stock-quote-card">
-  <h3>Stock Quote for {{ symbol }}:</h3>
-  <div class="card">
-    <ul>
-      <li><strong>Symbol:</strong> {{ stockData['01. symbol'] }}</li>
-      <li><strong>Open:</strong> {{ stockData['02. open'] }}</li>
-      <li><strong>High:</strong> {{ stockData['03. high'] }}</li>
-      <li><strong>Low:</strong> {{ stockData['04. low'] }}</li>
-      <li><strong>Price:</strong> {{ stockData['05. price'] }}</li>
-      <li><strong>Volume:</strong> {{ stockData['06. volume'] }}</li>
-      <li><strong>Latest Trading Day:</strong> {{ stockData['07. latest trading day'] }}</li>
-      <li><strong>Previous Close:</strong> {{ stockData['08. previous close'] }}</li>
-      <li><strong>Change:</strong> {{ stockData['09. change'] }}</li>
-      <li><strong>Change Percent:</strong> {{ stockData['10. change percent'] }}</li>
-    </ul>
+<div class="stock-card" *ngIf="latestData">
+  <h3>{{ symbol }} Daily Summary</h3>
+  <p><strong>Last Refreshed:</strong> {{ lastRefreshed }}</p>
+  <div class="data">
+    <p><strong>Open:</strong> {{ latestData['1. open'] }}</p>
+    <p><strong>High:</strong> {{ latestData['2. high'] }}</p>
+    <p><strong>Low:</strong> {{ latestData['3. low'] }}</p>
+    <p><strong>Close:</strong> {{ latestData['4. close'] }}</p>
+    <p><strong>Volume:</strong> {{ latestData['5. volume'] }}</p>
   </div>
 </div>
+<div *ngIf="error" class="error">
+  {{ error }}
+</div>
+
+  

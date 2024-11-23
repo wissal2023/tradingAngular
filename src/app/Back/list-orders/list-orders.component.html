@@ -20,9 +20,9 @@
         <td>{{ order.price }}</td>
         <td>{{ order.date | date:'short' }}</td>
         <td>{{ order.note }}</td>
-        <td>{{ order.tradeType }}</td>
+        <td>{{ order.assetsType }}</td>
         <td>{{ order.orderType }}</td>
-        <td>{{ order.transacType }}</td>
+        <td>{{ order.actionType }}</td>
         <td>
           <!-- Clickable Status -->
           <span class="badge bg-primary" (click)="onStatusClick(order)">{{ order.status }}</span>
@@ -33,14 +33,12 @@
       </tr>
     </tbody>
   </table>
-  
-  <!-- Modal for Confirmation -->
   <div *ngIf="selectedOrder" class="modal" tabindex="-1" style="display: block;" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Confirm Status Change</h5>
-          <button type="button" class="btn-close" (click)="closeModal()"></button>
+          <button type="button" class="btn-close" (click)="closeModal()" ></button>
         </div>
         <div class="modal-body">
           <p>Are you sure you want to change the status of order {{ selectedOrder.symbol }}?</p>
@@ -48,9 +46,10 @@
             <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
           </select>
         </div>
+        
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" (click)="confirmStatusChange()">Save changes</button>
-          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+          <button type="button" class="btn btn-secondary" (click)="closeModal()" >Cancel</button>
         </div>
       </div>
     </div>

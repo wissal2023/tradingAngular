@@ -3,11 +3,6 @@
 <div class="page-heading">
     <h3>Portfolio overview</h3>
 </div>
-
-
- <app-intra-day></app-intra-day>
-
-
   <div class="page-content">
     <section class="row" *ngFor="let portfolio of portfolios">
       <div class="col-12 col-lg-9">
@@ -81,22 +76,11 @@
                 </div>
             </div>
         </div> 
-
-                      
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>line chart for the stocks performance of the portfolio </h4>
-                    </div>
-                    <div class="card-body">
-                        <app-dashboard></app-dashboard>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+        <!--Holding component-->
         <app-holding></app-holding>
+        <!--orders component in my portfolio component-->
+        <app-listorder [portfolioId]="portfolioId"></app-listorder>
+        
 
         </div>
         <div class="col-12 col-lg-3">
@@ -113,17 +97,18 @@
                     </div>
                 </div>
             </div>
-            <!--place order-->
-            <app-place-order></app-place-order>
-            <!--Global Market Status-->
+            <!--placerOrder component -->
+            <app-watchlist [portfolioId]="portfolio.id"></app-watchlist>
+
+            <!--Global Market Status o/c-->
             <div class="card">
                 <div class="card-header">
-                    <h4>Global Market Status</h4>
+                    <h4>Market Status</h4>
                 </div>
-                <!--Market Open/ closed-->
-                <div>
-                    <input [(ngModel)]="searchTerm" placeholder="Enter stock symbol">
-                    <button (click)="search()">Search</button>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Enter stock symbol">
+                    <button class="btn btn-outline-secondary" type="button" (click)="search()">Search</button>
                 </div>
                 <div *ngIf="searchResults.length">
                     <h3>Search Results:</h3>

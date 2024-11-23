@@ -12,32 +12,24 @@ export class PlacingOrder {
     duration!: string;
     stopLoss?: number;
     takeProfit?: number;
-    leverage?: number;    
-    // Specific Fields For Bonds
-    faceValue?: number;
+    margin?: number;     
+    faceValue?: number; // Specific Fields For Bonds
     couponRate?: number;
-    maturityDate?: Date;
-    //  Specific Fields For Options
-    strikePrice?: number;
-    expirationDate?: Date;
-    //  Specific Fields For Commodities
-    contractSize?: number;
-    expiryDate?: Date;
-    //  Specific Fields For Mutual Funds and ETFs
-    nav?: number;
-
-
-    // Enums
-    tradeType!: TradeType;
+    maturityDate?: Date;    
+    strikePrice?: number;//  Specific Fields For Options
+    expirationDate?: Date;    
+    contractSize?: number;//  Specific Fields For Commodities
+    expiryDate?: Date;    
+    nav?: number;//  Specific Fields For Mutual Funds and ETFs
+    assetsType!: AssetsType;// Enums
     orderType!: OrderType;
-    transacType!: TransacType;
+    actionType!: ActionType;
     status!: Status;
-
     transactions!: Transaction[];  
-    portfolio!: Portfolio;  // to ge the id of portfolio           
+    
 }
     
-export enum TradeType {
+export enum AssetsType {
     STOCKS = 'STOCKS',
     OPTIONS = 'OPTIONS',
     BONDS = 'BONDS',
@@ -55,7 +47,7 @@ export enum OrderType {
     TRAILING_STOP = 'TRAILING_STOP'
 }
 
-export enum TransacType {
+export enum ActionType {
     BUY = 'BUY',
     SELL = 'SELL',
     SHORT = 'SHORT',

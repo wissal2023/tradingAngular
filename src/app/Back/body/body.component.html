@@ -4,6 +4,7 @@
         <div class="page-heading">
             <app-nav></app-nav>
             <section class="section">
+
                 <div>
                     <div>
                         <!-- <ng-container [ngSwitch]="currentComponent">
@@ -18,6 +19,18 @@
                         <app-list-orders *ngIf="currentComponent === 'orders'"></app-list-orders>
                         <app-user-profile *ngIf="currentComponent === 'profile'"></app-user-profile>
                         <app-user-details *ngIf="currentComponent === 'user-details'"></app-user-details>
+
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <ng-container [ngSwitch]="currentComponent">
+                            <app-chart  *ngSwitchCase="'dash'"></app-chart>
+                            <app-list-portfolio *ngSwitchCase="'portfolio'"></app-list-portfolio>
+                            <app-list-orders *ngSwitchCase="'orders'"></app-list-orders>
+                            <app-list-transaction *ngSwitchCase="'transactions'"></app-list-transaction>
+                        </ng-container>
+
                     </div>
                 </div>
             </section>
