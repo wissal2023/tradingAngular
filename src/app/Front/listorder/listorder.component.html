@@ -1,0 +1,33 @@
+<h4 class="card-title mb-0">Orders:</h4>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Date</th>
+      <th>Trade Type</th>
+      <th>Order Type</th>
+      <th>Transaction Type</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of placingOrder">
+      <td>{{ order.symbol }}</td>
+      <td>{{ order.qty }}</td>
+      <td>{{ order.price || 'N/A' }}</td>
+      <td>{{ order.date | date: 'short' }}</td>
+      <td>{{ order.assetsType }}</td>
+      <td>{{ order.orderType }}</td>
+      <td>{{ order.actionType }}</td>
+      <td>
+        <button class="btn bi-trash"></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="placingOrder.length === 0">No orders found.</div>
+
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

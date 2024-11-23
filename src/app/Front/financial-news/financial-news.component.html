@@ -1,0 +1,26 @@
+<app-header></app-header>
+
+<!-- Search Field for Ticker -->
+<div class="search-container">
+  <input type="text" [(ngModel)]="ticker" (keyup.enter)="searchTicker()" placeholder="Search for a ticker..." class="search-input" />
+  <button (click)="searchTicker()" class="search-button">Search</button>
+</div>
+
+<div *ngIf="financialNews.length > 0; else noNews" class="news-container">
+  <div *ngFor="let news of financialNews" class="news-card">
+    <div class="news-header">
+      <h3 class="news-title">{{ news.title }}</h3>
+      <span class="news-date">{{ news.date | date:'MMM dd, yyyy' }}</span>
+    </div>
+    <p class="news-content">{{ news.content }}</p>
+    <a [href]="news.link" target="_blank" class="read-more">Read more</a>
+  </div>
+</div>
+
+<ng-template #noNews>
+  <div class="no-news-message">
+    <p>No news available at the moment.</p>
+  </div>
+</ng-template>
+
+<p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>

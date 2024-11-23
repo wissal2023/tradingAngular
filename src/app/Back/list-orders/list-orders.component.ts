@@ -13,8 +13,8 @@ import { TransactionService } from 'src/app/Services/transaction.service';
 
 export class ListOrdersComponent implements OnInit {
   orders: PlacingOrder[] = [];
-  selectedOrder: PlacingOrder | null = null; // To track the selected order
-  statusOptions = Object.values(Status); // Enum for status options
+  selectedOrder: PlacingOrder | null = null; 
+  statusOptions = Object.values(Status); 
 
   constructor(private orderService: PlacingOrderService, 
               private transactionService: TransactionService) { }   
@@ -34,9 +34,8 @@ export class ListOrdersComponent implements OnInit {
     );
   }
 
-  // Handle the click event on the status
   onStatusClick(order: PlacingOrder): void {
-    this.selectedOrder = { ...order }; // Clone the order to avoid direct mutation
+    this.selectedOrder = { ...order };
   }
   closeModal(): void {
     this.selectedOrder = null;
@@ -47,8 +46,8 @@ export class ListOrdersComponent implements OnInit {
       this.orderService.modifyPlacingOrder(this.selectedOrder).subscribe(
         (updatedOrder: PlacingOrder) => {
           console.log('Order status updated successfully');
-          this.loadOrders(); // Reload the orders after modification
-          this.closeModal(); // Close the modal
+          this.loadOrders(); 
+          this.closeModal(); 
         },
         (error) => {
           console.error('Failed to update order', error);
@@ -68,6 +67,8 @@ export class ListOrdersComponent implements OnInit {
       }
     );
   }
+
+  /*
   addTransaction(placingOrderId: number, transaction: Transaction): void {
     this.transactionService.addTransaction(placingOrderId, transaction).subscribe(
       (createdTransaction: Transaction) => {
@@ -78,4 +79,5 @@ export class ListOrdersComponent implements OnInit {
       }
     );
   }
+    */
 }

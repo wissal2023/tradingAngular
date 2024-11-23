@@ -35,6 +35,12 @@
                         <span>Orders</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a (click)="setComponent('transactions')"class='sidebar-link' [class.active]="activeComponent === 'transactions'">
+                        <i class="bi bi-collection-fill"></i>
+                        <span>transactions</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>

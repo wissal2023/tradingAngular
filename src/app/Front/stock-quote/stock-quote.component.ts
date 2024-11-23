@@ -1,82 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Chart } from 'chart.js';
 import { StockQuoteService } from 'src/app/Services/stock-quote-service.service';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-stock-quote',
   templateUrl: './stock-quote.component.html',
   styleUrls: ['./stock-quote.component.css']
 })
-export class StockQuoteComponent {
-  stockData: any;
-  symbol: string = '';
-  searchResults: any[] = [];
-  searchTerm: string = '';
-  apiKey: string = 'GB675A5CC0KN3LWL';
+export class StockQuoteComponent  implements OnInit {
+  @Input() symbol!: string ; // Set a default symbol or pass it dynamically
+  latestData: any;
+  error: string | null = null;
+  lastRefreshed: string | null = null;
 
   constructor(private stockQuoteService: StockQuoteService) {}
-  // search symbol in order form
-  searchSymbol() {
-    this.symbol = this.searchTerm; 
-    this.stockQuote(); 
+
+  ngOnInit(): void {
+    this.fetchDailyTimeSeries();
   }
- stockQuote() {
-  if (this.symbol) {
-    this.stockQuoteService.getStockQuote(this.symbol, this.apiKey).subscribe(
-      (data: any) => {
-        console.log('API Response:', data); // Log the API response
-        this.stockData = data['Global Quote'];
-      },
-      (error) => {
-        console.error('Error fetching stock data', error);
-      }
-    );
-  } else {
-    console.error('Symbol is not set.');
-  }
-}
 
-
-
-
-
-  
-  /*
-  onSymbolChange() {
-    if (this.symbol) {
-      this.stockQuoteService.getStockQuote(this.symbol).subscribe(
-        (data) => {
-          this.stockQuote = data['Global Quote'];
-        },
-        (error) => {
-          console.error('Error fetching stock quote:', error);
-          this.stockQuote = null; 
-        }
-      );
-    } else {
-      this.stockQuote = null;
-    }
-  }
-  getQuote() {
-    this.stockQuoteService.getStockQuote(this.symbol).subscribe(
+  fetchDailyTimeSeries(): void {
+    if (!this.symbol) return;  
+    this.stockQuoteService.getDailyTimeSeries(this.symbol, this.stockQuoteService.apiKey).subscribe(
       data => {
-        console.log('Raw API response:', JSON.stringify(data, null, 2)); // Log the entire API response
-        
-        // Check if Global Quote exists and has properties
-        if (data['Global Quote'] && Object.keys(data['Global Quote']).length > 0) {
-          this.quote = data['Global Quote'];
-          console.log('Extracted quote:', JSON.stringify(this.quote, null, 2)); // Log the extracted quote
+        console.log('Daily Time Series Response:', data);
+        const timeSeries = data['Time Series (Daily)'];
+        if (timeSeries) {
+          const dates = Object.keys(timeSeries).slice(0, 10).reverse();
+          const closingPrices = dates.map(date => parseFloat(timeSeries[date]['4. close']));
+          //this.createChart(dates, closingPrices);
         } else {
-          console.error('Global Quote is empty or not found in response');
-          this.quote = null; // Ensure quote is reset if empty
+          console.error('No time series data found in response');
+          alert('Daily API limit reached. Please try again later.');
         }
       },
       error => {
-        console.error('Error fetching stock quote:', error);
-        this.quote = null; // Reset quote on error
+        console.error('Error fetching daily time series', error);
+        alert('An error occurred while fetching data. Please try again later.');
       }
     );
   }
-    */
+
+
 }
