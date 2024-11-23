@@ -1,14 +1,16 @@
 import { User } from './user';
 import { Transaction } from './transaction';
 import { Holding } from './holding';
+import { PlacingOrder } from './placing-order';
 
 export class Portfolio {
     id!: number;
     totVal!: number;
     dateCreated!: Date;
-    accVal: number = 99000.000;
+    accVal!: number;
     buyPow!: number;
-    cash!: number;    
+    cash!: number;  
+      
     tdyChange?: number;
     annReturn?: number;
     totGainLoss?: number;
@@ -16,4 +18,5 @@ export class Portfolio {
     user!: User;
     transactions!: Transaction[];
     holdings!: Holding[];
+    placingOrders!: PlacingOrder[];
 }

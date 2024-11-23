@@ -1,0 +1,29 @@
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Commission</th>
+        <th>Dividends</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of transactions">
+        <td>{{ transaction.symbol }}</td>
+        <td>{{ transaction.quantity }}</td> <!-- Corrected qty to quantity -->
+        <td>{{ transaction.price }}</td>
+        <td>{{ transaction.date | date:'short' }}</td>
+        <td>{{ transaction.descp }}</td>
+        <td>{{ transaction.commiss }}</td>
+        <td>{{ transaction.dividende }}</td>
+        <td>
+          <button class="btn bi-trash" (click)="deleteTransaction(transaction.id)"></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

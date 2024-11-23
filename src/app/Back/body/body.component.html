@@ -9,9 +9,10 @@
                     </div>
                     <div class="card-body">
                         <ng-container [ngSwitch]="currentComponent">
-                            <app-dashboard  *ngSwitchCase="'dash'"></app-dashboard>
+                            <app-chart  *ngSwitchCase="'dash'"></app-chart>
                             <app-list-portfolio *ngSwitchCase="'portfolio'"></app-list-portfolio>
                             <app-list-orders *ngSwitchCase="'orders'"></app-list-orders>
+                            <app-list-transaction *ngSwitchCase="'transactions'"></app-list-transaction>
                         </ng-container>
                     </div>
                 </div>
