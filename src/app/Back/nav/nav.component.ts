@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ComponentStateService } from 'src/app/component-state.service';
 import { User } from 'src/app/Entity/user';
+import { AuthService } from 'src/app/Services/auth.service';
 import { UserService } from 'src/app/Services/user.service';
 
 @Component({
@@ -10,21 +13,24 @@ import { UserService } from 'src/app/Services/user.service';
 export class NavComponent {
   user!: User; 
 
-  constructor(private userService: UserService) {}
+  constructor(private authService: AuthService, private componentStateService: ComponentStateService, private router: Router) {}
 
   ngOnInit(): void {
-    const userId = 1; 
-    this.getUserById(userId);
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      this.user = JSON.parse(userData);
+    } else {
+      console.log('No user data found in localStorage.');
+    }
   }
 
-  getUserById(userId: number): void {
-    this.userService.getUserById(userId).subscribe(
-      (data: User) => {
-        this.user = data; // Assign the fetched user data to the user property
-      },
-      (error) => {
-        console.error('Error fetching user data:', error);
-      }
-    );
+  navigateToProfile() {
+    this.componentStateService.changeComponent('profile');
+  }
+
+  logout() {
+    this.authService.clearUserData();
+    this.authService.clearToken();
+    this.router.navigate(['/login']);
   }
 }

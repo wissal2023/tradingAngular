@@ -4,13 +4,17 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="index.html"><img src="assets/Back/images/logo/logo.png" alt="Logo" height="250" width="250"></a>
+                    <a href="index.html">
+                        <img src="assets/Back/images/logo/logo.png" alt="Logo" class="img-logo">
+                    </a>
                 </div>
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                 </div>
             </div>
         </div>
+        <hr>
+
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
@@ -21,6 +25,21 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+
+                <li class="sidebar-item has-sub">
+                    <a href="#" class="sidebar-link" (click)="toggleSubMenu($event, 'users')">
+                      <i class="bi bi-people-fill"></i>
+                      <span>Users</span>
+                    </a>
+                    <ul class="submenu" [ngClass]="{ 'open': activeSubmenu === 'users' }">
+                      <li class="submenu-item">
+                        <a
+                        (click)="setComponent('list-user')" 
+                        class='sidebar-link' 
+                        [class.active]="activeComponent === 'list-user'"> Manage Users</a>
+                      </li>
+                    </ul>
+                  </li>
 
                 <li class="sidebar-item">
                     <a (click)="setComponent('portfolio')"class='sidebar-link' [class.active]="activeComponent === 'portfolio'">
@@ -43,32 +62,32 @@
                 </li>
 
                 <li class="sidebar-item has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-grid-1x2-fill"></i>
-                        <span>Challenges</span>
+                    <a href="#" class="sidebar-link" (click)="toggleSubMenu($event, 'challenges')">
+                      <i class="bi bi-grid-1x2-fill"></i>
+                      <span>Challenges</span>
                     </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="layout-default.html">Default Layout</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="layout-vertical-1-column.html">1 Column</a>
-                        </li>
-                        <li class="submenu-item active">
-                            <a href="layout-vertical-navbar.html">Vertical with Navbar</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="layout-horizontal.html">Horizontal Menu</a>
-                        </li>
+                    <ul class="submenu" [ngClass]="{ 'open': activeSubmenu === 'challenges' }">
+                      <li class="submenu-item">
+                        <a href="layout-default.html">Default Layout</a>
+                      </li>
+                      <li class="submenu-item">
+                        <a href="layout-vertical-1-column.html">1 Column</a>
+                      </li>
+                      <li class="submenu-item active">
+                        <a href="layout-vertical-navbar.html">Vertical with Navbar</a>
+                      </li>
+                      <li class="submenu-item">
+                        <a href="layout-horizontal.html">Horizontal Menu</a>
+                      </li>
                     </ul>
-                </li>
+                  </li>
 
                 <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
+                    <a href="#" class='sidebar-link' (click)="toggleSubMenu($event,'strategies')">
                         <i class="bi bi-hexagon-fill"></i>
                         <span>Stratégies</span>
                     </a>
-                    <ul class="submenu ">
+                    <ul class="submenu " [ngClass]="{ 'open': activeSubmenu === 'strategies' }">
                         <li class="submenu-item ">
                             <a href="form-element-input.html">Input</a>
                         </li>
@@ -98,11 +117,11 @@
                 </li>
 
                 <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
+                    <a href="#" class='sidebar-link' (click)="toggleSubMenu($event, 'risk')">
                         <i class="bi bi-pen-fill"></i>
                         <span>Risk management</span>
                     </a>
-                    <ul class="submenu ">
+                    <ul class="submenu " [ngClass]="{ 'open': activeSubmenu === 'risk' }">
                         <li class="submenu-item ">
                             <a href="form-editor-quill.html">Quill</a>
                         </li>
