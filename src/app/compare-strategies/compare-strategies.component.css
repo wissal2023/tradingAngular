@@ -1,0 +1,182 @@
+/* compare-strategies.component.css */
+
+:host {
+    display: block;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  /* Form Styles */
+  form {
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    font-weight: 600;
+    color: #555;
+  }
+  
+  input, select {
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    width: 100%;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+  
+  input:focus, select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+  }
+  
+  button {
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  /* Results Section */
+  h3 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .results-container {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .strategy-result {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f7f7f7;
+    border: 1px solid #eee;
+    border-radius: 0.5rem;
+  }
+  
+  .strategy-result h4 {
+    font-size: 1.25rem;
+    color: #444;
+  }
+  
+  .strategy-result p {
+    margin: 0.25rem 0;
+  }
+  
+  .error-message {
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  
+  .success-message {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  .grid-cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .grid-cols-1 {
+    grid-template-columns: 1fr;
+  }
+  
+/* Table Container */
+.overflow-x-auto {
+    border: 1px solid #000; /* Black border around the table container */
+    border-radius: 8px; /* Rounded corners for a polished look */
+    background-color: #fff; /* White background for the table */
+    padding: 1rem; /* Padding around the table for spacing */
+  }
+  
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse; /* Remove gaps between table cells */
+  }
+  
+  thead th {
+    background-color: #f1f5f9; /* Light grey header background */
+    color: #333; /* Dark header text */
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.75rem;
+    border-bottom: 2px solid #000; /* Black bottom border for headers */
+  }
+  
+  tbody tr {
+    border-bottom: 1px solid #ddd; /* Subtle row borders */
+  }
+  
+  tbody tr:last-child {
+    border-bottom: none; /* Remove border from last row */
+  }
+  
+  tbody td {
+    padding: 0.75rem;
+    text-align: left;
+  }
+  
+  /* Highlight Rows Based on Action */
+  .bg-green-50 {
+    background-color: #e6f7e6; /* Light green for BUY */
+  }
+  
+  .bg-red-50 {
+    background-color: #fdecea; /* Light red for SELL */
+  }
+  
+  /* Text Colors for Actions */
+  .text-green-600 {
+    color: #2f855a; /* Green text for BUY */
+  }
+  
+  .text-red-600 {
+    color: #c53030; /* Red text for SELL */
+  }
+
+  @media (min-width: 768px) {
+    .grid-cols-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+    table {
+        font-size: 0.9rem;
+      }
+    
+      thead th, tbody td {
+        padding: 0.5rem;
+      }
+  }
+  

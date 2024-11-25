@@ -1,0 +1,241 @@
+<form [formGroup]="monteCarloForm" class="p-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Symbol Input -->
+    <div>
+      <label class="block text-sm font-medium mb-1">Symbol</label>
+      <input 
+        type="text" 
+        formControlName="symbol"
+        class="w-full p-2 border rounded"
+        [ngClass]="{'border-red-500': monteCarloForm.get('symbol')?.invalid && monteCarloForm.get('symbol')?.touched}">
+      <span class="text-red-500 text-xs" *ngIf="monteCarloForm.get('symbol')?.invalid && monteCarloForm.get('symbol')?.touched">
+        {{getFormErrorMessage('symbol')}}
+      </span>
+    </div>
+
+    <!-- Strategy Selection -->
+    <div>
+      <label class="block text-sm font-medium mb-1">Strategy</label>
+      <select 
+        formControlName="strategy"
+        class="w-full p-2 border rounded">
+        <option *ngFor="let strategy of availableStrategies" [value]="strategy">
+          {{strategy}}
+        </option>
+      </select>
+    </div>
+
+    <!-- Number of Simulations -->
+    <div>
+      <label class="block text-sm font-medium mb-1">Number of Simulations</label>
+      <input 
+        type="number"
+        formControlName="simulations"
+        min="100"
+        max="10000"
+        class="w-full p-2 border rounded"
+        [ngClass]="{'border-red-500': monteCarloForm.get('simulations')?.invalid && monteCarloForm.get('simulations')?.touched}">
+      <span class="text-red-500 text-xs" *ngIf="monteCarloForm.get('simulations')?.invalid && monteCarloForm.get('simulations')?.touched">
+        {{getFormErrorMessage('simulations')}}
+      </span>
+    </div>
+
+    <!-- Date Inputs -->
+    <div>
+      <label class="block text-sm font-medium mb-1">Start Date</label>
+      <input 
+        type="date" 
+        formControlName="startDate"
+        class="w-full p-2 border rounded"
+        [ngClass]="{'border-red-500': monteCarloForm.get('startDate')?.invalid && monteCarloForm.get('startDate')?.touched}">
+      <span class="text-red-500 text-xs" *ngIf="monteCarloForm.get('startDate')?.invalid && monteCarloForm.get('startDate')?.touched">
+        {{getFormErrorMessage('startDate')}}
+      </span>
+    </div>
+    
+    <div>
+      <label class="block text-sm font-medium mb-1">End Date</label>
+      <input 
+        type="date" 
+        formControlName="endDate"
+        class="w-full p-2 border rounded"
+        [ngClass]="{'border-red-500': monteCarloForm.get('endDate')?.invalid && monteCarloForm.get('endDate')?.touched}">
+      <span class="text-red-500 text-xs" *ngIf="monteCarloForm.get('endDate')?.invalid && monteCarloForm.get('endDate')?.touched">
+        {{getFormErrorMessage('endDate')}}
+      </span>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="mt-4">
+    <button 
+      (click)="onSubmit()"
+      [disabled]="loading || monteCarloForm.invalid"
+      class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 w-full disabled:opacity-50 disabled:cursor-not-allowed">
+      {{loading ? 'Running Simulation...' : 'Run Monte Carlo Simulation'}}
+    </button>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="mt-4 text-center">
+    <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-purple-500 border-t-transparent"></div>
+    <p class="text-gray-600 mt-2">Running simulations...</p>
+  </div>
+
+  <!-- Error Display -->
+  <div *ngIf="error" class="mt-4 p-4 bg-red-100 text-red-700 rounded">
+    <p class="font-bold">Error</p>
+    <p>{{ error }}</p>
+  </div>
+
+  <!-- Results Section -->
+  <div *ngIf="results && simulationStats" class="mt-8">
+    <!-- Statistics Overview -->
+    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+      <h3 class="text-xl font-bold mb-4">Overall Statistics</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="p-4 bg-purple-50 rounded-lg">
+          <p class="text-sm text-purple-600">Mean Return</p>
+          <p class="text-lg font-bold">{{simulationStats.meanReturn | number:'1.2-2'}}%</p>
+        </div>
+        <div class="p-4 bg-purple-50 rounded-lg">
+          <p class="text-sm text-purple-600">Median Return</p>
+          <p class="text-lg font-bold">{{simulationStats.medianReturn | number:'1.2-2'}}%</p>
+        </div>
+        <div class="p-4 bg-purple-50 rounded-lg">
+          <p class="text-sm text-purple-600">Standard Deviation</p>
+          <p class="text-lg font-bold">{{simulationStats.stdDev | number:'1.2-2'}}%</p>
+        </div>
+        <div class="p-4 bg-purple-50 rounded-lg">
+          <p class="text-sm text-purple-600">Best Case</p>
+          <p class="text-lg font-bold">{{simulationStats.bestCase | number:'1.2-2'}}%</p>
+        </div>
+        <div class="p-4 bg-purple-50 rounded-lg">
+          <p class="text-sm text-purple-600">Worst Case</p>
+          <p class="text-lg font-bold">{{simulationStats.worstCase | number:'1.2-2'}}%</p>
+        </div>
+        <div class="p-4 bg-purple-50 rounded-lg">
+          <p class="text-sm text-purple-600">95% Confidence Interval</p>
+          <p class="text-lg font-bold">
+            {{simulationStats.confidenceInterval.lower | number:'1.2-2'}}% to {{simulationStats.confidenceInterval.upper | number:'1.2-2'}}%
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Distribution Chart -->
+    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+      <h3 class="text-xl font-bold mb-4">Return Distribution</h3>
+      <div class="h-80">
+        <canvas *ngIf="distributionChartData.datasets.length" baseChart
+                [data]="distributionChartData"
+                [options]="distributionChartOptions"
+                [type]="distributionChartType">
+        </canvas>
+      </div>
+    </div>
+
+    <!-- Individual Simulation Results -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <h3 class="text-xl font-bold mb-4">Simulation Details</h3>
+      <div class="space-y-6">
+        <div *ngFor="let sim of results; let i = index" class="border-b pb-6 last:border-b-0">
+          <div class="flex justify-between items-center mb-4">
+            <h4 class="text-lg font-semibold">Simulation {{i + 1}}</h4>
+            <button 
+              (click)="showSimulation(i)"
+              class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">
+              View Details
+            </button>
+          </div>
+
+          <!-- Simulation Metrics -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            <div class="p-3 bg-gray-50 rounded">
+              <p class="text-sm text-gray-600">Total Return</p>
+              <p class="text-lg font-semibold">{{sim.totalReturn | number:'1.2-2'}}%</p>
+            </div>
+            <div class="p-3 bg-gray-50 rounded">
+              <p class="text-sm text-gray-600">Sharpe Ratio</p>
+              <p class="text-lg font-semibold">{{sim.sharpeRatio | number:'1.2-2'}}</p>
+            </div>
+            <div class="p-3 bg-gray-50 rounded">
+              <p class="text-sm text-gray-600">Max Drawdown</p>
+              <p class="text-lg font-semibold">{{sim.maxDrawdown | number:'1.2-2'}}%</p>
+            </div>
+            <div class="p-3 bg-gray-50 rounded">
+              <p class="text-sm text-gray-600">Win Rate</p>
+              <p class="text-lg font-semibold">{{sim.winRate | number:'1.2-2'}}%</p>
+            </div>
+          </div>
+
+          <!-- Equity Chart for Selected Simulation -->
+          <div *ngIf="selectedSimulation === i">
+            <div class="mb-6">
+              <h5 class="text-lg font-semibold mb-3">Equity Curve</h5>
+              <div style="height: 400px;">
+                <canvas baseChart 
+                        [data]="equityChartData"
+                        [options]="equityChartOptions"
+                        [type]="equityChartType">
+                </canvas>
+              </div>
+            </div>
+
+            <!-- Trade Details -->
+            <div class="mt-6">
+              <h5 class="text-lg font-semibold mb-3">Trade History</h5>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                <div class="p-3 bg-gray-50 rounded">
+                  <p class="text-sm text-gray-600">Total Trades</p>
+                  <p class="text-lg font-semibold">{{getTradeStats(i).total}}</p>
+                </div>
+                <div class="p-3 bg-gray-50 rounded">
+                  <p class="text-sm text-gray-600">Buy Trades</p>
+                  <p class="text-lg font-semibold">{{getTradeStats(i).buys}}</p>
+                </div>
+                <div class="p-3 bg-gray-50 rounded">
+                  <p class="text-sm text-gray-600">Sell Trades</p>
+                  <p class="text-lg font-semibold">{{getTradeStats(i).sells}}</p>
+                </div>
+                <div class="p-3 bg-gray-50 rounded">
+                  <p class="text-sm text-gray-600">Avg Price</p>
+                  <p class="text-lg font-semibold">{{getTradeStats(i).avgPrice | currency:'USD':'symbol':'1.2-2'}}</p>
+                </div>
+              </div>
+
+              <!-- Trade Table -->
+              <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Shares</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200">
+                    <tr *ngFor="let trade of getTradesForSimulation(i)"
+                        [ngClass]="{'bg-green-50': trade.action === 'BUY', 'bg-red-50': trade.action === 'SELL'}">
+                      <td class="px-6 py-4 whitespace-nowrap">{{trade.date | date:'shortDate'}}</td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <span [ngClass]="{'text-green-600': trade.action === 'BUY', 'text-red-600': trade.action === 'SELL'}">
+                          {{trade.action}}
+                        </span>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">{{trade.shares | number}}</td>
+                      <td class="px-6 py-4 whitespace-nowrap">{{trade.price | currency:'USD':'symbol':'1.2-2'}}</td>
+                      <td class="px-6 py-4 whitespace-nowrap">{{trade.shares * trade.price | currency:'USD':'symbol':'1.2-2'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

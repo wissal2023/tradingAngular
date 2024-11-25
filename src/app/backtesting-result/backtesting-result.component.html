@@ -1,0 +1,133 @@
+<div class="backtesting-dashboard" *ngIf="result && isResultValid()">
+  <!-- Main Stats Banner -->
+  <div class="performance-banner" [ngClass]="result.totalReturn >= 0 ? 'positive' : 'negative'">
+    <div class="banner-content">
+      <h1>Strategy Performance</h1>
+      <div class="total-return">
+        <span class="percentage">{{ result.totalReturn | percent:'1.2-2' }}</span>
+        <span class="label">Total Return</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Metrics Grid -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-header">Initial Investment</div>
+      <div class="metric-value">{{ result.initialCapital | currency:'USD':'symbol':'1.2-2' }}</div>
+      <div class="metric-footer">Starting Capital</div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="metric-header">Current Value</div>
+      <div class="metric-value">{{ result.finalCapital | currency:'USD':'symbol':'1.2-2' }}</div>
+      <div class="metric-footer">Final Portfolio Value</div>
+    </div>
+    
+    <div class="metric-card">
+      <div class="metric-header">Profit/Loss</div>
+      <div class="metric-value" [ngClass]="result.finalCapital - result.initialCapital >= 0 ? 'profit' : 'loss'">
+        {{ result.finalCapital - result.initialCapital | currency:'USD':'symbol':'1.2-2' }}
+      </div>
+      <div class="metric-footer">Absolute Return</div>
+    </div>
+    
+    <div class="metric-card" *ngIf="result.winRate !== undefined">
+      <div class="metric-header">Success Rate</div>
+      <div class="metric-value">{{ result.winRate | percent:'1.2-2' }}</div>
+      <div class="metric-footer">Win/Loss Ratio</div>
+    </div>
+  </div>
+
+  <!-- Chart Component -->
+  <div class="chart-container">
+    <div class="chart-header">
+      <h2>Portfolio Value Over Time</h2>
+      <div class="chart-legend">
+        <span class="legend-item">
+          <span class="legend-color"></span>
+          Portfolio Value
+        </span>
+      </div>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="portfolioChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Trade History -->
+  <div class="trade-history">
+    <div class="section-header">
+      <h2>Trade History</h2>
+      <div class="trade-stats">
+        <span>Total Trades: {{ result.trades.length }}</span>
+        <span *ngIf="result.maxDrawdown !== undefined">Max Drawdown: {{ result.maxDrawdown | percent:'1.2-2' }}</span>
+      </div>
+    </div>
+    
+    <div class="position-legend">
+      <div class="legend-item">
+        <span class="position-indicator long"></span>
+        <div class="legend-text">
+          <strong>LONG Position</strong>
+          <span>Buying shares expecting price to rise</span>
+        </div>
+      </div>
+      <div class="legend-item">
+        <span class="position-indicator short"></span>
+        <div class="legend-text">
+          <strong>SHORT Position</strong>
+          <span>Selling borrowed shares expecting price to fall</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="trade-table-container">
+      <table class="trade-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Signal</th>
+            <th>Quantity</th>
+            <th>Entry Price</th>
+            <th>Total Value</th>
+            <th>Position</th>
+            <th>Expected Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trade of result.trades" [ngClass]="trade.action.toLowerCase()">
+            <td class="date">{{ trade.date | date:'MMM dd, yyyy' }}</td>
+            <td class="signal">
+              <div class="signal-indicator" [ngClass]="trade.action.toLowerCase()">
+                {{ trade.action }}
+              </div>
+            </td>
+            <td class="quantity">{{ trade.shares | number:'1.0-0' }}</td>
+            <td class="price">{{ trade.price | currency:'USD':'symbol':'1.2-2' }}</td>
+            <td class="value">{{ trade.shares * trade.price | currency:'USD':'symbol':'1.2-2' }}</td>
+            <td class="position">
+              <div class="position-badge" [ngClass]="trade.action.toLowerCase()"
+                   [appTooltip]="trade.action === 'BUY' ? 'Expecting price to rise' : 'Expecting price to fall'">
+                {{ trade.action === 'BUY' ? 'LONG' : 'SHORT' }}
+                <span class="position-arrow">{{ trade.action === 'BUY' ? '↗' : '↘' }}</span>
+              </div>
+            </td>
+            <td class="expectation">
+              <span class="expectation-text" [ngClass]="trade.action.toLowerCase()">
+                {{ trade.action === 'BUY' ? 'Profit from price increase' : 'Profit from price decrease' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<div class="no-data" *ngIf="!isResultValid()">
+  <div class="no-data-content">
+    <div class="icon">📊</div>
+    <h2>No Backtest Results</h2>
+    <p>Run a backtest simulation to see your strategy performance analysis</p>
+  </div>
+</div>

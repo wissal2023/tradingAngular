@@ -20,7 +20,7 @@ export class PortfolioComponent implements OnInit{
 
   ngOnInit() {
     this.fetchPortfolios();
-    this.fetchMarketStatus();
+    //this.fetchMarketStatus();
   }
   fetchPortfolios() {
     this.portfolioService.getAllPortfolios().subscribe((data: Portfolio[]) => {

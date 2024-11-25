@@ -1,0 +1,134 @@
+<div class="backtest-form-container">
+        <!-- Add the stock preview chart component here -->
+        <app-stock-preview [parentForm]="backtestingForm"></app-stock-preview>
+  <div class="form-header">
+    <h2>Backtest Strategy</h2>
+    <p class="subtitle">Configure your trading strategy parameters</p>
+  </div>
+  
+  <div *ngIf="error" class="error-message">
+    <i class="fas fa-exclamation-circle"></i>
+    {{ error }}
+  </div>
+
+  <form [formGroup]="backtestingForm" (ngSubmit)="onSubmit()" class="backtest-form">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="symbol">
+          <i class="fas fa-chart-line"></i>
+          Stock Symbol
+        </label>
+        <div class="input-wrapper">
+          <input
+            id="symbol"
+            type="text"
+            formControlName="symbol"
+            [class.invalid]="isFieldInvalid('symbol')"
+            placeholder="e.g., AAPL"
+          />
+          <span class="input-icon">
+            <i class="fas fa-search"></i>
+          </span>
+        </div>
+        <div class="error-hint" *ngIf="isFieldInvalid('symbol')">
+          {{ getErrorMessage('symbol') }}
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="strategy">
+          <i class="fas fa-robot"></i>
+          Trading Strategy
+        </label>
+        <div class="input-wrapper">
+          <select
+            id="strategy"
+            formControlName="strategy"
+            [class.invalid]="isFieldInvalid('strategy')"
+          >
+            <option value="">Select a strategy</option>
+            <option *ngFor="let strategy of strategies" [value]="strategy">
+              {{ strategy }}
+            </option>
+          </select>
+        </div>
+        <div class="error-hint" *ngIf="isFieldInvalid('strategy')">
+          {{ getErrorMessage('strategy') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="startDate">
+          <i class="fas fa-calendar-alt"></i>
+          Start Date
+        </label>
+        <div class="input-wrapper">
+          <input
+            id="startDate"
+            type="date"
+            formControlName="startDate"
+            [class.invalid]="isFieldInvalid('startDate')"
+          />
+        </div>
+        <div class="error-hint" *ngIf="isFieldInvalid('startDate')">
+          {{ getErrorMessage('startDate') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="endDate">
+          <i class="fas fa-calendar-alt"></i>
+          End Date
+        </label>
+        <div class="input-wrapper">
+          <input
+            id="endDate"
+            type="date"
+            formControlName="endDate"
+            [class.invalid]="isFieldInvalid('endDate')"
+          />
+        </div>
+        <div class="error-hint" *ngIf="isFieldInvalid('endDate')">
+          {{ getErrorMessage('endDate') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="initialCapital">
+          <i class="fas fa-dollar-sign"></i>
+          Initial Capital
+        </label>
+        <div class="input-wrapper">
+          <input
+            id="initialCapital"
+            type="number"
+            formControlName="initialCapital"
+            [class.invalid]="isFieldInvalid('initialCapital')"
+            placeholder="Enter amount"
+          />
+          <span class="input-icon">$</span>
+        </div>
+        <div class="error-hint" *ngIf="isFieldInvalid('initialCapital')">
+          {{ getErrorMessage('initialCapital') }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="backtestingForm.errors?.['dateRange']" class="error-message date-range-error">
+      <i class="fas fa-exclamation-triangle"></i>
+      End date must be after start date
+    </div>
+
+    <div class="form-actions">
+      <button 
+        type="submit" 
+        [disabled]="backtestingForm.invalid || loading"
+        class="submit-button"
+      >
+        <i class="fas" [class.fa-spinner]="loading" [class.fa-play]="!loading"></i>
+        {{ loading ? 'Running backtest...' : 'Run Backtest' }}
+      </button>
+    </div>
+  </form>
+</div>

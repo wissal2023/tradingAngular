@@ -14,15 +14,13 @@
             <a href="blog.html" class="nav-item nav-link">Blogs</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link" data-bs-toggle="dropdown">
-                    <span class="dropdown-toggle">Pages</span>
+                    <span class="dropdown-toggle">Backtest</span>
                 </a>
                 <div class="dropdown-menu m-0">
-                    <a href="feature.html" class="dropdown-item">Our Features</a>
-                    <a href="team.html" class="dropdown-item">Our team</a>
-                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                    <a href="offer.html" class="dropdown-item">Our offer</a>
-                    <a href="FAQ.html" class="dropdown-item">FAQs</a>
-                    <a href="404.html" class="dropdown-item">404 Page</a>
+                    <a [routerLink]="['/backtest-form']" routerLinkActive="active" class="dropdown-item">Simple Backtest</a>
+                    <a [routerLink]="['/optim']" routerLinkActive="active"  class="dropdown-item">Optimization Strategy</a>
+                    <a [routerLink]="['/predict']" routerLinkActive="active"  class="dropdown-item">Price Prediction</a>
+                    <a [routerLink]="['/advancebacktest']" routerLinkActive="active"  class="dropdown-item">advanced backtest</a>
                 </div>
             </div>
             <a href="contact.html" class="nav-item nav-link">Contact Us</a>
