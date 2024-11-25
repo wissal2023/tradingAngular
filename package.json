@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+
     "@tensorflow/tfjs": "^4.22.0",
     "@tensorflow/tfjs-converter": "^4.22.0",
     "@tensorflow/tfjs-layers": "^4.22.0",
@@ -29,6 +30,12 @@
     "long": "^5.2.3",
     "ml": "^8.0.0",
     "ng2-charts": "^6.0.1",
+
+    "apexcharts": "^3.54.1",
+    "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.5",
+    "ng2-charts": "^4.1.1",
+
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

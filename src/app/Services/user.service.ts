@@ -7,33 +7,35 @@ import { User } from '../Entity/user';
   providedIn: 'root'
 })
 export class UserService {
+  private apiUrl = 'http://localhost:8094/home/user'; // Remplacez par l'URL de votre API
 
-  private baseUrl = 'http://localhost:8090/home/user'; 
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  // Fetch all users
+  // Récupérer tous les utilisateurs
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}/Get-all-users`);
+    return this.http.get<User[]>(`${this.apiUrl}/get-all-users`);
   }
 
-  // Fetch a single user by ID
+  // Récupérer un utilisateur par ID
   getUserById(userId: number): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}/Get-user/${userId}`);
+    return this.http.get<User>(`${this.apiUrl}/get-user/${userId}`);
   }
 
-  // Add a user and assign a portfolio
-  addUserAndAssignPortfolio(user: User): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/add-user-and-assign-portfolio`, user);
-  }
-
-  // Modify a user
+  // Modifier un utilisateur
   modifyUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.baseUrl}/modify-user`, user);
+    return this.http.put<User>(`${this.apiUrl}/modify-user`, user);
   }
 
-  // Remove a user
+  // Supprimer un utilisateur
   removeUser(userId: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/remove-user/${userId}`);
+    return this.http.delete<void>(`${this.apiUrl}/remove-user/${userId}`);
+  }
+
+  VerifyPassword(userId: number, typedPassword: string): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}/verify-password`, {userId, typedPassword});
+  }
+
+  changeStatus(userId: number, status: boolean): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/change-status?status=${status}&userId=${userId}`,{});
   }
 }

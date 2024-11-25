@@ -1,58 +1,16 @@
-<div>
-  <input [(ngModel)]="symbol" placeholder="Enter stock symbol" />
-  <button (click)="getQuote()">Get Quote</button>
-  
-  <div *ngIf="quote">
-    <h3>Stock Quote for {{ symbol }}</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Attribute</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr>
-            <td>Symbol</td>
-            <td>{{ quote['01. symbol'] }}</td>
-          </tr>
-          <tr>
-            <td>Open</td>
-            <td>{{ quote['02. open'] }}</td>
-          </tr>
-          <tr>
-            <td>High</td>
-            <td>{{ quote['03. high'] }}</td>
-          </tr>
-          <tr>
-            <td>Low</td>
-            <td>{{ quote['04. low'] }}</td>
-          </tr>
-          <tr>
-            <td>Price</td>
-            <td>{{ quote['05. price'] }}</td>
-          </tr>
-          <tr>
-            <td>Volume</td>
-            <td>{{ quote['06. volume'] }}</td>
-          </tr>
-          <tr>
-            <td>Latest Trading Day</td>
-            <td>{{ quote['07. latest trading day'] }}</td>
-          </tr>
-          <tr>
-            <td>Previous Close</td>
-            <td>{{ quote['08. previous close'] }}</td>
-          </tr>
-          <tr>
-            <td>Change</td>
-            <td>{{ quote['09. change'] }}</td>
-          </tr>
-          <tr>
-            <td>Change Percent</td>
-            <td>{{ quote['10. change percent'] }}</td>
-          </tr>
-        </tbody>
-    </table>
+<div class="stock-card" *ngIf="latestData">
+  <h3>{{ symbol }} Daily Summary</h3>
+  <p><strong>Last Refreshed:</strong> {{ lastRefreshed }}</p>
+  <div class="data">
+    <p><strong>Open:</strong> {{ latestData['1. open'] }}</p>
+    <p><strong>High:</strong> {{ latestData['2. high'] }}</p>
+    <p><strong>Low:</strong> {{ latestData['3. low'] }}</p>
+    <p><strong>Close:</strong> {{ latestData['4. close'] }}</p>
+    <p><strong>Volume:</strong> {{ latestData['5. volume'] }}</p>
   </div>
 </div>
+<div *ngIf="error" class="error">
+  {{ error }}
+</div>
+
+  

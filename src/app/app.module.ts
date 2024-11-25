@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,11 +14,14 @@ import { FooterFrontComponent } from './Front/footer-Front/footerFront.component
 import { HeaderComponent } from './Front/header/header.component';
 import { PortfolioComponent } from './Front/portfolio/portfolio.component';
 import { StockQuoteComponent } from './Front/stock-quote/stock-quote.component';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { IntraDayComponent } from './Front/intra-day/intra-day.component';
 import { HoldingComponent } from './Front/holding/holding.component';
 import { TransactionComponent } from './Front/transaction/transaction.component';
+
 import { PlaceOrderComponent } from './Front/place-order/place-order.component';
 import { ChallengeComponent } from './Front/challenge/challenge.component';
 import { TraderComponent } from './Front/trader/trader.component';
@@ -25,6 +29,33 @@ import { TransactionchallengeComponent } from './Front/Transactionn/transactionc
 import { ReactiveFormsModule } from '@angular/forms';
 //import { ChartsModule } from 'ng2-charts';
 import { CreateChallengeComponent } from './Back/create-challenge/create-challenge/create-challenge.component';
+
+import { WatchlistComponent } from './Front/watchlist/watchlist.component';
+import { LoginComponent } from './Front/login/login.component';
+import { OrderFormComponent } from './Front/order-form/order-form.component';
+import { ListPortfolioComponent } from './Back/list-portfolio/list-portfolio.component';
+import { ListOrdersComponent } from './Back/list-orders/list-orders.component';
+
+import { DashboardComponent } from './Back/dashboard/dashboard.component';
+import { RegisterComponent } from './Front/register/register.component';
+import { ListUsersComponent } from './Back/list-users/list-users.component';
+import { UserProfileComponent } from './Back/user-profile/user-profile.component';
+import { SearchfilterPipe } from './Pipes/searchFilter.pipe';
+import { UserDetailsComponent } from './Back/user-details/user-details.component';
+import { ResetPasswordComponent } from './Front/reset-password/reset-password.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { NotAuthorizedComponent } from './Front/not-authorized/not-authorized.component';
+import { ActivateAccountComponent } from './Front/activate-account/activate-account.component';
+
+import { ListTransactionComponent } from './Back/list-transaction/list-transaction.component';
+import { ChartComponent } from './Front/chart/chart.component';
+import { ModalComponent } from './Front/modal/modal.component';
+import { FinancialNewsComponent } from './Front/financial-news/financial-news.component';
+import { ListorderComponent } from './Front/listorder/listorder.component';
+import { OptionQuoteComponent } from './Front/option-quote/option-quote.component';
+import { OilPricesQuoteComponent } from './Front/oil-prices-quote/oil-prices-quote.component';
+
+
 
 @NgModule({
   declarations: [
@@ -43,12 +74,36 @@ import { CreateChallengeComponent } from './Back/create-challenge/create-challen
   IntraDayComponent,
   HoldingComponent,
   TransactionComponent,
+
   PlaceOrderComponent, 
   ChallengeComponent,
    TraderComponent,
   TransactionchallengeComponent,
  
   CreateChallengeComponent
+
+  WatchlistComponent,
+  ChartComponent,
+  LoginComponent,
+  OrderFormComponent,
+  ListPortfolioComponent,
+  ListOrdersComponent,
+  RegisterComponent,
+  DashboardComponent,
+  ListUsersComponent,
+  UserProfileComponent,
+  SearchfilterPipe,
+  UserDetailsComponent,
+  ResetPasswordComponent,
+  NotAuthorizedComponent,
+  ActivateAccountComponent,
+  ListTransactionComponent,
+  ModalComponent,
+  FinancialNewsComponent,
+  ListorderComponent,
+  OptionQuoteComponent,
+  OilPricesQuoteComponent
+
     
   ],
   imports: [
@@ -56,11 +111,19 @@ import { CreateChallengeComponent } from './Back/create-challenge/create-challen
     AppRoutingModule,
     HttpClientModule, 
     FormsModule,
+
     ReactiveFormsModule, 
    
     //ChartsModule
+
+    ReactiveFormsModule,
+    NgChartsModule
+      
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

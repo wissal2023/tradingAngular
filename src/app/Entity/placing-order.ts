@@ -1,3 +1,4 @@
+import { Portfolio } from "./portfolio";
 import { Transaction } from "./transaction";
 
 export class PlacingOrder {
@@ -8,23 +9,35 @@ export class PlacingOrder {
     date!: Date;
     note?: string;
     param!: string;
-    duration!: number;
-
-    tradeType!: TradeType;
+    duration!: string;
+    stopLoss?: number;
+    takeProfit?: number;
+    margin?: number;     
+    faceValue?: number; // Specific Fields For Bonds
+    couponRate?: number;
+    maturityDate?: Date;    
+    strikePrice?: number;//  Specific Fields For Options
+    expirationDate?: Date;    
+    contractSize?: number;//  Specific Fields For Commodities
+    expiryDate?: Date;    
+    nav?: number;//  Specific Fields For Mutual Funds and ETFs
+    assetsType!: AssetsType;// Enums
     orderType!: OrderType;
-    transacType!: TransacType;
+    actionType!: ActionType;
     status!: Status;
+    transactions!: Transaction[];  
     
-    transactions!: Transaction[];
 }
-export enum TradeType {
+    
+export enum AssetsType {
     STOCKS = 'STOCKS',
     OPTIONS = 'OPTIONS',
     BONDS = 'BONDS',
     COMMODITIES = 'COMMODITIES',
     FOREX = 'FOREX',
     MUTUAL_FUNDS = 'MUTUAL_FUNDS',
-    ETF = 'ETF'
+    ETF = 'ETF',
+    CRYPTO='CRYPTO'
 }
 
 export enum OrderType {
@@ -34,7 +47,7 @@ export enum OrderType {
     TRAILING_STOP = 'TRAILING_STOP'
 }
 
-export enum TransacType {
+export enum ActionType {
     BUY = 'BUY',
     SELL = 'SELL',
     SHORT = 'SHORT',
@@ -46,5 +59,6 @@ export enum TransacType {
 export enum Status {
     OPEN = 'OPEN',
     FILLED = 'FILLED',
-    CANCELLED = 'CANCELLED'
+    CANCELLED = 'CANCELLED',
+    PENDING = 'PENDING'
 }

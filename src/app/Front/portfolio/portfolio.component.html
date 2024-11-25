@@ -3,18 +3,8 @@
 <div class="page-heading">
     <h3>Portfolio overview</h3>
 </div>
-
-<div>
-    <h5>Global Market Status</h5>
-    <div *ngIf="marketStatus">
-      <h5>Market Status: </h5>
-      <pre>{{ marketStatus | json }}</pre> 
-    </div>
-  </div>
-
-
   <div class="page-content">
-    <section class="row"  *ngFor="let portfolio of portfolios">
+    <section class="row" *ngFor="let portfolio of portfolios">
       <div class="col-12 col-lg-9">
         <div class="row">
             <div class="col-6 col-lg-3 col-md-6">
@@ -86,22 +76,11 @@
                 </div>
             </div>
         </div> 
-    
-              
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>line chart for the stocks performance of the portfolio </h4>
-                        </div>
-                        <div class="card-body">
-                            <app-stock-quote></app-stock-quote>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <app-holding></app-holding>
+        <!--Holding component-->
+        <app-holding></app-holding>
+        <!--orders component in my portfolio component-->
+        <app-listorder [portfolioId]="portfolioId"></app-listorder>
+        
 
         </div>
         <div class="col-12 col-lg-3">
@@ -113,56 +92,41 @@
                         </div>
                         <div class="ms-3 name">
                             <h5 class="font-bold">{{ portfolio.user.id }}</h5>
-                            <h6 class="text-muted mb-0">{{ portfolio.user.username }}</h6> 
+                            <h6 class="text-muted mb-0">{{ portfolio.user.fullname }}</h6> 
                         </div>
                     </div>
                 </div>
             </div>
+            <!--placerOrder component -->
+            <app-watchlist [portfolioId]="portfolio.id"></app-watchlist>
+
+            <!--Global Market Status o/c-->
             <div class="card">
                 <div class="card-header">
-                    <h4>watchlist</h4>
+                    <h4>Market Status</h4>
                 </div>
-                <div class="card-content pb-4">
-                    <div class="recent-message d-flex px-4 py-3">
-                        <div class="avatar avatar-lg">
-                            <img src="assets/Back/images/faces/4.jpg">
-                        </div>
-                        <div class="name ms-4">
-                            <h5 class="mb-1">Hank Schrader</h5>
-                            <h6 class="text-muted mb-0">johnducky</h6>
-                        </div>
-                    </div>
-                    <div class="recent-message d-flex px-4 py-3">
-                        <div class="avatar avatar-lg">
-                            <img src="assets/Back/images/faces/5.jpg">
-                        </div>
-                        <div class="name ms-4">
-                            <h5 class="mb-1">Dean Winchester</h5>
-                            <h6 class="text-muted mb-0">imdean</h6>
-                        </div>
-                    </div>
-                    <div class="recent-message d-flex px-4 py-3">
-                        <div class="avatar avatar-lg">
-                            <img src="assets/Back/images/faces/1.jpg">
-                        </div>
-                        <div class="name ms-4">
-                            <h5 class="mb-1">John Dodol</h5>
-                            <h6 class="text-muted mb-0">dodoljohn</h6>
-                        </div>
-                    </div>
-                    <div class="px-4">
-                        <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
-                            Conversation</button>
-                    </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Enter stock symbol">
+                    <button class="btn btn-outline-secondary" type="button" (click)="search()">Search</button>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h4>Visitors Profile</h4>
-                </div>
-                <div class="card-body">
-                    <div id="chart-visitors-profile"></div>
-                </div>
+                <div *ngIf="searchResults.length">
+                    <h3>Search Results:</h3>
+                    <ul>
+                    <li *ngFor="let result of searchResults">
+                        <strong>{{ result['1. symbol'] }} - {{ result['2. name'] }}</strong>
+                        <ul>
+                        <li>Type: {{ result['3. type'] }}</li>
+                        <li>Region: {{ result['4. region'] }}</li>
+                        <li>Market Open: {{ result['5. marketOpen'] }}</li>
+                        <li>Market Close: {{ result['6. marketClose'] }}</li>
+                        <li>Timezone: {{ result['7. timezone'] }}</li>
+                        <li>Currency: {{ result['8. currency'] }}</li>
+                        <li>Match Score: {{ result['9. matchScore'] }}</li>
+                        </ul>
+                    </li>
+                    </ul>
+                </div>  
             </div>
         </div>
     </section>

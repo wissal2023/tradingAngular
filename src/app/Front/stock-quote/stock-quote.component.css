@@ -1,15 +1,25 @@
-table {
-    width: 100%;
-    border-collapse: collapse;
+.stock-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 300px;
+    margin: 16px auto;
+    background-color: #f9f9f9;
   }
   
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+  h3 {
+    margin-bottom: 8px;
+    font-size: 1.2em;
+    color: #333;
   }
   
-  th {
-    background-color: #f2f2f2;
+  .data p {
+    margin: 4px 0;
+    font-size: 1em;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
   }
   
