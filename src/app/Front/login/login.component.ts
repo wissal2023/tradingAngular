@@ -36,33 +36,29 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        this.authService.loginUser(this.email?.value, this.password?.value).subscribe({
-            next: (response: LoginResponse) => {
-                console.log('Login successful', response);
-                // store auth token
-                this.authService.storeToken(response.token);
-                //store connectedUser data
-                this.userService.getUserById(response.user.id).subscribe(
-                    user => {
-                        this.authService.storeUserData(user);
-                        // check user role for redirection
-                        this.isAdmin = response.user.roles.some(r => r.name === Role_User.ROLE_ADMIN);
-                        if (this.isAdmin) {
-                            this.router.navigate(['/dash']);
-                        }
-                        else {
-                            this.router.navigate(['/portfolio']);
-                        }
-                    }
-                );
+    this.authService.loginUser(this.email?.value, this.password?.value).subscribe({
+        next: (response: LoginResponse) => {
+            console.log('Login successful', response);
+            // Store auth token
+            this.authService.storeToken(response.token);
+            // Store connected user data
+            this.userService.getUserById(response.user.id).subscribe(user => {
+                this.authService.storeUserData(user);
+                // Check user role for redirection
+                this.isAdmin = response.user.roles.some(r => r.name === Role_User.ROLE_ADMIN);
+                if (this.isAdmin) {
+                    this.router.navigate(['/dash']);
+                } else {
+                    // Redirect to the portfolio using the correct `portfolioId`
+                    this.router.navigate([`/portfolio/${user.id}/${user.portfolio.id}`]);
+                }
+            });
+        },
+        error: (error) => {
+            console.error('Login failed', error);
+        }
+    });
+}
 
-
-            },
-            error: (error) => {
-                console.error('Login failed', error);
-
-            }
-        });
-    }
 }
 

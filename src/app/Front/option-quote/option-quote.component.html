@@ -1,18 +1,11 @@
 <div class="historical-options-container">
-    <h2>Historical Options for Symbol: {{ symbol }}</h2>
-  
     <!-- Search Input for Symbol -->
     <div>
-      <input
-        type="text"
-        [(ngModel)]="symbol"
-        (ngModelChange)="onSymbolChange()"
-        placeholder="Enter Symbol"
-      />
+      <input type="text" [(ngModel)]="symbol" (ngModelChange)="onSymbolChange()" placeholder="Enter Symbol" />
       <button (click)="fetchHistoricalOptions()">Search</button>
     </div>
-  
     <!-- Display Historical Options Data in Table -->
+    <h2>Historical Options for Symbol: {{ symbol }}</h2>
     <table *ngIf="historicalOptions.length > 0" class="options-table">
       <thead>
         <tr>
@@ -54,8 +47,7 @@
           <td>{{ option.rho }}</td>
         </tr>
       </tbody>
-    </table>
-  
+    </table>  
     <!-- If no data available, show a message -->
     <p *ngIf="historicalOptions.length === 0">No historical options data available.</p>
   </div>

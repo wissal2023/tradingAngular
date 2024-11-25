@@ -1,16 +1,26 @@
-<div class="stock-card" *ngIf="latestData">
-  <h3>{{ symbol }} Daily Summary</h3>
-  <p><strong>Last Refreshed:</strong> {{ lastRefreshed }}</p>
-  <div class="data">
-    <p><strong>Open:</strong> {{ latestData['1. open'] }}</p>
-    <p><strong>High:</strong> {{ latestData['2. high'] }}</p>
-    <p><strong>Low:</strong> {{ latestData['3. low'] }}</p>
-    <p><strong>Close:</strong> {{ latestData['4. close'] }}</p>
-    <p><strong>Volume:</strong> {{ latestData['5. volume'] }}</p>
-  </div>
-</div>
-<div *ngIf="error" class="error">
-  {{ error }}
-</div>
 
-  
+<div *ngIf="stockData" class="stock-quote-card">
+  <h3>Stock Quote for {{ stockData['01. symbol'] }}:</h3>                                                
+  <div class="card">
+      <div class="stock-info-summary">
+      <div class="stock-price">
+          <h4>{{ stockData['05. price'] | currency }}</h4>
+          <div [ngClass]="{'positive-change': stockData['09. change'] > 0, 'negative-change': stockData['09. change'] < 0}">
+          <span>{{ stockData['09. change'] | number: '1.2-2' }} ({{ stockData['10. change percent'] }})</span>
+          </div>
+      </div>                                                    
+      </div>
+      <div class="stock-info-details">
+      <ul>
+          <li><strong>Open:</strong> {{ stockData['02. open'] | currency }}</li>
+          <li><strong>High:</strong> {{ stockData['03. high'] | currency }}</li>
+          <li><strong>Low:</strong> {{ stockData['04. low'] | currency }}</li>
+          <li><strong>Previous Close:</strong> {{ stockData['08. previous close'] | currency }}</li>
+          <li><strong>Volume:</strong> {{ stockData['06. volume'] | number }}</li>
+      </ul>
+      </div>
+  </div>
+  </div> 
+<div *ngIf="chartData.length > 0">
+  <app-chart [data]="chartData"></app-chart>
+</div>

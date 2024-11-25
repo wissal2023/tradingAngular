@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WatchlistComponent {
 
-  @Input() portfolioId!: number; 
+
   
  
 }

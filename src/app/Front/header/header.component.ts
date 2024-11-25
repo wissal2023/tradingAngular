@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { StockQuoteService } from 'src/app/Services/stock-quote-service.service';
 
 @Component({
@@ -11,9 +12,13 @@ export class HeaderComponent  {
   @Input() portfolioId!: number; 
   marketStatus: any[] = [];
 
-  constructor(private stockQuoteService: StockQuoteService) {}
+  constructor(private stockQuoteService: StockQuoteService, 
+              private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.portfolioId = +params['portfolioId']; // Fetch portfolioId from route
+    });
     //this.getMarketStatus();
   }
 

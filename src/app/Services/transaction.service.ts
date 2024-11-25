@@ -7,7 +7,7 @@ import { Transaction } from '../Entity/transaction';
   providedIn: 'root'
 })
 export class TransactionService {
-  private baseUrl = 'http://localhost:8090/home/transaction';
+  private baseUrl = 'http://localhost:8094/home/transaction';
   constructor(private http: HttpClient) {}
   getAllTransactions(): Observable<Transaction[]> {
 
@@ -16,14 +16,11 @@ export class TransactionService {
   getTransaction(transactionId: number): Observable<Transaction> {
     return this.http.get<Transaction>(`${this.baseUrl}/Get-transaction/${transactionId}`);
   }
-  addTransaction(placingOrderId: number, transaction: Transaction): Observable<Transaction> {
-    const url = `${this.baseUrl}/AddTransaction/${placingOrderId}`;
-    return this.http.post<Transaction>(url, transaction);
+  // Get transactions by portfolio ID
+  getTransactionsByPortfolioId(portfolioId: number): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.baseUrl}/Get-transactions-by-portfolio/${portfolioId}`);
   }
-  modifyTransaction(transaction: Transaction): Observable<Transaction> {
-    return this.http.put<Transaction>(`${this.baseUrl}/modify-transaction`, transaction);
-  }
-  removeTransaction(transactionId: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/remove-transaction/${transactionId}`);
-  }
+  
+  
+ 
 }

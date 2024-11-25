@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="oil-prices">
     <h2>Brent Crude Oil Prices</h2>
   
@@ -9,6 +10,8 @@
         <option value="monthly">Monthly</option>
       </select>
     </div>
+
+    
   
     <!-- Display Error Message -->
     <div *ngIf="errorMessage" class="error-message">
@@ -42,5 +45,6 @@
     <div *ngIf="oilPrices.length === 0 && !errorMessage" class="no-data-message">
       No oil prices available for the selected interval.
     </div>
-  </div>
+</div>
+<app-footer-front></app-footer-front>
   

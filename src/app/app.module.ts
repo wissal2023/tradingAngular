@@ -35,8 +35,6 @@ import { LoginComponent } from './Front/login/login.component';
 import { OrderFormComponent } from './Front/order-form/order-form.component';
 import { ListPortfolioComponent } from './Back/list-portfolio/list-portfolio.component';
 import { ListOrdersComponent } from './Back/list-orders/list-orders.component';
-
-import { DashboardComponent } from './Back/dashboard/dashboard.component';
 import { RegisterComponent } from './Front/register/register.component';
 import { ListUsersComponent } from './Back/list-users/list-users.component';
 import { UserProfileComponent } from './Back/user-profile/user-profile.component';
@@ -46,7 +44,6 @@ import { ResetPasswordComponent } from './Front/reset-password/reset-password.co
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NotAuthorizedComponent } from './Front/not-authorized/not-authorized.component';
 import { ActivateAccountComponent } from './Front/activate-account/activate-account.component';
-
 import { ListTransactionComponent } from './Back/list-transaction/list-transaction.component';
 import { ChartComponent } from './Front/chart/chart.component';
 import { ModalComponent } from './Front/modal/modal.component';
@@ -54,6 +51,8 @@ import { FinancialNewsComponent } from './Front/financial-news/financial-news.co
 import { ListorderComponent } from './Front/listorder/listorder.component';
 import { OptionQuoteComponent } from './Front/option-quote/option-quote.component';
 import { OilPricesQuoteComponent } from './Front/oil-prices-quote/oil-prices-quote.component';
+import { PerformanceChartComponent } from './Front/performance-chart/performance-chart.component';
+import { ShowTransactionsComponent } from './Front/show-transactions/show-transactions.component';
 
 
 
@@ -89,7 +88,6 @@ import { OilPricesQuoteComponent } from './Front/oil-prices-quote/oil-prices-quo
   ListPortfolioComponent,
   ListOrdersComponent,
   RegisterComponent,
-  DashboardComponent,
   ListUsersComponent,
   UserProfileComponent,
   SearchfilterPipe,
@@ -102,7 +100,10 @@ import { OilPricesQuoteComponent } from './Front/oil-prices-quote/oil-prices-quo
   FinancialNewsComponent,
   ListorderComponent,
   OptionQuoteComponent,
-  OilPricesQuoteComponent
+  OilPricesQuoteComponent,
+  BodyComponent,
+  PerformanceChartComponent,
+  ShowTransactionsComponent,
 
     
   ],
@@ -111,12 +112,8 @@ import { OilPricesQuoteComponent } from './Front/oil-prices-quote/oil-prices-quo
     AppRoutingModule,
     HttpClientModule, 
     FormsModule,
-
-    ReactiveFormsModule, 
-   
+    ReactiveFormsModule,    
     //ChartsModule
-
-    ReactiveFormsModule,
     NgChartsModule
       
   ],

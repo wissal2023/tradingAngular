@@ -40,7 +40,6 @@ export class OrderFormComponent implements OnInit {
               private placingOrderService: PlacingOrderService,
               private router: Router,
               private stockQuoteService: StockQuoteService) {}
-
 ngOnInit(): void { 
     this.portfolioId = +this.route.snapshot.paramMap.get('portfolioId')!; 
     console.log('Portfolio ID:', this.portfolioId);
@@ -69,104 +68,34 @@ ngOnInit(): void {
       margin: [null]
     });
   }
-  
-  onPreview(): void {
-    if (this.orderForm.valid) {
-      this.orderDetails = this.orderForm.value;
-      console.log('Order Preview:', this.orderDetails);
-    } else {
-      console.error('Form is invalid');
-    }
-  }
-
-  onSubmit(orderDetails: any): void {
-    console.log('Final order submission:', orderDetails);
-    if (this.orderForm.valid) {
-      const placingOrder: PlacingOrder = {
-        ...this.orderForm.value,
-        totalPrice: this.totalPrice
-      };  
-      this.placingOrderService.addOrder(this.portfolioId, placingOrder).subscribe(
-        (response) => {
-          console.log('Order placed successfully', response);
-          this.router.navigate(['/portfolio']);
-        },
-        (error) => {
-          console.error('Error placing order', error);
-        }
-      );
-    } else {
-      console.error('Form is invalid');
-    }
-  }
-  
-
-  
-
-  // Search symbol  and show chart 
-searchSymbol() {
-  this.searchSymbolTerm = this.orderForm.get('symbol')?.value;
-  if (this.searchSymbolTerm) {
-    this.stockQuote();
-    this.getStockTimeSeries(); // Fetch data for the chart
+onPreview(): void {
+  if (this.orderForm.valid) {
+    this.orderDetails = this.orderForm.value;
+    console.log('Order Preview:', this.orderDetails);
+  } else {
+    console.error('Form is invalid');
   }
 }
-stockQuote() {
-    if (this.searchSymbolTerm) {
-        this.stockQuoteService.getStockQuote(this.searchSymbolTerm, this.stockQuoteService.apiKey).subscribe(
-            (data: any) => {
-                console.log('API Response:', data);
-                this.stockData = data['Global Quote'];                                
-            },
-            (error) => {
-                console.error('Error fetching stock data', error);
-            }
-        );
-    } else {
-        console.error('Symbol is not set.');
-    }
-}
-getStockTimeSeries() {
-  if (this.searchSymbolTerm) {
-    this.stockQuoteService.getDailyTimeSeries(this.searchSymbolTerm, this.stockQuoteService.apiKey).subscribe(
-      (data: any) => {
-        const timeSeries = data['Time Series (Daily)'];
-        if (timeSeries) {
-          this.chartData = this.transformDataForChart(timeSeries);
-        } else {
-          console.error('No time series data available');
-        }
+onSubmit(orderDetails: any): void {
+  console.log('Final order submission:', orderDetails);
+  if (this.orderForm.valid) {
+    const placingOrder: PlacingOrder = {
+      ...this.orderForm.value,
+      totalPrice: this.totalPrice
+    };  
+    this.placingOrderService.addOrder(this.portfolioId, placingOrder).subscribe(
+      (response) => {
+        console.log('Order placed successfully', response);
+        this.router.navigate(['/portfolio']);
       },
       (error) => {
-        console.error('Error fetching time series data', error);
+        console.error('Error placing order', error);
       }
     );
   } else {
-    console.error('Symbol is not set.');
+    console.error('Form is invalid');
   }
 }
-transformDataForChart(timeSeries: any): any[] {
-  return Object.keys(timeSeries).map(date => {
-    const dailyData = timeSeries[date];
-    return {
-      x: new Date(date),
-      y: [
-        parseFloat(dailyData['1. open']),
-        parseFloat(dailyData['2. high']),
-        parseFloat(dailyData['3. low']),
-        parseFloat(dailyData['4. close'])
-      ]
-    };
-  }).reverse(); // Reverse to get chronological order
-}
-  
-
-
-
-
-
-
-
 logInvalidControls() {
   Object.keys(this.orderForm.controls).forEach(key => {
     const control = this.orderForm.get(key);
@@ -222,10 +151,6 @@ private resetDynamicFields(assetsType: string) {
   this.orderForm.get('strikePrice')?.updateValueAndValidity();
   this.orderForm.get('expirationDate')?.updateValueAndValidity();
 }
-
-
-
-
   //get assetsType() { return this.orderForm.get('assetsType')!.value; }
   //get actionType() { return this.orderForm.get('actionType')!.value; }
   get orderType() { return this.orderForm.get('orderType')!.value; }
@@ -248,4 +173,61 @@ private resetDynamicFields(assetsType: string) {
   get stopLoss() { return this.orderForm.get('stopLoss')?.value; }
   get takeProfit() { return this.orderForm.get('takeProfit')?.value; }
   get margin() { return this.orderForm.get('margin')?.value; }
+
+// Search symbol  and show chart 
+searchSymbol() {
+  this.searchSymbolTerm = this.orderForm.get('symbol')?.value;
+  if (this.searchSymbolTerm) {
+    this.stockQuote();
+    this.getStockTimeSeries(); // Fetch data for the chart
+  }
+}
+stockQuote() {
+    if (this.searchSymbolTerm) {
+        this.stockQuoteService.getStockQuote(this.searchSymbolTerm, this.stockQuoteService.apiKey).subscribe(
+            (data: any) => {
+                console.log('API Response:', data);
+                this.stockData = data['Global Quote'];                                
+            },
+            (error) => {
+                console.error('Error fetching stock data', error);
+            }
+        );
+    } else {
+        console.error('Symbol is not set.');
+    }
+}
+getStockTimeSeries() {
+  if (this.searchSymbolTerm) {
+    this.stockQuoteService.getDailyTimeSeries(this.searchSymbolTerm, this.stockQuoteService.apiKey).subscribe(
+      (data: any) => {
+        const timeSeries = data['Time Series (Daily)'];
+        if (timeSeries) {
+          this.chartData = this.transformDataForChart(timeSeries);
+        } else {
+          console.error('No time series data available');
+        }
+      },
+      (error) => {
+        console.error('Error fetching time series data', error);
+      }
+    );
+  } else {
+    console.error('Symbol is not set.');
+  }
+}
+transformDataForChart(timeSeries: any): any[] {
+  return Object.keys(timeSeries).map(date => {
+    const dailyData = timeSeries[date];
+    return {
+      x: new Date(date),
+      y: [
+        parseFloat(dailyData['1. open']),
+        parseFloat(dailyData['2. high']),
+        parseFloat(dailyData['3. low']),
+        parseFloat(dailyData['4. close'])
+      ]
+    };
+  }).reverse(); // Reverse to get chronological order
+}
 }

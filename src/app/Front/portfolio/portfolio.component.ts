@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PlacingOrder } from 'src/app/Entity/placing-order';
 import { Portfolio } from 'src/app/Entity/portfolio';
-import { PlacingOrderService } from 'src/app/Services/placing-order.service';
-import { PortfolioService } from 'src/app/Services/portfolio.service';
+import { User } from 'src/app/Entity/user';
+import { AuthService } from 'src/app/Services/auth.service';
 import { StockQuoteService } from 'src/app/Services/stock-quote-service.service';
+import { UserService } from 'src/app/Services/user.service';
 
 
 @Component({
@@ -21,38 +22,55 @@ export class PortfolioComponent implements OnInit{
   
   marketStatus: any[] = [];
   currentIndex: number = 0;
-  
-  portfolioId!:number;
+    
+  portfolio!: Portfolio;       // Store the specific portfolio
+  user!:User;
+  portfolioId!: number;
+  userId!: number;
+  currentUser: any
 
-  constructor(private stockQuoteService: StockQuoteService,   
-              private portfolioService: PortfolioService,
+  constructor(private stockQuoteService: StockQuoteService,
+              private userService: UserService,
+              private authService: AuthService,
               private actR:ActivatedRoute) {}
 
-  ngOnInit() {    
-
-    this.portfolioId=Number(this.actR.snapshot.paramMap.get('id'));
-
-    this.fetchPortfolios();
-    this.getMarketStatus();
-    //this.fetchMarketStatus();
-
-  }
-  getMarketStatus(): void {
-    this.stockQuoteService.getMarketStatus(this.stockQuoteService.apiKey).subscribe((response: any) => {
-      if (response && response.markets) {
-        this.marketStatus = response.markets;
+  ngOnInit() {   
+    this.actR.params.subscribe((params) => {this.userId = params['userId'];// Extract userId from route parameters
+      if (this.userId) {
+        this.loadUser(this.userId); 
+        
+      } else {
+        console.error('User ID not found in route parameters');
       }
-    }, (error) => {
-      console.error('Error fetching market status:', error);
+      this.portfolioId = params['portfolioId'];// If portfolioId is also needed, extract it
     });
-  }
 
-  fetchPortfolios() {
-    this.portfolioService.getAllPortfolios().subscribe((data: Portfolio[]) => {
-      this.portfolios = data;
-      console.log(this.portfolios); 
-    });
+    this.loadCurrentUser(); 
   }
+  loadUser(userId: number) {
+    this.userService.getUserById(userId).subscribe(
+      (user) => {
+        this.portfolio = user.portfolio; // Extract the portfolio from user
+        console.log('Portfolio:', this.portfolio);
+        console.log('User and Portfolio loaded:', user);
+      },
+      (error) => {
+        console.error('Error loading user:', error);
+      }
+    );
+  }
+  loadCurrentUser() {
+    const storedUser = this.authService.getCurrentUser();
+    if (storedUser) {
+      this.currentUser = storedUser;
+      this.user = this.currentUser;  // Assign currentUser to user
+      console.log('Current User:', this.currentUser);
+      this.loadUser(this.currentUser.id); // Load associated portfolio if required
+    } else {
+      console.error('No user is currently logged in.');
+    }
+  }
+  
 // search if Market Open/ closed
 search() {
   if (this.searchTerm) {
@@ -66,8 +84,6 @@ search() {
     );
   }
 }
-
-
 nextSlide(): void {
   this.currentIndex = (this.currentIndex + 1) % this.marketStatus.length;
   this.updateCarouselPosition();

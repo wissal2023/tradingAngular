@@ -1,135 +1,135 @@
 <app-header></app-header>
-<div class="container-fluid about py-5">
-<div class="page-heading">
-    <h3>Portfolio overview</h3>
-</div>
-  <div class="page-content">
-    <section class="row" *ngFor="let portfolio of portfolios">
-      <div class="col-12 col-lg-9">
-        <div class="row">
+<div class="container-fluid about py-5 " >
+    <div class="page-heading">
+      <h3>Portfolio overview</h3>
+    </div>
+    <div class="page-content">
+      <section *ngIf="portfolio" class="row">
+        <!-- Display portfolio data -->
+        <div class="col-12 col-lg-9">
+          <div class="row">
+            <!--portfolio.accVal-->
             <div class="col-6 col-lg-3 col-md-6">
-                <div class="card">
-                <div class="card-body px-3 py-4-5">
-                    <div class="row">
-                    <div class="col-md-4">
-                        <div class="stats-icon purple">
-                        <i class="iconly-boldShow"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <h6 class="text-muted font-semibold">Account value</h6>
-                        <h6 class="font-extrabold mb-0">{{ portfolio.accVal }}</h6>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div> 
-            <div class="col-6 col-lg-3 col-md-6">
-                <div class="card">
-                <div class="card-body px-3 py-4-5">
-                    <div class="row">
-                    <div class="col-md-4">
-                        <div class="stats-icon blue">
-                        <i class="iconly-boldProfile"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <h6 class="text-muted font-semibold">Buying power</h6>
-                        <h6 class="font-extrabold mb-0">{{ portfolio.buyPow }}</h6>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div> 
-            <div class="col-6 col-lg-3 col-md-6">
-            <div class="card">
-              <div class="card-body px-3 py-4-5">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="stats-icon green">
-                      <i class="iconly-boldAdd-User"></i>
-                    </div>
+              <div class="card shadow-sm rounded-4 border-0">
+                <div class="card-body d-flex align-items-center">
+                  <div class="icon-container purple me-3">
+                    <i class="iconly-boldShow"></i>
                   </div>
-                  <div class="col-md-8">
-                    <h6 class="text-muted font-semibold">Cash</h6>
-                    <h6 class="font-extrabold mb-0">{{ portfolio.cash }}</h6>
+                  <div>
+                    <h6 class="text-muted">Account Value</h6>
+                    <h5 class="font-extrabold mb-0">{{ portfolio.accVal | currency }}</h5>
                   </div>
                 </div>
               </div>
             </div>
-            </div> 
+            <!--portfolio.buyPow-->          
             <div class="col-6 col-lg-3 col-md-6">
-                <div class="card">
-                <div class="card-body px-3 py-4-5">
-                        <div class="row">
-                        <div class="col-md-4">
-                            <div class="stats-icon red">
-                            <i class="iconly-boldBookmark"></i>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <h6 class="text-muted font-semibold">Rank</h6>
-                            <h6 class="font-extrabold mb-0">{{ portfolio.user.rank }}</h6>
-                        </div>
-                        </div>
-                    </div>
+              <div class="card shadow-sm rounded-4 border-0">
+                <div class="card-body d-flex align-items-center">
+                  <div class="icon-container blue me-3">
+                    <i class="iconly-boldProfile"></i>
+                  </div>
+                  <div>
+                    <h6 class="text-muted">Buying Power</h6>
+                    <h5 class="font-extrabold mb-0">{{ portfolio.buyPow | currency }}</h5>
+                  </div>
                 </div>
+              </div>
+            </div>   
+            <!--portfolio.cash-->       
+            <div class="col-6 col-lg-3 col-md-6">
+              <div class="card shadow-sm rounded-4 border-0">
+                <div class="card-body d-flex align-items-center">
+                  <div class="icon-container green me-3">
+                    <i class="iconly-boldAdd-User"></i>
+                  </div>
+                  <div>
+                    <h6 class="text-muted">Cash</h6>
+                    <h5 class="font-extrabold mb-0">{{ portfolio.cash | currency }}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>    
+            <!--user.rank-->      
+            <div class="col-6 col-lg-3 col-md-6">
+              <div class="card shadow-sm rounded-4 border-0">
+                <div class="card-body d-flex align-items-center">
+                  <div class="icon-container red me-3">
+                    <i class="iconly-boldBookmark"></i>
+                  </div>
+                  <div>
+                    <h6 class="text-muted">Rank</h6>
+                    <h5 class="font-extrabold mb-0"> {{ user.rank }}</h5>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div> 
-        <!--Holding component-->
-        <app-holding></app-holding>
-        <!--orders component in my portfolio component-->
-        <app-listorder [portfolioId]="portfolioId"></app-listorder>
-        
-
+          </div>          
+          <div class="component-spacing">
+            <app-performance-chart></app-performance-chart>
+          </div>
+          <div class="component-spacing">
+            <app-listorder [portfolioId]="portfolioId"></app-listorder>
+          </div>
         </div>
+        <!--user.fullname-->
         <div class="col-12 col-lg-3">
-            <div class="card">
-                <div class="card-body py-4 px-5">
-                    <div class="d-flex align-items-center">
-                        <div class="avatar avatar-xl">
-                            <img src="assets/Back/images/faces/1.jpg" alt="Face 1">
-                        </div>
-                        <div class="ms-3 name">
-                            <h5 class="font-bold">{{ portfolio.user.id }}</h5>
-                            <h6 class="text-muted mb-0">{{ portfolio.user.fullname }}</h6> 
-                        </div>
-                    </div>
+          <div class="card shadow-sm rounded-4 border-0">
+            <div class="card-body py-4 px-5">
+              <div class="d-flex align-items-center">
+                <div class="avatar avatar-xl rounded-circle overflow-hidden shadow-sm me-3">
+                  <img src="assets/Back/images/faces/1.jpg" alt="Face 1" class="img-fluid">
                 </div>
+                <div>                  
+                  <h5 class="font mb-1">{{ user.fullname }}</h5>
+                  <h6 class="text-muted mb-0">{{ currentUser.email }}</h6>
+                </div>
+              </div>
             </div>
-            <!--placerOrder component -->
-            <app-watchlist [portfolioId]="portfolio.id"></app-watchlist>
+          </div>
 
-            <!--Global Market Status o/c-->
-            <div class="card">
-                <div class="card-header">
-                    <h4>Market Status</h4>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Enter stock symbol">
-                    <button class="btn btn-outline-secondary" type="button" (click)="search()">Search</button>
-                </div>
-                <div *ngIf="searchResults.length">
-                    <h3>Search Results:</h3>
-                    <ul>
-                    <li *ngFor="let result of searchResults">
-                        <strong>{{ result['1. symbol'] }} - {{ result['2. name'] }}</strong>
-                        <ul>
-                        <li>Type: {{ result['3. type'] }}</li>
-                        <li>Region: {{ result['4. region'] }}</li>
-                        <li>Market Open: {{ result['5. marketOpen'] }}</li>
-                        <li>Market Close: {{ result['6. marketClose'] }}</li>
-                        <li>Timezone: {{ result['7. timezone'] }}</li>
-                        <li>Currency: {{ result['8. currency'] }}</li>
-                        <li>Match Score: {{ result['9. matchScore'] }}</li>
-                        </ul>
-                    </li>
-                    </ul>
-                </div>  
+          <!-- Watchlist component -->
+          <div class="card">
+            <div class="card-header">
+                <h4>Trade</h4>
             </div>
+            <div class="card-content pb-4">
+                <div class="px-4">
+                    <button class='btn btn-block btn-xl btn-outline-primary font-bold mt-3' [routerLink]="['/form', portfolioId]">place an order</button>
+                </div>
+            </div>
+          </div>
+            <!-- Global Market Status -->
+          <div class="card">
+            <div class="card-header">
+              <h4>Market Status</h4>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+              <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Enter stock symbol">
+              <button class="btn btn-outline-secondary" type="button" (click)="search()">Search</button>
+            </div>
+            <div *ngIf="searchResults.length">
+              <h3>Search Results:</h3>
+              <ul>
+                <li *ngFor="let result of searchResults">
+                  <strong>{{ result['1. symbol'] }} - {{ result['2. name'] }}</strong>
+                  <ul>
+                    <li>Type: {{ result['3. type'] }}</li>
+                    <li>Region: {{ result['4. region'] }}</li>
+                    <li>Market Open: {{ result['5. marketOpen'] }}</li>
+                    <li>Market Close: {{ result['6. marketClose'] }}</li>
+                    <li>Timezone: {{ result['7. timezone'] }}</li>
+                    <li>Currency: {{ result['8. currency'] }}</li>
+                    <li>Match Score: {{ result['9. matchScore'] }}</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>  
+          </div>
         </div>
-    </section>
-</div>
+      </section>
+    </div>
 </div>
 <app-footer-front></app-footer-front>
+  

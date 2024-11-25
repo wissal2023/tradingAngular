@@ -33,7 +33,7 @@ export class OilPricesQuoteComponent implements OnInit {
   constructor(private stockQuoteService: StockQuoteService) {}
 
   ngOnInit(): void {
-    this.fetchBrentCrudePrices();
+    //this.fetchBrentCrudePrices();
   }
 
   fetchBrentCrudePrices(): void {
