@@ -21,6 +21,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IntraDayComponent } from './Front/intra-day/intra-day.component';
 import { HoldingComponent } from './Front/holding/holding.component';
 import { TransactionComponent } from './Front/transaction/transaction.component';
+
+import { PlaceOrderComponent } from './Front/place-order/place-order.component';
+import { ChallengeComponent } from './Front/challenge/challenge.component';
+import { TraderComponent } from './Front/trader/trader.component';
+import { TransactionchallengeComponent } from './Front/Transactionn/transactionchallenge.component';
+import { ReactiveFormsModule } from '@angular/forms';
+//import { ChartsModule } from 'ng2-charts';
+import { CreateChallengeComponent } from './Back/create-challenge/create-challenge/create-challenge.component';
+
 import { WatchlistComponent } from './Front/watchlist/watchlist.component';
 import { LoginComponent } from './Front/login/login.component';
 import { OrderFormComponent } from './Front/order-form/order-form.component';
@@ -46,6 +55,7 @@ import { PerformanceChartComponent } from './Front/performance-chart/performance
 import { ShowTransactionsComponent } from './Front/show-transactions/show-transactions.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +73,14 @@ import { ShowTransactionsComponent } from './Front/show-transactions/show-transa
   IntraDayComponent,
   HoldingComponent,
   TransactionComponent,
+
+  PlaceOrderComponent, 
+  ChallengeComponent,
+   TraderComponent,
+  TransactionchallengeComponent,
+ 
+  CreateChallengeComponent
+
   WatchlistComponent,
   ChartComponent,
   LoginComponent,
@@ -86,6 +104,7 @@ import { ShowTransactionsComponent } from './Front/show-transactions/show-transa
   BodyComponent,
   PerformanceChartComponent,
   ShowTransactionsComponent,
+
     
   ],
   imports: [
@@ -93,12 +112,14 @@ import { ShowTransactionsComponent } from './Front/show-transactions/show-transa
     AppRoutingModule,
     HttpClientModule, 
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,    
+    //ChartsModule
     NgChartsModule
       
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+
   ],
   bootstrap: [AppComponent]
 })

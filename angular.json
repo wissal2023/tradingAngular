@@ -28,8 +28,14 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
+
+            
+            "allowedCommonJsDependencies": [
+              "long"
+
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
+
             ]
           },
           "configurations": {

@@ -5,6 +5,26 @@ import { LandingComponent } from './Front/landing/landing.component';
 import { PortfolioComponent } from './Front/portfolio/portfolio.component';
 import { HoldingComponent } from './Front/holding/holding.component';
 import { TransactionComponent } from './Front/transaction/transaction.component';
+
+import { PlaceOrderComponent } from './Front/place-order/place-order.component';
+import { ChallengeComponent } from './Front/challenge/challenge.component';
+import { TransactionchallengeComponent } from './Front/Transactionn/transactionchallenge.component';
+import { CreateChallengeComponent } from './Back/create-challenge/create-challenge/create-challenge.component';
+const routes: Routes = [
+    { path: '', redirectTo: 'challenge', pathMatch: 'full' },
+    {path: 'dash', component: BodyComponent }, 
+    {path: 'home', component: LandingComponent }, 
+    {path: 'holding', component: HoldingComponent},
+    {path: 'challenge', component: ChallengeComponent},
+    {path: 'Transaction', component: TransactionchallengeComponent},
+    {path: 'Transactions', component: TransactionchallengeComponent},
+    {path:'Transactions/:challengeId', component: TransactionchallengeComponent},
+    {path: 'createchallenge', component: CreateChallengeComponent},
+    { path: 'portfolio', component: PortfolioComponent, children: [
+      {path: 'transaction', component: TransactionComponent},      
+      {path: 'order', component: PlaceOrderComponent}]
+      }
+
 import { WatchlistComponent } from './Front/watchlist/watchlist.component';
 import { LoginComponent } from './Front/login/login.component';
 import { RegisterComponent } from './Front/register/register.component';
@@ -40,6 +60,7 @@ const routes: Routes = [
   {path: 'option', component: OptionQuoteComponent}, 
   {path: 'oil', component: OilPricesQuoteComponent},
   { path: 'transactions/:portfolioId', component: ShowTransactionsComponent },
+
 
 ];
 
