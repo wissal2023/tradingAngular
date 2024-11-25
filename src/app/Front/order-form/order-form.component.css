@@ -1,167 +1,82 @@
-.error {
-    color: red; /* Change to your preferred error color */
-    font-size: 0.875em; /* Adjust font size */
+.stock-quote-card {
+  margin: 20px 0;
 }
 
+.stock-quote-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 10px;
+}
 
-
-.stock-quote-card {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  .stock-info-summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .stock-price h4 {
-    font-size: 2em;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .positive-change {
-    color: #00b746;
-  }
-  
-  .negative-change {
-    color: #ef403c;
-  }
-  
- 
-  .stock-info-details ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .stock-info-details li {
-    font-size: 16px;
-    margin: 5px 0;
-  }
-  
-  .stock-info-details strong {
-    font-weight: bold;
-  }
-  
-  .stock-trading-day p {
-    font-size: 14px;
-    margin-top: 10px;
-    color: #666;
-  }
-  
-  .stock-quote-card {
-    width: 48%; /* Adjust to 48% for side-by-side layout */
-  }
-  
-  .chart-card {
-    width: 48%; /* Adjust to 48% for side-by-side layout */
-  }
-  
-  .positive-change {
-    color: #00b746;
-  }
-  
-  .negative-change {
-    color: #ef403c;
-  }
-  
-  .stock-info-summary {
-    margin-bottom: 20px;
-  }
-  
-  .stock-info-details ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .stock-info-details li {
-    font-size: 16px;
-    margin: 5px 0;
-  }
-  
-  .stock-info-details strong {
-    font-weight: bold;
-  }
-  
-/* Make the stock-quote-card and chart-card sit side by side */
 .stock-quote-container {
-    display: flex;
-    justify-content: space-between; /* Ensure there’s space between them */
-    gap: 20px; /* Optional: add some space between the cards */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #ffffff;
 }
 
-.stock-quote-card,
-.chart-card {
-    width: 48%; /* Make each card take up almost half the container's width */
-}
-
-.stock-quote-card {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.chart-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* For smaller screens, stack the cards vertically */
-@media (max-width: 768px) {
-    .stock-quote-container {
-        flex-direction: column; /* Stack the cards vertically on small screens */
-        align-items: center;
-    }
-
-    .stock-quote-card,
-    .chart-card {
-        width: 100%; /* Make each card take full width on smaller screens */
-    }
-}
-
-/* Adjust styling for the stock info section */
 .stock-info-summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.stock-price h4 {
-    font-size: 2em;
-    font-weight: bold;
-    color: #333;
+.stock-price-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2b8a3e; /* Green for positive numbers */
+}
+
+.stock-change {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-top: 5px;
 }
 
 .positive-change {
-    color: #00b746;
+  color: #2b8a3e; /* Green */
 }
 
 .negative-change {
-    color: #ef403c;
+  color: #d93025; /* Red */
 }
 
-.stock-info-details ul {
-    list-style: none;
-    padding: 0;
+.stock-info-details {
+  margin-top: 10px;
 }
 
-.stock-info-details li {
-    font-size: 16px;
-    margin: 5px 0;
+.stock-details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.stock-info-details strong {
-    font-weight: bold;
+.stock-details-list li {
+  font-size: 0.95rem;
+  padding: 5px 0;
+  border-bottom: 1px solid #f0f0f0;
 }
+
+.stock-details-list li:last-child {
+  border-bottom: none;
+}
+
+
+.custom-header {
+  background: linear-gradient(90deg, #4aa2dc, #3965dc); /* Smooth gradient for a modern look */
+  color: white; /* Clean text color for contrast */
+  font-weight: 600; /* Slightly bold for professional appearance */
+  text-transform: uppercase; /* Capitalize text for emphasis */
+  font-size: 1.2rem; /* Increase font size for readability */
+  padding: 15px; /* Add padding for better spacing */
+  border-radius: 8px 8px 0 0; /* Rounded corners at the top for a sleek card */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  letter-spacing: 1px; /* Slight spacing for refined text appearance */
+  text-align: center; /* Center-align the text */
+}
+
 
   

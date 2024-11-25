@@ -7,23 +7,14 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav ms-auto py-0">
-      <a href="index.html" class="nav-item nav-link active">Home</a>
-      <a [routerLink]="['/form', portfolioId]" class="nav-item nav-link">Trade</a>
-      <a [routerLink]="['/portfolio']" class="nav-item nav-link">Portfolio</a>
+      <a [routerLink]="['/home']" class="nav-item nav-link ">Home</a> 
+      <a [routerLink]="['/portfolio/:userId/:portfolioId']" class="nav-item nav-link ">Portfolio</a>            
+      <a [routerLink]="['/news']" class="nav-item nav-link">Market</a>     
       <a [routerLink]="['/news']" class="nav-item nav-link">News</a>
-      <div class="nav-item dropdown">
-        <a href="#" class="nav-link" data-bs-toggle="dropdown">
-          <span class="dropdown-toggle">Pages</span>
-        </a>
-        <div class="dropdown-menu m-0">
-          <a href="feature.html" class="dropdown-item">Our Features</a>
-          <a href="team.html" class="dropdown-item">Our team</a>
-          <a href="404.html" class="dropdown-item">404 Page</a>
-        </div>
-      </div>
+      <a [routerLink]="['/holding']" class="nav-item nav-link">Holdings</a>
+      <a [routerLink]="" class="nav-item nav-link">page</a>
       <a href="contact.html" class="nav-item nav-link">Contact Us</a>
     </div>
-    <a class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0" [routerLink]="['/login']">Get Started</a>
   </div>
 </nav>
 

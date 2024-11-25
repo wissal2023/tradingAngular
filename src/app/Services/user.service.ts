@@ -7,7 +7,7 @@ import { User } from '../Entity/user';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8094/home/user'; // Remplacez par l'URL de votre API
+  private apiUrl = 'http://localhost:8094/home/user'; 
 
   constructor(private http: HttpClient) {}
 

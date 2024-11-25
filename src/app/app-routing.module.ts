@@ -29,14 +29,12 @@ const routes: Routes = [
   { path: 'reset-pwd', component: ResetPasswordComponent },
   { path: 'dash', component: BodyComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'ADMIN' },},
   { path: 'list-user', component: ListUsersComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'ADMIN' },},
-  { path: 'portfolio',component: PortfolioComponent, canActivate: [AuthGuard, RoleGuard],  data: { expectedRole: 'CUSTOMER' },},
+  { path: 'portfolio/:userId/:portfolioId',component: PortfolioComponent, canActivate: [AuthGuard, RoleGuard],  data: { expectedRole: 'CUSTOMER' },},
   { path: 'not-authorized', component: NotAuthorizedComponent },
   { path: 'activate-account', component: ActivateAccountComponent }, 
-  
   {path: 'form/:portfolioId', component: OrderFormComponent},
   {path: 'holding', component: HoldingComponent},  
   {path: 'transaction', component: TransactionComponent}, 
-  //{path: 'order', component: WatchlistComponent},  
   {path: 'news', component: FinancialNewsComponent}, 
   {path: 'option', component: OptionQuoteComponent}, 
   {path: 'oil', component: OilPricesQuoteComponent}

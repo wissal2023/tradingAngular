@@ -1,6 +1,5 @@
 import { Portfolio } from './portfolio';
 import { Role } from './role';
-
 export class User {
     id!: number;                // Identifiant de l'utilisateur
     email!: string;             // Adresse email de l'utilisateur

@@ -1,1 +1,121 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #f2f7ff;
+    margin: 0; /* Removes default browser margin */
+    padding: 0; /* Removes default browser padding */
+    font-family: Arial, sans-serif; /* Optional, sets a consistent font */
+}
+
+/* Global Card Styles */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  /* Avatar Styling */
+  .avatar {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+  }
+  
+  .avatar img:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Typography */
+  .card h5 {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .card h6.text-muted {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      margin-bottom: 1rem;
+    }
+  }
+  
+
+  /* Table container styles */
+.table-container {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-header {
+    font-weight: bold;
+    border-bottom: 2px solid #e9ecef;
+    padding: 1rem;
+  }
+  .table {
+    margin: 0;
+    width: 100%;
+  }
+  
+  .table th {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    background-color: #f8f9fa;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+  
+  /* Action button */
+  .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  
+  .btn-danger i {
+    font-size: 1rem;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  /* Alert styles for error messages */
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+  }
+  

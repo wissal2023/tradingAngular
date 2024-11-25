@@ -7,7 +7,7 @@ import { Holding } from '../Entity/holding';
   providedIn: 'root'
 })
 export class HoldingService {
-  private baseUrl = 'http://localhost:8090/home/holding';
+  private baseUrl = 'http://localhost:8094/home/holding';
   constructor(private http: HttpClient) {}
   getAllHoldings(): Observable<Holding[]> {
     return this.http.get<Holding[]>(`${this.baseUrl}/Get-all-holdings`);

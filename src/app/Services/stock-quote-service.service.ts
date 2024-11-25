@@ -39,7 +39,8 @@ export class StockQuoteService {
     };
     return this.http.get(this.apiUrl, { params });
   }
-  private eodhUrl = 'http://localhost:8090/home/API/financial-news';
+
+  private eodhUrl = 'http://localhost:8094/home/API/financial-news';
   apiToken: string = '6719a97987dbd2.59347935';   
   getFinancialNews(ticker: string, limit: number = 10, offset: number = 0): Observable<any> {
     const params = new HttpParams()
@@ -77,27 +78,6 @@ getDailyTimeSeries(symbol: string, apiKey: string): Observable<any> {
   return this.http.get(this.apiUrl, { params });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-getMarketStatu(): Observable<any> {
-  const params = {
-    function: 'MARKET_STATUS',
-    apikey: this.apiKey,
-  };
-  return this.http.get<any>(this.apiUrl, { params });
-}
-getStockData(symbol: string, interval: string): Observable<any> {
-  return this.http.get<any>(`${this.apiUrl}?symbol=${symbol}&interval=${interval}`);
-}
 
 }
 

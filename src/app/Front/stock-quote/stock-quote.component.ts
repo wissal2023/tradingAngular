@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { StockQuoteService } from 'src/app/Services/stock-quote-service.service';
@@ -10,38 +10,67 @@ import { StockQuoteService } from 'src/app/Services/stock-quote-service.service'
   styleUrls: ['./stock-quote.component.css']
 })
 export class StockQuoteComponent  implements OnInit {
-  @Input() symbol!: string ; // Set a default symbol or pass it dynamically
-  latestData: any;
-  error: string | null = null;
-  lastRefreshed: string | null = null;
-
+  searchSymbolTerm: string = '';
+  stockData: any; // Holds stock summary data
+  chartData: any[] = []; // Holds chart data for time series
+  isassetsTypeSelected: boolean = false;
   constructor(private stockQuoteService: StockQuoteService) {}
-
-  ngOnInit(): void {
-    this.fetchDailyTimeSeries();
+  ngOnInit(): void {}
+  searchSymbol(): void {
+    if (this.searchSymbolTerm) {
+      this.stockQuote(); // Fetch stock summary
+      this.getStockTimeSeries(); // Fetch chart data
+    } else {
+      console.error('Search symbol term is not set.');
+    }
   }
-
-  fetchDailyTimeSeries(): void {
-    if (!this.symbol) return;  
-    this.stockQuoteService.getDailyTimeSeries(this.symbol, this.stockQuoteService.apiKey).subscribe(
-      data => {
-        console.log('Daily Time Series Response:', data);
-        const timeSeries = data['Time Series (Daily)'];
-        if (timeSeries) {
-          const dates = Object.keys(timeSeries).slice(0, 10).reverse();
-          const closingPrices = dates.map(date => parseFloat(timeSeries[date]['4. close']));
-          //this.createChart(dates, closingPrices);
-        } else {
-          console.error('No time series data found in response');
-          alert('Daily API limit reached. Please try again later.');
-        }
-      },
-      error => {
-        console.error('Error fetching daily time series', error);
-        alert('An error occurred while fetching data. Please try again later.');
+  stockQuote() {
+      if (this.searchSymbolTerm) {
+          this.stockQuoteService.getStockQuote(this.searchSymbolTerm, this.stockQuoteService.apiKey).subscribe(
+              (data: any) => {
+                  console.log('API Response:', data);
+                  this.stockData = data['Global Quote'];                                
+              },
+              (error) => {
+                  console.error('Error fetching stock data', error);
+              }
+          );
+      } else {
+          console.error('Symbol is not set.');
       }
-    );
   }
-
-
+  getStockTimeSeries() {
+    if (this.searchSymbolTerm) {
+      this.stockQuoteService.getDailyTimeSeries(this.searchSymbolTerm, this.stockQuoteService.apiKey).subscribe(
+        (data: any) => {
+          const timeSeries = data['Time Series (Daily)'];
+          if (timeSeries) {
+            this.chartData = this.transformDataForChart(timeSeries);
+          } else {
+            console.error('No time series data available');
+          }
+        },
+        (error) => {
+          console.error('Error fetching time series data', error);
+        }
+      );
+    } else {
+      console.error('Symbol is not set.');
+    }
+  }
+  transformDataForChart(timeSeries: any): any[] {
+    return Object.keys(timeSeries).map(date => {
+      const dailyData = timeSeries[date];
+      return {
+        x: new Date(date),
+        y: [
+          parseFloat(dailyData['1. open']),
+          parseFloat(dailyData['2. high']),
+          parseFloat(dailyData['3. low']),
+          parseFloat(dailyData['4. close'])
+        ]
+      };
+    }).reverse(); // Reverse to get chronological order
+  }  
+  
 }
