@@ -21,14 +21,6 @@ export class TransactionService {
     return this.http.get<Transaction[]>(`${this.baseUrl}/Get-transactions-by-portfolio/${portfolioId}`);
   }
   
-  addTransaction(placingOrderId: number, transaction: Transaction): Observable<Transaction> {
-    const url = `${this.baseUrl}/AddTransaction/${placingOrderId}`;
-    return this.http.post<Transaction>(url, transaction);
-  }
-  modifyTransaction(transaction: Transaction): Observable<Transaction> {
-    return this.http.put<Transaction>(`${this.baseUrl}/modify-transaction`, transaction);
-  }
-  removeTransaction(transactionId: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/remove-transaction/${transactionId}`);
-  }
+  
+ 
 }

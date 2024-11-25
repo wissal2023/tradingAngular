@@ -43,6 +43,7 @@ import { ListorderComponent } from './Front/listorder/listorder.component';
 import { OptionQuoteComponent } from './Front/option-quote/option-quote.component';
 import { OilPricesQuoteComponent } from './Front/oil-prices-quote/oil-prices-quote.component';
 import { PerformanceChartComponent } from './Front/performance-chart/performance-chart.component';
+import { ShowTransactionsComponent } from './Front/show-transactions/show-transactions.component';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { PerformanceChartComponent } from './Front/performance-chart/performance
   OptionQuoteComponent,
   OilPricesQuoteComponent,
   BodyComponent,
-  PerformanceChartComponent
+  PerformanceChartComponent,
+  ShowTransactionsComponent,
     
   ],
   imports: [

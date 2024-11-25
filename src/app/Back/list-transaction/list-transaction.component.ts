@@ -26,7 +26,7 @@ export class ListTransactionComponent implements OnInit {
       }
     );
   }
-
+/*
   deleteTransaction(id: number): void {
     this.transactionService.removeTransaction(id).subscribe(
       () => {
@@ -38,4 +38,5 @@ export class ListTransactionComponent implements OnInit {
       }
     );
   }
+    */
 }

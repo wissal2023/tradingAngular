@@ -7,7 +7,7 @@
                 <div class="table-container rounded shadow-sm">
                 <div class="table-header d-flex justify-content-between align-items-center p-3">
                     <h4 class="mb-0">Holdings</h4>
-                    <a href="#" class="btn btn-info btn-sm px-3">Show Transactions</a>
+                    <a [routerLink]="['/transactions', portfolioId]" class="btn btn-info btn-sm px-3">Show Transactions</a>
                 </div>
                 <div class="table-content">
                     <div *ngIf="holdings.length === 0; else holdingsTable" class="text-center p-3">

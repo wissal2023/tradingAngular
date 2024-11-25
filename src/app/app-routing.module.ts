@@ -18,6 +18,7 @@ import { ActivateAccountComponent } from './Front/activate-account/activate-acco
 import { FinancialNewsComponent } from './Front/financial-news/financial-news.component';
 import { OptionQuoteComponent } from './Front/option-quote/option-quote.component';
 import { OilPricesQuoteComponent } from './Front/oil-prices-quote/oil-prices-quote.component';
+import { ShowTransactionsComponent } from './Front/show-transactions/show-transactions.component';
 
 
 const routes: Routes = [
@@ -33,11 +34,12 @@ const routes: Routes = [
   { path: 'not-authorized', component: NotAuthorizedComponent },
   { path: 'activate-account', component: ActivateAccountComponent }, 
   {path: 'form/:portfolioId', component: OrderFormComponent},
-  {path: 'holding', component: HoldingComponent},  
+  { path: 'holding/:portfolioId', component: HoldingComponent },
   {path: 'transaction', component: TransactionComponent}, 
   {path: 'news', component: FinancialNewsComponent}, 
   {path: 'option', component: OptionQuoteComponent}, 
-  {path: 'oil', component: OilPricesQuoteComponent}
+  {path: 'oil', component: OilPricesQuoteComponent},
+  { path: 'transactions/:portfolioId', component: ShowTransactionsComponent },
 
 ];
 

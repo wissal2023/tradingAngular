@@ -15,9 +15,12 @@ export class HoldingService {
   getHolding(holdingId: number): Observable<Holding> {
     return this.http.get<Holding>(`${this.baseUrl}/Get-holding/${holdingId}`);
   }
-  addHolding(holding: Holding): Observable<Holding> {
-    return this.http.post<Holding>(`${this.baseUrl}/Add-Holding`, holding);
+  getHoldingsByPortfolioId(portfolioId: number): Observable<Holding[]> {
+    return this.http.get<Holding[]>(`${this.baseUrl}/portfolio/${portfolioId}`);
   }
+  
+
+
   modifyHolding(holding: Holding): Observable<Holding> {
     return this.http.put<Holding>(`${this.baseUrl}/modify-holding`, holding);
   }
