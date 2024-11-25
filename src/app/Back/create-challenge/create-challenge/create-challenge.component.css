@@ -1,0 +1,9 @@
+.container {
+    max-width: 600px; /* Limiter la largeur du conteneur si nécessaire */
+    margin: auto; /* Centrer le conteneur */
+}
+
+.form-control {
+    width: 100%; /* Assurez-vous que les champs prennent toute la largeur */
+    box-sizing: border-box; /* Inclure la bordure et le padding dans la largeur */
+}

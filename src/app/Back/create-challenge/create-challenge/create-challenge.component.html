@@ -1,0 +1,78 @@
+<div id="app">
+    <app-nav></app-nav>
+    <div class="d-flex">
+        <app-sidebar></app-sidebar>
+        <div class="container mt-5 flex-grow-1">
+            <h2 class="text-center">Create a New Challenge</h2>
+            <form (ngSubmit)="createChallenge()">
+               
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select id="category" class="form-control" [(ngModel)]="newChallenge.category" name="category" required>
+                        <option *ngFor="let category of categoryEnum" [value]="category">{{ category }}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="startDate" class="form-label">Start Date</label>
+                    <input id="startDate" class="form-control" [(ngModel)]="newChallenge.startDate" name="startDate" type="date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="endDate" class="form-label">End Date</label>
+                    <input id="endDate" class="form-control" [(ngModel)]="newChallenge.endDate" name="endDate" type="date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="minimumTradingDays" class="form-label">Minimum Trading Days</label>
+                    <input id="minimumTradingDays" class="form-control" [(ngModel)]="newChallenge.minimumTradingDays" name="minimumTradingDays" type="number" required>
+                </div>
+                <div class="mb-3">
+                    <label for="leverage" class="form-label">Leverage</label>
+                    <input id="leverage" class="form-control" [(ngModel)]="newChallenge.leverage" name="leverage" required>
+                </div>
+                <div class="mb-3">
+                    <label for="profitTarget" class="form-label">Profit Target</label>
+                    <input id="profitTarget" class="form-control" [(ngModel)]="newChallenge.profitTarget" name="profitTarget" required>
+                </div>
+                <div class="mb-3">
+                    <label for="profitBooster" class="form-label">Profit Booster</label>
+                    <input id="profitBooster" class="form-control" [(ngModel)]="newChallenge.profitBooster" name="profitBooster" required>
+                </div>
+                <div class="mb-3">
+                    <label for="payoutExpress" class="form-label">Payout Express</label>
+                    <input id="payoutExpress" class="form-control" [(ngModel)]="newChallenge.payoutExpress" name="payoutExpress" required>
+                </div>
+                <div class="mb-3">
+                    <label for="maxLoss" class="form-label">Max Loss</label>
+                    <input id="maxLoss" class="form-control" [(ngModel)]="newChallenge.maxLoss" name="maxLoss" required>
+                </div>
+                <div class="mb-3">
+                    <label for="maxDailyLoss" class="form-label">Max Daily Loss</label>
+                    <input id="maxDailyLoss" class="form-control" [(ngModel)]="newChallenge.maxDailyLoss" name="maxDailyLoss" required>
+                </div>
+                <div class="mb-3">
+                    <label for="eaEnabled" class="form-label">EA Enabled</label>
+                    <select id="eaEnabled" class="form-control" [(ngModel)]="newChallenge.eaEnabled" name="eaEnabled" required>
+                        <option [value]="true">Available</option>
+                        <option [value]="false">Not available</option>
+                    </select>
+                </div>
+            
+                <div class="mb-3">
+                    <label for="tradeTheNews" class="form-label">Trade the News</label>
+                    <select id="tradeTheNews" class="form-control" [(ngModel)]="newChallenge.tradeTheNews" name="tradeTheNews" required>
+                        <option [value]="true">Available</option>
+                        <option [value]="false">Not available</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="weekendTrading" class="form-label">Weekend Trading</label>
+                    <select id="weekendTrading" class="form-control" [(ngModel)]="newChallenge.weekendTrading" name="weekendTrading" required>
+                        <option [value]="true">Available</option>
+                        <option [value]="false">Not available</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Challenge</button>
+            </form>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

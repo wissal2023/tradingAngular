@@ -61,6 +61,19 @@
                     </a>
                 </li>
 
+
+                    <a [routerLink]="['/createchallenge']" class='sidebar-link'> <!-- Utilisez routerLink ici -->
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Challenges</span>
+                    </a>
+
+                    <a [routerLink]="['/Transaction']" class='sidebar-link'> <!-- Utilisez routerLink ici -->
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Transaction Challenge</span>
+                    </a>
+                
+                
+
                 <li class="sidebar-item has-sub">
                     <a href="#" class="sidebar-link" (click)="toggleSubMenu($event, 'challenges')">
                       <i class="bi bi-grid-1x2-fill"></i>
@@ -81,6 +94,7 @@
                       </li>
                     </ul>
                   </li>
+
 
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link' (click)="toggleSubMenu($event,'strategies')">
