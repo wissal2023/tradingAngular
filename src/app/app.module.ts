@@ -19,8 +19,12 @@ import { IntraDayComponent } from './Front/intra-day/intra-day.component';
 import { HoldingComponent } from './Front/holding/holding.component';
 import { TransactionComponent } from './Front/transaction/transaction.component';
 import { PlaceOrderComponent } from './Front/place-order/place-order.component';
-
-
+import { ChallengeComponent } from './Front/challenge/challenge.component';
+import { TraderComponent } from './Front/trader/trader.component';
+import { TransactionchallengeComponent } from './Front/Transactionn/transactionchallenge.component';
+import { ReactiveFormsModule } from '@angular/forms';
+//import { ChartsModule } from 'ng2-charts';
+import { CreateChallengeComponent } from './Back/create-challenge/create-challenge/create-challenge.component';
 
 @NgModule({
   declarations: [
@@ -39,14 +43,22 @@ import { PlaceOrderComponent } from './Front/place-order/place-order.component';
   IntraDayComponent,
   HoldingComponent,
   TransactionComponent,
-  PlaceOrderComponent
+  PlaceOrderComponent, 
+  ChallengeComponent,
+   TraderComponent,
+  TransactionchallengeComponent,
+ 
+  CreateChallengeComponent
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, 
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule, 
+   
+    //ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
