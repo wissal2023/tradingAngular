@@ -40,7 +40,7 @@ export class LoginComponent {
   
       action.subscribe({
         next: (user) => {
-          this.router.navigate(['/optim']);
+          this.router.navigate(['/home']);
         },
         error: (error) => {
           this.error = error.error?.message || 'An error occurred';
