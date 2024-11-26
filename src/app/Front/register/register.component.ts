@@ -12,12 +12,9 @@ import { RegistrationRequest } from 'src/app/Entity/registration-request';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   registerform!: FormGroup;
   registerReq: RegistrationRequest = new RegistrationRequest;
-
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) { }
-
   ngOnInit(): void {
     const formcontrols = {
       fullname: new FormControl('', [Validators.required]),

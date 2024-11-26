@@ -1,0 +1,19 @@
+/* watchlist.component.css */
+.container {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  
+  .row {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  p {
+    margin: 0;
+  }
+  

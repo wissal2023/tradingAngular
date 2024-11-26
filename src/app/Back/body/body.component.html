@@ -7,7 +7,10 @@
                 <div class="card">
                     <div class="card-header">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body">                      
+                        <app-body  *ngIf="currentComponent === 'dash'"></app-body>
+                        <app-list-users  *ngIf="currentComponent === 'list-user'"></app-list-users>                      
+                        <app-user-details *ngIf="currentComponent === 'user-details'"></app-user-details>
                         <app-list-users  *ngIf="currentComponent === 'list-user'"></app-list-users>
                         <app-list-portfolio *ngIf="currentComponent === 'portfolio'"></app-list-portfolio>
                         <app-list-orders *ngIf="currentComponent === 'orders'"></app-list-orders>
@@ -21,7 +24,6 @@
                 </div>
             </section>
         </div>
-
        <app-footer></app-footer>
     </div>
 </div>
