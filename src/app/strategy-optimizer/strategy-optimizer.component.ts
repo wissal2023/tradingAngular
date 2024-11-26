@@ -1,10 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OptimizationResponse } from '../Entity/optimization-response';
 import { OptimizationService } from '../Services/optimization.service';
-import { RiskLevel } from '../Entity/risk-level';
-import { BaseChartDirective } from 'ng2-charts';
-import { ChartConfiguration } from 'chart.js';
 import { StockPreviewService } from '../Services/stock-preview.service';
 import { Router } from '@angular/router';
 

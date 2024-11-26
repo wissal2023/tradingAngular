@@ -1,11 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PredictionResponse } from '../Entity/prediction-response';
-import { Chart, ChartConfiguration, ChartData } from 'chart.js';
 import { PredictionService } from '../Services/prediction-service.service';
 import { NbToastrService } from '@nebular/theme';
-import { catchError, finalize } from 'rxjs/operators';
-import { of } from 'rxjs';
+
 
 
 @Component({

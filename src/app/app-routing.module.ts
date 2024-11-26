@@ -6,7 +6,6 @@ import { PortfolioComponent } from './Front/portfolio/portfolio.component';
 import { HoldingComponent } from './Front/holding/holding.component';
 import { TransactionComponent } from './Front/transaction/transaction.component';
 import { BacktestingFormComponent } from './backtesting-form/backtesting-form.component';
-
 import { WatchlistComponent } from './Front/watchlist/watchlist.component';
 import { LoginComponent } from './Front/login/login.component';
 import { RegisterComponent } from './Front/register/register.component';
@@ -32,49 +31,46 @@ import { QuizSummaryComponent } from './quiz-summary/quiz-summary.component';
 import { ChallengeComponent } from './Front/challenge/challenge.component';
 import { TransactionchallengeComponent } from './Front/Transactionn/transactionchallenge.component';
 import { CreateChallengeComponent } from './Back/create-challenge/create-challenge/create-challenge.component';
+
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'predict', component: PredictionComponent },
+    { path: 'home', component: LandingComponent },
+    { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'activate-account', component: ActivateAccountComponent }, 
+    { path: 'dash', component: BodyComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'ADMIN' },},
+    { path: 'list-user', component: ListUsersComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'ADMIN' },},
+    { path: 'portfolio/:userId/:portfolioId',component: PortfolioComponent, canActivate: [AuthGuard, RoleGuard],  data: { expectedRole: 'CUSTOMER' },},
+    
+
+
+    { path: 'predict', component: PredictionComponent },
     { path: 'quizzes', component: QuizListComponent },
     { path: 'quiz/:id', component: QuizComponent },
-      { path: 'quiz-summary', component: QuizSummaryComponent },
+    { path: 'quiz-summary', component: QuizSummaryComponent },
     { path: 'advancebacktest', component: AdvancedBacktestingComponent },
-    { path: 'optim', component: StrategyOptimizerComponent,
-      canActivate: [AuthGuard] },
-      { path: 'strategy-results', component: StrategyResultsComponent,
-        canActivate: [AuthGuard] },
-    { 
-      path: 'backtest-form', 
-      component: BacktestingFormComponent
-    },
-    { 
-      path: 'backtest-results', 
-      component: BacktestingResultComponent
-    },
-    { path: '', redirectTo: 'challenge', pathMatch: 'full' },
-    {path: 'dash', component: BodyComponent }, 
-    {path: 'home', component: LandingComponent }, 
+    { path: 'optim', component: StrategyOptimizerComponent, canActivate: [AuthGuard] },
+    { path: 'strategy-results', component: StrategyResultsComponent, canActivate: [AuthGuard] },
+    { path: 'backtest-form',  component: BacktestingFormComponent},
+    { path: 'backtest-results',  component: BacktestingResultComponent },    
     {path: 'holding', component: HoldingComponent},
     {path: 'challenge', component: ChallengeComponent},
     {path: 'Transaction', component: TransactionchallengeComponent},
     {path: 'Transactions', component: TransactionchallengeComponent},
     {path:'Transactions/:challengeId', component: TransactionchallengeComponent},
     {path: 'createchallenge', component: CreateChallengeComponent},
-    { path: 'register', component: RegisterComponent },
-    { path: 'reset-pwd', component: ResetPasswordComponent },
-    { path: 'dash', component: BodyComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'ADMIN' },},
-    { path: 'list-user', component: ListUsersComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'ADMIN' },},
-    { path: 'portfolio/:userId/:portfolioId',component: PortfolioComponent, canActivate: [AuthGuard, RoleGuard],  data: { expectedRole: 'CUSTOMER' },},
-    { path: 'not-authorized', component: NotAuthorizedComponent },
-    { path: 'activate-account', component: ActivateAccountComponent }, 
     {path: 'form/:portfolioId', component: OrderFormComponent},
     { path: 'holding/:portfolioId', component: HoldingComponent },
     {path: 'transaction', component: TransactionComponent}, 
+    
+    { path: 'transactions/:portfolioId', component: ShowTransactionsComponent },
     {path: 'news', component: FinancialNewsComponent}, 
     {path: 'option', component: OptionQuoteComponent}, 
     {path: 'oil', component: OilPricesQuoteComponent},
-    { path: 'transactions/:portfolioId', component: ShowTransactionsComponent },
+    
+    { path: 'reset-pwd', component: ResetPasswordComponent },
+    { path: 'not-authorized', component: NotAuthorizedComponent },
+
 
 ];
 

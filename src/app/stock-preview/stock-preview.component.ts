@@ -1,5 +1,4 @@
 import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { Chart, ChartConfiguration } from 'chart.js';
 import { catchError, debounceTime, distinctUntilChanged, filter, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { BacktestingService } from '../Services/backtesting.service';
 import { StockData } from '../Entity/stock-data';
