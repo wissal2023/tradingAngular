@@ -8,6 +8,8 @@ import { TransactionComponent } from './Front/transaction/transaction.component'
 import { ChallengeComponent } from './Front/challenge/challenge.component';
 import { TransactionchallengeComponent } from './Front/Transactionn/transactionchallenge.component';
 import { CreateChallengeComponent } from './Back/create-challenge/create-challenge/create-challenge.component';
+import { BacktestingFormComponent } from './backtesting-form/backtesting-form.component';
+import { WatchlistComponent } from './Front/watchlist/watchlist.component';
 import { LoginComponent } from './Front/login/login.component';
 import { RegisterComponent } from './Front/register/register.component';
 import { OrderFormComponent } from './Front/order-form/order-form.component';
@@ -22,6 +24,18 @@ import { OptionQuoteComponent } from './Front/option-quote/option-quote.componen
 import { OilPricesQuoteComponent } from './Front/oil-prices-quote/oil-prices-quote.component';
 import { ShowTransactionsComponent } from './Front/show-transactions/show-transactions.component';
 import { WatchlistComponent } from './Front/watchlist/watchlist.component';
+import { BacktestingResultComponent } from './backtesting-result/backtesting-result.component';
+import { StrategyOptimizerComponent } from './strategy-optimizer/strategy-optimizer.component';
+import { PredictionComponent } from './prediction/prediction.component';
+import { AdvancedBacktestingComponent } from './advanced-backtesting/advanced-backtesting.component';
+import { StrategyResultsComponent } from './strategy-results/strategy-results.component';
+import { QuizListComponent } from './quiz-list/quiz-list.component';
+import { QuizComponent } from './quiz/quiz.component';
+import { QuizSummaryComponent } from './quiz-summary/quiz-summary.component';
+import { ChallengeComponent } from './Front/challenge/challenge.component';
+import { TransactionchallengeComponent } from './Front/Transactionn/transactionchallenge.component';
+import { CreateChallengeComponent } from './Back/create-challenge/create-challenge/create-challenge.component';
+
 
 
 const routes: Routes = [
@@ -49,8 +63,36 @@ const routes: Routes = [
   {path:'Transactions/:challengeId', component: TransactionchallengeComponent},
   {path: 'createchallenge', component: CreateChallengeComponent},
   {path: 'watchlist', component: WatchlistComponent},
+  { path: 'predict', component: PredictionComponent },
+    { path: 'quizzes', component: QuizListComponent },
+    { path: 'quiz/:id', component: QuizComponent },
+    { path: 'quiz-summary', component: QuizSummaryComponent },
+    { path: 'advancebacktest', component: AdvancedBacktestingComponent },
+    { path: 'optim', component: StrategyOptimizerComponent, canActivate: [AuthGuard] },
+    { path: 'strategy-results', component: StrategyResultsComponent, canActivate: [AuthGuard] },
+    { path: 'backtest-form',  component: BacktestingFormComponent},
+    { path: 'backtest-results',  component: BacktestingResultComponent },    
+    {path: 'holding', component: HoldingComponent},
+    {path: 'challenge', component: ChallengeComponent},
+    {path: 'Transaction', component: TransactionchallengeComponent},
+    {path: 'Transactions', component: TransactionchallengeComponent},
+    {path:'Transactions/:challengeId', component: TransactionchallengeComponent},
+    {path: 'createchallenge', component: CreateChallengeComponent},
+    {path: 'form/:portfolioId', component: OrderFormComponent},
+    { path: 'holding/:portfolioId', component: HoldingComponent },
+    {path: 'transaction', component: TransactionComponent}, 
+    { path: 'transactions/:portfolioId', component: ShowTransactionsComponent },
+    {path: 'news', component: FinancialNewsComponent}, 
+    {path: 'option', component: OptionQuoteComponent}, 
+    {path: 'oil', component: OilPricesQuoteComponent},
     
-];
+    { path: 'reset-pwd', component: ResetPasswordComponent },
+    { path: 'not-authorized', component: NotAuthorizedComponent },
+
+
+
+
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

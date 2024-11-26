@@ -1,0 +1,93 @@
+/* General container styling */
+.container {
+    max-width: 800px; /* Ensures content doesn't span too wide */
+    margin: 0 auto; /* Center container horizontally */
+    padding: 1rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Grid layout for summary sections */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single-column layout for smaller screens */
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr 1fr; /* Two-column layout for larger screens */
+    }
+  }
+  
+  /* Card styling for summary sections */
+  .bg-white {
+    background-color: #ffffff;
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem; /* Rounded corners for a modern look */
+  }
+  
+  .shadow {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .p-6 {
+    padding: 1.5rem;
+  }
+  
+  /* Headings in summary sections */
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  /* Spacing for items in statistics */
+  .space-y-4 > * + * {
+    margin-top: 1rem; /* Space between items */
+  }
+  
+  /* Flexbox for key-value pairs */
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .text-gray-600 {
+    color: #4a5568; /* Neutral text color */
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  .text-yellow-600 {
+    color: #d69e2e; /* Yellow for emphasis on points */
+  }
+  
+  .text-green-600 {
+    color: #38a169; /* Green for correct answers */
+  }
+  
+  .text-red-600 {
+    color: #e53e3e; /* Red for incorrect answers */
+  }
+  
+  /* Responsive design for cards */
+  @media (max-width: 640px) {
+    .p-6 {
+      padding: 1rem; /* Smaller padding on smaller screens */
+    }
+  
+    h3 {
+      font-size: 1rem; /* Adjust heading size */
+    }
+  }
+  

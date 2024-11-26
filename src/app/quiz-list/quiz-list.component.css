@@ -1,0 +1,104 @@
+/* Container Styling */
+.container {
+    max-width: 18000px;
+    margin: 0 auto;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  /* Title Styling */
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    color: #333;
+    border-bottom: 2px solid #0077cc;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* List Layout */
+  .grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .grid > li {
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+  }
+  
+  .grid > li:last-child {
+    border-bottom: none;
+  }
+  
+  /* Quiz Item Header */
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .items-start {
+    align-items: flex-start;
+  }
+  
+  .bg-blue-100 {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  
+  .text-yellow-600 {
+    color: #ff9800;
+    font-weight: 600;
+  }
+  
+  /* Quiz Question Styling */
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #444;
+    margin: 0 0 0.5rem;
+  }
+  
+  /* Quiz Buttons and Status */
+  button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    background-color: #0077cc;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #005fa3;
+  }
+  
+  button:disabled {
+    background-color: #b0bec5;
+    cursor: not-allowed;
+  }
+  
+  .text-green-600 {
+    color: #4caf50;
+    font-weight: 600;
+  }
+  
+  .text-gray-500 {
+    color: #757575;
+    font-size: 0.875rem;
+  }
+  

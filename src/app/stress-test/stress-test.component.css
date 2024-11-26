@@ -1,0 +1,151 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Form Container */
+  form {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 1600px;
+    margin: 20px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form Fields */
+  input[type="text"],
+  input[type="date"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  input:focus,
+  select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Button Styles */
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Error Message */
+  div.bg-red-100 {
+    border: 1px solid #f5c6cb;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  /* Loading State */
+  p.text-gray-600 {
+    color: #6c757d;
+  }
+  
+  /* Results Container */
+  div.bg-white {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Metrics Grid */
+  div.grid {
+    display: grid;
+    gap: 20px;
+  }
+  
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  /* Metric Box */
+  div.bg-gray-50 {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  /* Chart Container */
+  div.canvas-container {
+    height: 400px;
+    margin-top: 20px;
+  }
+  
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  thead {
+    background-color: #f1f1f1;
+  }
+  
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #e5e5e5;
+  }
+  
+  tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .bg-green-50 {
+    background-color: #e6f7e6;
+  }
+  
+  .bg-red-50 {
+    background-color: #fce8e8;
+  }
+  
+  .text-green-600 {
+    color: #28a745;
+  }
+  
+  .text-red-600 {
+    color: #dc3545;
+  }
+  

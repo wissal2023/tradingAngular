@@ -12,8 +12,10 @@ export class User {
     enabled!: boolean;
     createdDate!: Date;          
     lastModifiedDate!: Date;
+    bonusPoints!:number;
     // Ajoutez des propriétés optionnelles si nécessaire
     // registrationDate?: string; 
     // enabled?: boolean; 
     // imageName?: string;
 }
+

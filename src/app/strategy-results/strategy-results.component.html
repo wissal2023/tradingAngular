@@ -1,0 +1,153 @@
+<!-- strategy-results.component.html -->
+<div *ngIf="optimizationResult" class="results-section">
+    <h3>Optimization Results</h3>
+    
+    <div class="results-grid">
+     <!-- First Row -->
+  <div class="row">
+    <div class="result-card large-card">
+      <h4>Strategy Performance</h4>
+      <div class="performance-metrics">
+        <div class="metric-row" *ngFor="let metric of optimizationResult.performanceMetrics | keyvalue">
+          <span class="metric-label">{{metric.key | titlecase}}:</span>
+          <span class="metric-value">{{metric.value | number:'1.2-2'}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Row -->
+  <div class="row">
+    <!-- Market Conditions -->
+    <div class="result-card">
+      <h4>Market Conditions</h4>
+      <div class="market-conditions">
+        <div class="condition-row" *ngFor="let condition of optimizationResult.marketConditions | keyvalue">
+          <span class="condition-label">{{condition.key | titlecase}}:</span>
+          <span class="condition-value">{{condition.value | number:'1.2-2'}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optimized Parameters -->
+    <div class="result-card">
+      <h4>Optimized Parameters</h4>
+      <div class="parameters-list">
+        <div *ngFor="let param of optimizationResult.parameters | keyvalue" class="parameter-item">
+          <span class="param-label">{{param.key | titlecase}}:</span>
+          <span class="param-value">{{param.value | number:'1.2-2'}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rolling Metrics -->
+    <div class="result-card">
+      <h4>Rolling Analysis</h4>
+      <div class="rolling-metrics">
+        <h5>Returns & Volatility</h5>
+        <div class="metric-row">
+          <span>Latest Return:</span>
+          <span>{{optimizationResult.rollingMetrics.returns[optimizationResult.rollingMetrics.returns.length-1] | percent:'1.2-2'}}</span>
+        </div>
+        <div class="metric-row">
+          <span>Latest Volatility:</span>
+          <span>{{optimizationResult.rollingMetrics.volatilities[optimizationResult.rollingMetrics.volatilities.length-1] | percent:'1.2-2'}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Streak Analysis -->
+    <div class="result-card">
+      <h4>Streak Analysis</h4>
+      <div class="streak-metrics">
+        <div class="streak-row">
+          <span>Max Win Streak:</span>
+          <span>{{optimizationResult.streakAnalysis.maxWinStreak}}</span>
+        </div>
+        <div class="streak-row">
+          <span>Max Loss Streak:</span>
+          <span>{{optimizationResult.streakAnalysis.maxLossStreak}}</span>
+        </div>
+        <div class="streak-row">
+          <span>Average Win Streak:</span>
+          <span>{{optimizationResult.streakAnalysis.avgWinStreak | number:'1.1-1'}}</span>
+        </div>
+        <div class="streak-row">
+          <span>Average Loss Streak:</span>
+          <span>{{optimizationResult.streakAnalysis.avgLossStreak | number:'1.1-1'}}</span>
+        </div>
+        <div class="streak-row">
+          <span>Current Streak:</span>
+          <span [class.positive]="optimizationResult.streakAnalysis.currentStreak > 0"
+                [class.negative]="optimizationResult.streakAnalysis.currentStreak < 0">
+            {{optimizationResult.streakAnalysis.currentStreak}}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Risk Assessment -->
+    <div class="result-card">
+      <h4>Risk Assessment</h4>
+      <div class="risk-assessment">
+        <div class="risk-level" [style.color]="getRiskLevelColor(optimizationResult.feedback.riskAssessment.level)">
+          Risk Level: {{optimizationResult.feedback.riskAssessment.level}}
+        </div>
+        <div class="risk-score">
+          Risk Score: {{optimizationResult.feedback.riskAssessment.score | number:'1.2-2'}}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+      <!-- Charts Section -->
+      <div class="result-card full-width">
+        <h4>Rolling Metrics Analysis</h4>
+        <div class="chart-container">
+          <canvas baseChart
+            [data]="rollingMetricsChartData"
+            [options]="rollingMetricsChartOptions"
+            [type]="'line'">
+          </canvas>
+        </div>
+      </div>
+      
+      <div class="result-card">
+        <h4>Efficiency Ratios</h4>
+        <div class="chart-container">
+          <canvas baseChart
+            [data]="efficiencyRatiosChartData"
+            [options]="efficiencyRatiosChartOptions"
+            [type]="'bar'">
+          </canvas>
+        </div>
+      </div>
+      
+      <div class="result-card">
+        <h4>Streak Distribution</h4>
+        <div class="chart-container">
+          <canvas baseChart
+            [data]="streakDistributionChartData"
+            [options]="streakDistributionChartOptions"
+            [type]="'bar'">
+          </canvas>
+        </div>
+      </div>
+  
+      <!-- Feedback & Recommendations -->
+      <div class="result-card feedback-card">
+        <h4>Strategy Assessment</h4>
+        <div class="feedback-content">
+          <p class="feedback-summary">{{optimizationResult.feedback.overallAssessment}}</p>
+          <div class="recommendations-section">
+            <h5>Recommendations</h5>
+            <ul class="feedback-recommendations">
+              <li *ngFor="let recommendation of optimizationResult.feedback.recommendations">
+                {{recommendation}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

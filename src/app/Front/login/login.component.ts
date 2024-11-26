@@ -45,12 +45,12 @@ export class LoginComponent implements OnInit {
             this.userService.getUserById(response.user.id).subscribe(user => {
                 this.authService.storeUserData(user);
                 // Check user role for redirection
-                this.isAdmin = response.user.roles.some(r => r.name === Role_User.ROLE_ADMIN);
+//    this.isAdmin = response.user.roles.some(r => r.name === Role_User.ROLE_ADMIN);
                 if (this.isAdmin) {
                     this.router.navigate(['/dash']);
                 } else {
                     // Redirect to the portfolio using the correct `portfolioId`
-                    this.router.navigate([`/portfolio/${user.id}/${user.portfolio.id}`]);
+                 //   this.router.navigate([`/portfolio/${user.id}/${user.portfolio.id}`]);
                 }
             });
         },
