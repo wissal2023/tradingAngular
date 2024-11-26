@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div *ngIf="transactions.length > 0; else noTransactions">
     <h2>Transactions for Portfolio {{ portfolioId }}</h2>
     <ul>
@@ -10,4 +11,4 @@
   <ng-template #noTransactions>
     <p>No transactions found for this portfolio.</p>
   </ng-template>
-  
+<app-footer-front></app-footer-front>

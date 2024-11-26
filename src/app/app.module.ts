@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgChartsModule } from 'ng2-charts';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BodyComponent } from './Back/body/body.component';
 import { FooterComponent } from './Back/footer/footer.component';
 import { NavComponent } from './Back/nav/nav.component';
 import { SidebarComponent } from './Back/sidebar/sidebar.component';
-
 import { LandingComponent } from './Front/landing/landing.component';
 import { FooterFrontComponent } from './Front/footer-Front/footerFront.component';
 import { HeaderComponent } from './Front/header/header.component';
@@ -16,21 +14,13 @@ import { PortfolioComponent } from './Front/portfolio/portfolio.component';
 import { StockQuoteComponent } from './Front/stock-quote/stock-quote.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule} from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-
-import { IntraDayComponent } from './Front/intra-day/intra-day.component';
 import { HoldingComponent } from './Front/holding/holding.component';
 import { TransactionComponent } from './Front/transaction/transaction.component';
-
-import { PlaceOrderComponent } from './Front/place-order/place-order.component';
 import { ChallengeComponent } from './Front/challenge/challenge.component';
 import { TraderComponent } from './Front/trader/trader.component';
 import { TransactionchallengeComponent } from './Front/Transactionn/transactionchallenge.component';
 import { ReactiveFormsModule } from '@angular/forms';
-//import { ChartsModule } from 'ng2-charts';
 import { CreateChallengeComponent } from './Back/create-challenge/create-challenge/create-challenge.component';
-
-import { WatchlistComponent } from './Front/watchlist/watchlist.component';
 import { LoginComponent } from './Front/login/login.component';
 import { OrderFormComponent } from './Front/order-form/order-form.component';
 import { ListPortfolioComponent } from './Back/list-portfolio/list-portfolio.component';
@@ -53,6 +43,7 @@ import { OptionQuoteComponent } from './Front/option-quote/option-quote.componen
 import { OilPricesQuoteComponent } from './Front/oil-prices-quote/oil-prices-quote.component';
 import { PerformanceChartComponent } from './Front/performance-chart/performance-chart.component';
 import { ShowTransactionsComponent } from './Front/show-transactions/show-transactions.component';
+import { WatchlistComponent } from './Front/watchlist/watchlist.component';
 
 
 
@@ -70,18 +61,12 @@ import { ShowTransactionsComponent } from './Front/show-transactions/show-transa
   HeaderComponent,
   PortfolioComponent,
   StockQuoteComponent,
-  IntraDayComponent,
   HoldingComponent,
   TransactionComponent,
-
-  PlaceOrderComponent, 
   ChallengeComponent,
-   TraderComponent,
+  TraderComponent,
   TransactionchallengeComponent,
- 
-  CreateChallengeComponent
-
-  WatchlistComponent,
+  CreateChallengeComponent,
   ChartComponent,
   LoginComponent,
   OrderFormComponent,
@@ -104,6 +89,7 @@ import { ShowTransactionsComponent } from './Front/show-transactions/show-transa
   BodyComponent,
   PerformanceChartComponent,
   ShowTransactionsComponent,
+  WatchlistComponent
 
     
   ],
@@ -112,8 +98,7 @@ import { ShowTransactionsComponent } from './Front/show-transactions/show-transa
     AppRoutingModule,
     HttpClientModule, 
     FormsModule,
-    ReactiveFormsModule,    
-    //ChartsModule
+    ReactiveFormsModule,   
     NgChartsModule
       
   ],

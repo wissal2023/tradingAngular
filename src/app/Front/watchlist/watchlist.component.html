@@ -1,0 +1,22 @@
+<app-header></app-header>
+<div class="container mt-5">
+    <h2>Your Watchlist</h2>
+    <div *ngIf="watchlist.length === 0">
+      <p>Your watchlist is empty.</p>
+    </div>
+    <div *ngFor="let stock of watchlist">
+      <div class="row mb-3">
+        <div class="col-6">
+          <p><strong>{{ stock.name }}</strong> ({{ stock.symbol }})</p>
+        </div>
+        <div class="col-4">
+          <p>Price: {{ stock.price  }}</p>
+        </div>
+        <div class="col-2">
+          <button (click)="removeFromWatchlist(stock)" class="btn btn-danger">Remove</button>
+        </div>
+      </div>
+    </div>
+    <button (click)="addToWatchlist()" class="btn btn-primary">Add Stock to Watchlist</button>
+  </div>
+  <app-footer-front></app-footer-front>

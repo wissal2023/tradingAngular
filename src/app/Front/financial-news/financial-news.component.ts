@@ -17,6 +17,11 @@ export class FinancialNewsComponent implements OnInit {
     this.getFinancialNews(this.ticker);
   }
 
+  searchTicker(): void {
+    if (this.ticker.trim()) {
+      this.getFinancialNews(this.ticker);
+    }
+  }
  // Fetch financial news for the given ticker
  getFinancialNews(ticker: string): void {
   this.stockQuoteService.getFinancialNews(ticker).subscribe(
@@ -25,17 +30,14 @@ export class FinancialNewsComponent implements OnInit {
       this.errorMessage = ''; // Reset error message
     },
     (error) => {
-      this.errorMessage = 'Error fetching financial news.';
-      console.error(error);
+      this.errorMessage = `Error fetching financial news: ${error.message}`;
+      console.error(error); // Log the full error for more details
     }
   );
 }
 
-searchTicker(): void {
-  if (this.ticker.trim()) {
-    this.getFinancialNews(this.ticker);
-  }
-}
+
+
 
 
 
