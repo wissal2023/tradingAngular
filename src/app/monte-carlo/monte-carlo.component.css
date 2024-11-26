@@ -1,0 +1,96 @@
+/* General Form Styles */
+form {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 1600px;
+    margin: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Labels */
+  label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  /* Input Fields */
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  select {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.875rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  /* Hover and Focus Styles */
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="date"]:focus,
+  select:focus {
+    border-color: #6b46c1; /* Purple highlight */
+    box-shadow: 0 0 4px rgba(107, 70, 193, 0.4);
+    outline: none;
+  }
+  
+  /* Error Styles */
+  input.ng-invalid.ng-touched,
+  select.ng-invalid.ng-touched {
+    border-color: #e53e3e; /* Red for errors */
+  }
+  
+  .text-red-500 {
+    color: #e53e3e;
+    font-size: 0.75rem;
+  }
+  
+  /* Grid for Form Layout */
+  .grid {
+    display: grid;
+    gap: 16px;
+  }
+  
+  .grid-cols-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Buttons */
+  button {
+    padding: 10px 16px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #6b46c1; /* Purple button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: #553c9a; /* Darker purple on hover */
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  
+    form {
+      padding: 12px;
+    }
+  }
+  

@@ -1,0 +1,104 @@
+<div class="prediction-wrapper">
+  <div class="prediction-container">
+    <div class="prediction-header">
+      <h1>Stock Price Prediction</h1>
+      <p>Enter stock details to generate price predictions</p>
+    </div>
+    
+    <form [formGroup]="predictionForm" (ngSubmit)="onSubmit()" class="prediction-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Stock Symbol</label>
+          <input type="text" formControlName="symbol" placeholder="Enter stock symbol">
+          <span class="error" *ngIf="predictionForm.get('symbol')?.invalid && predictionForm.get('symbol')?.touched">
+            Please enter a valid stock symbol
+          </span>
+        </div>
+        
+        <div class="form-group">
+          <label>Start Date</label>
+          <input type="date" formControlName="startDate">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>End Date</label>
+          <input type="date" formControlName="endDate">
+          <span class="error" *ngIf="predictionForm.get('endDate')?.errors?.['invalidDate']">
+            End date must be after start date
+          </span>
+        </div>
+        
+        <div class="form-group">
+          <label>Prediction Timeframe</label>
+          <input type="number" formControlName="predictionTimeframe" placeholder="Enter timeframe">
+          <span class="error" *ngIf="predictionForm.get('predictionTimeframe')?.invalid && predictionForm.get('predictionTimeframe')?.touched">
+            Invalid timeframe for selected unit
+          </span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Timeframe Unit</label>
+          <select formControlName="timeframeUnit">
+            <option *ngFor="let unit of timeframeUnits" [value]="unit.value">
+              {{unit.label}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="predictionForm.invalid || isLoading" class="submit-btn">
+          <span *ngIf="isLoading" class="spinner"></span>
+          <span>Generate Prediction</span>
+        </button>
+      </div>
+    </form>
+
+    <div *ngIf="predictionResponse" class="prediction-results" [ngClass]="{'Bullish': predictionResponse.priceGoingUp, 'Bearish': !predictionResponse.priceGoingUp}">
+      <div class="indicators-container" *ngIf="hasTechnicalIndicators()">
+        <h3>Technical Indicators</h3>
+        <div class="indicator-bars">
+          <div class="indicator-item" *ngFor="let indicator of normalizedIndicators">
+            <div class="indicator-label">{{indicator.label}}</div>
+            <div class="indicator-bar-container">
+              <div class="indicator-bar" 
+                   [style.width.%]="Math.abs(indicator.percentage)"
+                   [ngClass]="{'positive': indicator.value >= 0, 'negative': indicator.value < 0}">
+                <span class="indicator-value">{{indicator.value}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      
+      <div class="details-container">
+        <h2>Prediction Details</h2>
+        <div class="details-grid">
+          <div class="detail-item">
+            <label>Symbol</label>
+            <span>{{predictionResponse.symbol}}</span>
+          </div>
+          <div class="detail-item">
+            <label>Prediction Period</label>
+            <span>{{predictionResponse.predictionDate}} to {{predictionResponse.targetDate}}</span>
+          </div>
+          <div class="detail-item">
+            <label>Direction</label>
+            <span [ngClass]="{'Bullish-text': predictionResponse.priceGoingUp, 'Bearish-text': !predictionResponse.priceGoingUp}">
+              {{predictionResponse.direction}}
+            </span>
+          </div>
+          <div class="detail-item">
+            <label>Confidence</label>
+            <span>{{predictionResponse.confidenceScore | percent:'1.2-2'}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

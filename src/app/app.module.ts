@@ -14,19 +14,37 @@ import { FooterFrontComponent } from './Front/footer-Front/footerFront.component
 import { HeaderComponent } from './Front/header/header.component';
 import { PortfolioComponent } from './Front/portfolio/portfolio.component';
 import { StockQuoteComponent } from './Front/stock-quote/stock-quote.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FormsModule} from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-
 import { IntraDayComponent } from './Front/intra-day/intra-day.component';
 import { HoldingComponent } from './Front/holding/holding.component';
 import { TransactionComponent } from './Front/transaction/transaction.component';
+import { NbAccordionModule, NbAlertModule, NbBadgeModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbFormFieldModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbSelectModule, NbSpinnerModule, NbTabsetModule, NbThemeModule, NbToastrModule, NbToggleModule, NbTreeGridModule } from '@nebular/theme';
+import { CommonModule } from '@angular/common';
+import { BacktestingResultComponent } from './backtesting-result/backtesting-result.component';
+import { BacktestingFormComponent } from './backtesting-form/backtesting-form.component';
+import { StrategyOptimizerComponent } from './strategy-optimizer/strategy-optimizer.component';
+import { StockPreviewComponent } from './stock-preview/stock-preview.component';
+import { BarElement, CategoryScale, Chart, Legend, LinearScale, LineElement, PointElement, TimeScale, Title, Tooltip } from 'chart.js';
+import { enUS } from 'date-fns/locale';
+import 'chartjs-adapter-date-fns';
+import { PredictionComponent } from './prediction/prediction.component';
+import { TooltipDirective } from './tooltip.directive';
+import { AdvancedBacktestingComponent } from './advanced-backtesting/advanced-backtesting.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material/tabs';
+import { CompareStrategiesComponent } from './compare-strategies/compare-strategies.component';
+import { WalkForwardComponent } from './walk-forward/walk-forward.component';
+import { MonteCarloComponent } from './monte-carlo/monte-carlo.component';
+import { StressTestComponent } from './stress-test/stress-test.component';
+import { StrategyResultsComponent } from './strategy-results/strategy-results.component';
+import { QuizListComponent } from './quiz-list/quiz-list.component';
+import { QuizComponent } from './quiz/quiz.component';
+import { QuizSummaryComponent } from './quiz-summary/quiz-summary.component';
 
-import { PlaceOrderComponent } from './Front/place-order/place-order.component';
 import { ChallengeComponent } from './Front/challenge/challenge.component';
 import { TraderComponent } from './Front/trader/trader.component';
 import { TransactionchallengeComponent } from './Front/Transactionn/transactionchallenge.component';
-import { ReactiveFormsModule } from '@angular/forms';
 //import { ChartsModule } from 'ng2-charts';
 import { CreateChallengeComponent } from './Back/create-challenge/create-challenge/create-challenge.component';
 
@@ -55,6 +73,17 @@ import { PerformanceChartComponent } from './Front/performance-chart/performance
 import { ShowTransactionsComponent } from './Front/show-transactions/show-transactions.component';
 
 
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  TimeScale,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement
+);
 
 @NgModule({
   declarations: [
@@ -73,17 +102,28 @@ import { ShowTransactionsComponent } from './Front/show-transactions/show-transa
   IntraDayComponent,
   HoldingComponent,
   TransactionComponent,
-
-  PlaceOrderComponent, 
+  LoginComponent,
+  BacktestingResultComponent,
+  BacktestingFormComponent,
+  StrategyOptimizerComponent,
+  StockPreviewComponent,
+  PredictionComponent,
+  TooltipDirective,
+  AdvancedBacktestingComponent,
+  CompareStrategiesComponent,
+  WalkForwardComponent,
+  MonteCarloComponent,
+  StressTestComponent,
+  StrategyResultsComponent,
+  QuizListComponent,
+  QuizComponent,
+  QuizSummaryComponent,
   ChallengeComponent,
    TraderComponent,
   TransactionchallengeComponent,
- 
-  CreateChallengeComponent
-
+  CreateChallengeComponent,
   WatchlistComponent,
   ChartComponent,
-  LoginComponent,
   OrderFormComponent,
   ListPortfolioComponent,
   ListOrdersComponent,
@@ -112,6 +152,30 @@ import { ShowTransactionsComponent } from './Front/show-transactions/show-transa
     AppRoutingModule,
     HttpClientModule, 
     FormsModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule,
+    NbInputModule,
+    NbButtonModule,
+    NbSelectModule,
+    NbCardModule,
+    NgChartsModule,
+    NbAlertModule, 
+    CommonModule,
+    NbIconModule,
+    NbBadgeModule,
+    NbTreeGridModule,
+    ReactiveFormsModule,
+    NbAccordionModule,
+    NbSpinnerModule,
+    NbFormFieldModule,  
+    NbDatepickerModule.forRoot(),  
+    NbToggleModule, 
+    NbToastrModule.forRoot(),
+    NbTabsetModule,
+    NbListModule,
+    NbDatepickerModule,
+    BrowserAnimationsModule,
+    MatTabsModule,
     ReactiveFormsModule,    
     //ChartsModule
     NgChartsModule
@@ -119,7 +183,6 @@ import { ShowTransactionsComponent } from './Front/show-transactions/show-transa
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+export interface User {
+    id: number;
+    username: string;
+    password?: string;
+  }
+
+=======
 import { Portfolio } from './portfolio';
 import { Role } from './role';
 export class User {
@@ -17,3 +25,4 @@ export class User {
     // enabled?: boolean; 
     // imageName?: string;
 }
+>>>>>>> origin/main

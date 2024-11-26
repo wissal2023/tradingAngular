@@ -1,0 +1,196 @@
+<div class="optimizer-container">
+  <h2>Strategy Optimizer</h2>
+  
+  <!-- Add the stock preview component at the top -->
+  <div class="preview-section">
+    <h3>Historical Price Chart</h3>
+    <app-stock-preview
+      [parentForm]="optimizationForm">
+    </app-stock-preview>
+  </div>
+
+  <form [formGroup]="optimizationForm" (ngSubmit)="onSubmit()" class="optimizer-form">
+    <div class="form-section">
+      <h3>Basic Settings</h3>
+      <div class="settings-grid">
+        <div class="form-group">
+          <label for="symbol">Symbol:</label>
+          <input 
+            id="symbol" 
+            type="text" 
+            formControlName="symbol" 
+            [class.invalid]="isFieldInvalid('symbol')"
+          >
+          <div class="error-message" *ngIf="isFieldInvalid('symbol')">
+            Please enter a valid stock symbol (1-5 capital letters)
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="startDate">Start Date:</label>
+          <input 
+            id="startDate" 
+            type="date" 
+            formControlName="startDate"
+            [class.invalid]="isFieldInvalid('startDate')"
+          >
+        </div>
+    
+        <div class="form-group">
+          <label for="endDate">End Date:</label>
+          <input 
+            id="endDate" 
+            type="date" 
+            formControlName="endDate"
+            [class.invalid]="isFieldInvalid('endDate')"
+          >
+        </div>
+    
+        <div class="form-group">
+          <label for="strategyType">Strategy Type:</label>
+          <select 
+            id="strategyType" 
+            formControlName="strategyType"
+            [class.invalid]="isFieldInvalid('strategyType')"
+          >
+            <option *ngFor="let strategy of availableStrategies" [value]="strategy">
+              {{strategy}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="form-section" formGroupName="preferences">
+      <h3>Risk Preferences</h3>
+      <div class="preferences-grid">
+        <div class="form-group">
+          <label for="volatilityThreshold">Volatility Threshold:</label>
+          <input 
+            id="volatilityThreshold" 
+            type="number" 
+            step="0.01" 
+            formControlName="volatilityThreshold"
+            [class.invalid]="isFieldInvalid('preferences.volatilityThreshold')"
+          >
+        </div>
+    
+        <div class="form-group">
+          <label for="maxDrawdownThreshold">Max Drawdown Threshold:</label>
+          <input 
+            id="maxDrawdownThreshold" 
+            type="number" 
+            step="0.01" 
+            formControlName="maxDrawdownThreshold"
+            [class.invalid]="isFieldInvalid('preferences.maxDrawdownThreshold')"
+          >
+        </div>
+    
+        <div class="form-group">
+          <label for="minSharpeRatio">Minimum Sharpe Ratio:</label>
+          <input 
+            id="minSharpeRatio" 
+            type="number" 
+            step="0.01" 
+            formControlName="minSharpeRatio"
+            [class.invalid]="isFieldInvalid('preferences.minSharpeRatio')"
+          >
+        </div>
+    
+        <div class="form-group">
+          <label for="riskFreeRate">Risk-Free Rate:</label>
+          <input 
+            id="riskFreeRate" 
+            type="number" 
+            step="0.001" 
+            formControlName="riskFreeRate"
+            [class.invalid]="isFieldInvalid('preferences.riskFreeRate')"
+          >
+        </div>
+    
+        <div class="form-group checkbox-group">
+          <label>
+            <input 
+              type="checkbox" 
+              formControlName="adaptToMarketConditions"
+            >
+            Adapt to Market Conditions
+          </label>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="form-section" formGroupName="preferences.metricWeights">
+      <h3>Metric Weights</h3>
+      
+      <div class="weights-grid">
+        <div class="form-group">
+          <label for="returnWeight">Return:</label>
+          <input 
+            id="returnWeight" 
+            type="number" 
+            step="0.1" 
+            formControlName="return"
+            [class.invalid]="isFieldInvalid('preferences.metricWeights.return')"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="sharpeWeight">Sharpe:</label>
+          <input 
+            id="sharpeWeight" 
+            type="number" 
+            step="0.1" 
+            formControlName="sharpe"
+            [class.invalid]="isFieldInvalid('preferences.metricWeights.sharpe')"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="maxDrawdownWeight">Max Drawdown:</label>
+          <input 
+            id="maxDrawdownWeight" 
+            type="number" 
+            step="0.1" 
+            formControlName="maxDrawdown"
+            [class.invalid]="isFieldInvalid('preferences.metricWeights.maxDrawdown')"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="volatilityWeight">Volatility:</label>
+          <input 
+            id="volatilityWeight" 
+            type="number" 
+            step="0.1" 
+            formControlName="volatility"
+            [class.invalid]="isFieldInvalid('preferences.metricWeights.volatility')"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="sortinoWeight">Sortino:</label>
+          <input 
+            id="sortinoWeight" 
+            type="number" 
+            step="0.1" 
+            formControlName="sortino"
+            [class.invalid]="isFieldInvalid('preferences.metricWeights.sortino')"
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="isLoading" class="submit-btn">
+        <span *ngIf="!isLoading">Optimize Strategy</span>
+        <span *ngIf="isLoading">Optimizing...</span>
+      </button>
+      <button type="button" (click)="resetForm()" class="reset-btn">
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
