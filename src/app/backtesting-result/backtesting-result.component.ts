@@ -49,14 +49,14 @@ export class BacktestingResultComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   ngOnInit() {
-    if (!this.authService.currentUserValue) {
+   /* if (!this.authService.currentUserValue) {
       this.router.navigate(['/login']);
       return;
     }
 
     if (this.result) {
       this.updateTradeHistory();
-    }
+    }*/
   }
 
   ngAfterViewInit() {

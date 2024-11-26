@@ -1,0 +1,21 @@
+<section class="section">
+  <div class="row">
+    <div class="col-12">
+      <div class="table-container rounded shadow-sm">
+        <div class="table-header d-flex justify-content-between align-items-center p-3">
+          <h4 class="mb-0">Performance</h4>
+        </div>
+        <div class="chart-container">
+            <canvas baseChart
+              [datasets]="chartData.datasets"
+              [labels]="chartData.labels"
+              [options]="chartOptions"
+              [legend]="true"
+              [type]="'line'"> 
+            </canvas>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+  

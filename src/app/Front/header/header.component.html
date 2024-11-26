@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+<<<<<<< HEAD
     <a href="" class="navbar-brand p-0">
         <h1 class="text-primary"><i class="fas fa-search-dollar me-3"></i>Smart Stock</h1>
         <!-- <img src="assets/Front/img/logo.png" alt="Logo"> -->
@@ -26,5 +27,71 @@
             <a href="contact.html" class="nav-item nav-link">Contact Us</a>
         </div>
         <a href="#" class="btn btn-primary rounded-pill py-2 px-4 my-3 my-lg-0 flex-shrink-0">Get Started</a>
+=======
+  <a href="" class="navbar-brand p-0">
+    <h1 class="text-primary"><i class="fas fa-dollar-sign me-3"></i>Smart Stock</h1>
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+    <span class="fa fa-bars"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav ms-auto py-0">
+      <a [routerLink]="['/home']" class="nav-item nav-link ">Home</a> 
+      <a [routerLink]="['/portfolio/:userId/:portfolioId']" class="nav-item nav-link ">Portfolio</a>            
+      <a [routerLink]="['/']" class="nav-item nav-link">Market</a>   
+      <a [routerLink]="['/']" class="nav-item nav-link">Watchlist</a>  
+      <a [routerLink]="['/news']" class="nav-item nav-link">News</a>
+      <a [routerLink]="['/holding', portfolioId]" class="nav-item nav-link">Holdings</a>
+      <a [routerLink]="" class="nav-item nav-link">page</a>
+      <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+>>>>>>> origin/main
     </div>
+  </div>
 </nav>
+
+
+
+<!-- Carousel with repeated cards for smooth loop -->
+<div class="carousel-wrapper">
+  <div class="carousel-track">
+    <div *ngFor="let market of marketStatus" class="carousel-card">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">{{ market.primary_exchanges }}</h5>
+          <p class="card-text">
+            <span [ngClass]="{'text-success': market.current_status === 'open', 'text-danger': market.current_status === 'closed'}">
+              <ng-container *ngIf="market.current_status === 'open'">
+                <i class="bi bi-check-circle-fill"></i> <!-- Open market icon -->
+              </ng-container>
+              <ng-container *ngIf="market.current_status === 'closed'">
+                <i class="bi bi-x-circle-fill"></i> <!-- Closed market icon -->
+              </ng-container>
+              {{ market.current_status | titlecase }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Repeat the cards for infinite loop -->
+    <div *ngFor="let market of marketStatus" class="carousel-card">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">{{ market.primary_exchanges }}</h5>
+          <p class="card-text">
+            <span 
+              [ngClass]="{'text-success': market.current_status === 'open', 'text-danger': market.current_status === 'closed'}">
+              <ng-container *ngIf="market.current_status === 'open'">
+                <i class="bi bi-check-circle-fill"></i> <!-- Open market icon -->
+              </ng-container>
+              <ng-container *ngIf="market.current_status === 'closed'">
+                <i class="bi bi-x-circle-fill"></i> <!-- Closed market icon -->
+              </ng-container>
+              {{ market.current_status | titlecase }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

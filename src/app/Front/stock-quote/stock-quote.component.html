@@ -1,58 +1,26 @@
-<div>
-  <input [(ngModel)]="symbol" placeholder="Enter stock symbol" />
-  <button (click)="getQuote()">Get Quote</button>
-  
-  <div *ngIf="quote">
-    <h3>Stock Quote for {{ symbol }}</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Attribute</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr>
-            <td>Symbol</td>
-            <td>{{ quote['01. symbol'] }}</td>
-          </tr>
-          <tr>
-            <td>Open</td>
-            <td>{{ quote['02. open'] }}</td>
-          </tr>
-          <tr>
-            <td>High</td>
-            <td>{{ quote['03. high'] }}</td>
-          </tr>
-          <tr>
-            <td>Low</td>
-            <td>{{ quote['04. low'] }}</td>
-          </tr>
-          <tr>
-            <td>Price</td>
-            <td>{{ quote['05. price'] }}</td>
-          </tr>
-          <tr>
-            <td>Volume</td>
-            <td>{{ quote['06. volume'] }}</td>
-          </tr>
-          <tr>
-            <td>Latest Trading Day</td>
-            <td>{{ quote['07. latest trading day'] }}</td>
-          </tr>
-          <tr>
-            <td>Previous Close</td>
-            <td>{{ quote['08. previous close'] }}</td>
-          </tr>
-          <tr>
-            <td>Change</td>
-            <td>{{ quote['09. change'] }}</td>
-          </tr>
-          <tr>
-            <td>Change Percent</td>
-            <td>{{ quote['10. change percent'] }}</td>
-          </tr>
-        </tbody>
-    </table>
+
+<div *ngIf="stockData" class="stock-quote-card">
+  <h3>Stock Quote for {{ stockData['01. symbol'] }}:</h3>                                                
+  <div class="card">
+      <div class="stock-info-summary">
+      <div class="stock-price">
+          <h4>{{ stockData['05. price'] | currency }}</h4>
+          <div [ngClass]="{'positive-change': stockData['09. change'] > 0, 'negative-change': stockData['09. change'] < 0}">
+          <span>{{ stockData['09. change'] | number: '1.2-2' }} ({{ stockData['10. change percent'] }})</span>
+          </div>
+      </div>                                                    
+      </div>
+      <div class="stock-info-details">
+      <ul>
+          <li><strong>Open:</strong> {{ stockData['02. open'] | currency }}</li>
+          <li><strong>High:</strong> {{ stockData['03. high'] | currency }}</li>
+          <li><strong>Low:</strong> {{ stockData['04. low'] | currency }}</li>
+          <li><strong>Previous Close:</strong> {{ stockData['08. previous close'] | currency }}</li>
+          <li><strong>Volume:</strong> {{ stockData['06. volume'] | number }}</li>
+      </ul>
+      </div>
   </div>
+  </div> 
+<div *ngIf="chartData.length > 0">
+  <app-chart [data]="chartData"></app-chart>
 </div>

@@ -1,0 +1,35 @@
+
+.unauthorized-content h1 {
+    font-size: 96px; 
+    font-weight: bold;
+    color: #ff4757; 
+}
+
+.unauthorized-content h2 {
+    font-size: 24px; 
+    margin: 20px 0;
+}
+
+.unauthorized-content p {
+    font-size: 16px; 
+    margin-bottom: 30px;
+}
+
+
+
+.btn:hover {
+    background-color: #2086f3;
+}
+
+.error-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-error {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 50px;
+}

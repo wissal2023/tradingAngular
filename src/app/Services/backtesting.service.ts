@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 import { User } from '../Entity/user';
 import { BacktestFormData } from '../Entity/backtest-form-data';
 import { BacktestResult } from '../Entity/backtest-result';
@@ -20,9 +20,9 @@ export class BacktestingService {
     private authService: AuthService
   ) {
     // Subscribe to AuthService's user updates
-    this.authService.currentUser.subscribe(
-      user => this.currentUser = user
-    );
+    //this.authService.currentUser.subscribe(
+     // user => this.currentUser = user
+    //);
   }
 
   // Authentication methods
@@ -31,17 +31,12 @@ export class BacktestingService {
       .pipe(
         tap(user => {
           this.setCurrentUser(user);
-          this.authService.login(username, password).subscribe();
+        //  this.authService.login(username, password).subscribe();
         })
       );
   }
 
-  login(username: string, password: string): Observable<User> {
-    return this.authService.login(username, password)
-      .pipe(
-        tap(user => this.setCurrentUser(user))
-      );
-  }
+
 
   setCurrentUser(user: User) {
     this.currentUser = user;
@@ -110,5 +105,71 @@ export class BacktestingService {
         return throwError(() => new Error('Failed to fetch stock data'));
       })
     );
+  }
+  getBacktestResults(userId: number): Observable<BacktestResult> {
+    return this.http.get<BacktestResult>(
+      `${this.apiUrl}/users/${userId}/backtest`,
+      { 
+        withCredentials: true,
+        responseType: 'json'
+      }
+    ).pipe(
+      tap(response => {
+        // Log the raw response for debugging
+        console.log('Raw backtest response:', response);
+      }),
+      map(response => {
+        // Ensure the response matches the BacktestResult interface
+        if (!this.isValidBacktestResult(response)) {
+          throw new Error('Invalid backtest result format');
+        }
+        return response;
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  private isValidBacktestResult(result: any): result is BacktestResult {
+    return (
+      result &&
+      typeof result.initialCapital === 'number' &&
+      typeof result.finalCapital === 'number' &&
+      typeof result.totalReturn === 'number' &&
+      Array.isArray(result.trades) &&
+      result.trades.every((trade: any) =>
+        typeof trade.date === 'string' &&
+        typeof trade.action === 'string' &&
+        typeof trade.shares === 'number' &&
+        typeof trade.price === 'number'
+      )
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'An error occurred';
+    
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Server-side error
+      switch (error.status) {
+        case 404:
+          errorMessage = 'Service not found. Please check server configuration.';
+          break;
+        case 401:
+          errorMessage = 'Invalid credentials. Please try again.';
+          break;
+        case 200: // For JSON parsing errors
+          errorMessage = 'Invalid response format from server';
+          console.error('Raw response:', error.error);
+          break;
+        default:
+          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      }
+    }
+    
+    console.error('Error details:', error);
+    return throwError(() => new Error(errorMessage));
   }
 }

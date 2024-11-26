@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Stocker - Cryptocurrency Management</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMOKK8WGuA11LxtbKXKhMDFxBfzV6QcOc3xG6LZ" crossorigin="anonymous">
+
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .info-container {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #myChart, #predictionChart {
+            width: 100%;
+            height: 400px;
+        }
+
+        .crypto-container {
+            background-color: #f1eeee;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .crypto-logo {
+            font-size: 3rem;
+            color: #f7931a; /* Orange color for Bitcoin logo */
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .change-positive {
+    font-size: 1.5rem;
+    color: #4caf50; /* Green for positive change */
+    font-weight: bold; /* Rend le texte en gras */
+}
+
+.change-negative {
+    font-size: 1.5rem;
+    color: #e53935; /* Red for negative change */
+    font-weight: bold; /* Rend le texte en gras */
+}
+
+
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        .prediction-chart-container {
+   
+    margin-top: 20px; /* Espace au-dessus du graphique */
+    text-align: center; /* Centre le contenu à l'intérieur */
+}
+
+#predictionChart {
+    max-width: 100%;
+    height: 250px; /* Hauteur réduite pour un affichage compact */
+}
+.volatility-high {
+    color: #ff9800; /* Orange for high volatility */
+}
+
+.volatility-low {
+    color: #2196f3; /* Blue for low volatility */
+}
+
+.text-muted {
+    color: #6c757d; /* Light gray for labels */
+}
+.change-info, .volatility-info {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+#myChart {
+  width: 100%;
+  height: 400px;  /* Ajustez la hauteur selon vos besoins */
+}
+
+  .form-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    text-transform: uppercase;
+    border-bottom: 2px solid #007bff;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  .form-label {
+    font-weight: bold;
+    color: #495057;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  .btn-custom {
+    background-color: #007bff;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 50px;
+  }
+
+  .btn-custom:hover {
+    background-color: #0056b3;
+  }
+
+  .chart-container {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .score-display {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #343a40;
+  }
+
+  .recommendation-container {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #e9f7ef;
+    color: #155724;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+        <a href="#" class="navbar-brand p-0">
+            <h1 class="text-primary"><i class="fas fa-search-dollar me-2"></i>Stocker</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="service.html" class="nav-item nav-link active">Services</a>
+                <a href="blog.html" class="nav-item nav-link">Blogs</a>
+                <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+            </div>
+            <button class="btn btn-primary rounded-pill my-3" (click)="navigateToDashboard()">Go to Dashboard</button>
+        </div>
+    </nav>
+   
+
+    <div class="container">
+        <div class="header">
+            <div *ngIf="selectedCategory === 'CRYPTOCURRENCY'">
+            <h4 class="display-4 mb-4">Manage Cryptocurrency Transactions</h4>
+        
+
+        <div class="row">
+            <div class="col-md-6">
+                <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="info-container">
+                    <h5 class="mb-4">Transaction Details</h5>
+                    <div class="crypto-container">
+                        <div class="crypto-logo">
+                            <img [src]="getCryptoIconUrl(selectedSymbol)" alt="{{ selectedSymbol }} Logo" class="crypto-img" />
+                        </div>
+                        <h2>{{ selectedSymbol }} Price</h2>
+                        <div *ngIf="cryptoPrice !== null && priceChangePercent !== null; else loading">
+                            <div class="price">{{ cryptoPrice | number: '1.2-2' }} $</div>
+                            <div [ngClass]="{'change-positive': priceChangePercent >= 0, 'change-negative': priceChangePercent < 0}">
+                                <span *ngIf="priceChangePercent >= 0">+{{ priceChangePercent | number: '1.2-2' }}%</span>
+                                <span *ngIf="priceChangePercent < 0">{{ priceChangePercent | number: '1.2-2' }}%</span>
+                            </div>
+                           
+                        </div>
+                        <div class="volatility-info" *ngIf="volatility !== null">
+                            <div>
+                                Volatility: {{ volatility | number: '1.2-2' }}% 
+                                <span *ngIf="volatility > 5" class="text-success">
+                                    <i class="fas fa-arrow-up"></i> <!-- Flèche vers le haut pour haute volatilité -->
+                                </span>
+                                <span *ngIf="volatility <= 5" class="text-danger">
+                                    <i class="fas fa-arrow-down"></i> <!-- Flèche vers le bas pour basse volatilité -->
+                                </span>
+                            </div>
+                            
+                        </div>
+                        
+                        <ng-template #loading>
+                            <div class="price">Loading...</div>
+                        </ng-template>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="cryptocurrency" class="form-label">Cryptocurrency</label>
+                        <select id="cryptocurrency" formControlName="cryptocurrency" class="form-control" required (change)="loadCryptoData()">
+                            <option value="BTC">Bitcoin (BTC)</option>
+                            <option value="ETH">Ethereum (ETH)</option>
+                            <option value="BNB">Binance Coin (BNB)</option>
+                            <option value="ADA">Cardano (ADA)</option>
+                            <option value="SOL">Solana (SOL)</option>
+                            <option value="XRP">Ripple (XRP)</option>
+                            <option value="DOT">Polkadot (DOT)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input id="price" class="form-control" formControlName="price" type="number" required />
+                        <div *ngIf="transactionForm.get('price')?.invalid && transactionForm.get('price')?.touched">
+                            <span class="text-danger">Price is required</span>
+                        </div>
+                    </div>
+                    
+
+                 
+                    <div class="form-group mt-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input id="quantity" class="form-control" formControlName="quantity" type="number" required />
+                        <div *ngIf="transactionForm.get('quantity')?.invalid && transactionForm.get('quantity')?.touched">
+                            <span class="text-danger">Quantity is required</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label>Total Amount</label>
+                        <input id="totalAmount" [value]="totalAmount" class="form-control" disabled />
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="transactionDate" class="form-label">Transaction Date</label>
+                        <input id="transactionDate" type="date" formControlName="transactionDate" class="form-control" required />
+                    </div>
+            
+                      <div class="form-group mt-3">
+                        <label for="type" class="form-label">Type</label>
+                        <select id="type" formControlName="type" class="form-control" required>
+                            <option value="">Select a type</option>
+                            <option value="BUY">Buy</option>
+                            <option value="SELL">Sell</option>
+                        </select>
+                        <div *ngIf="transactionForm.get('type')?.invalid && transactionForm.get('type')?.touched">
+                            <span class="text-danger">Type est requis</span>
+                        </div>
+                    </div>
+            
+                    <div class="form-group mt-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select id="status" formControlName="status" class="form-control" required>
+                            <option value="PENDING">PENDING</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            <option value="FAILED">FAILED</option>
+                        </select>
+                    </div>
+            
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-custom">{{ isEditing ? 'Update' : 'Create' }} Transaction</button>
+                        <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+                    </div>
+
+                    
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <!--<h2 class="mt-4">Graphique de Prédiction des Prix</h2>-->
+                <div class="prediction-chart-container">
+                    <canvas id="predictionChart" style="max-width: 100%; height: 250px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+<!--******************************************************************************************************-->
+<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="info-container">
+    <div *ngIf="selectedCategory === 'OBLIGATIONS'">
+        <h4>Obligations Transaction</h4>
+        <div class="mb-3">
+            <label for="obligationType" class="form-label">Type of Obligation</label>
+            <select id="obligationType" class="form-control" required>
+              <option value="" disabled selected>Select an obligation type</option>
+              <option value="government-bond">Government Bond</option>
+              <option value="corporate-bond">Corporate Bond</option>
+              <option value="municipal-bond">Municipal Bond</option>
+              <option value="convertible-bond">Convertible Bond</option>
+              <option value="zero-coupon-bond">Zero-Coupon Bond</option>
+              <option value="junk-bond">Junk Bond</option>
+            </select>
+          </div>
+          
+        
+        <div class="mb-3">
+          <label for="bondAmount" class="form-label">Bond Amount</label>
+          <input id="bondAmount" formControlName="bondAmount" type="number" class="form-control" required />
+        </div>
+      
+        <div class="mb-3">
+          <label for="interestRate" class="form-label">Interest Rate (%)</label>
+          <input id="interestRate" formControlName="interestRate" type="number" class="form-control" required />
+        </div>
+      
+        <div class="mb-3">
+          <label for="maturityDate" class="form-label">Maturity Date</label>
+          <input id="maturityDate" formControlName="maturityDate" type="date" class="form-control" required />
+        </div>
+      
+        <div class="mb-3">
+          <label for="issuer" class="form-label">Issuer</label>
+          <input id="issuer" formControlName="issuer" class="form-control" required />
+        </div>
+      
+        <div class="mb-3">
+          <label for="faceValue" class="form-label">Face Value</label>
+          <input id="faceValue" formControlName="faceValue" type="number" class="form-control" required />
+        </div>
+        <div class="form-group mt-3">
+            <label for="transactionDate" class="form-label">Transaction Date</label>
+            <input id="transactionDate" type="date" formControlName="transactionDate" class="form-control" required />
+        </div>
+
+          <div class="form-group mt-3">
+            <label for="type" class="form-label">Type</label>
+            <select id="type" formControlName="type" class="form-control" required>
+                <option value="">Select a type</option>
+                <option value="BUY">Buy</option>
+                <option value="SELL">Sell</option>
+            </select>
+            <div *ngIf="transactionForm.get('type')?.invalid && transactionForm.get('type')?.touched">
+                <span class="text-danger">Type est requis</span>
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="status" class="form-label">Status</label>
+            <select id="status" formControlName="status" class="form-control" required>
+                <option value="PENDING">PENDING</option>
+                <option value="COMPLETED">COMPLETED</option>
+                <option value="FAILED">FAILED</option>
+            </select>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-custom">{{ isEditing ? 'Update' : 'Create' }} Transaction</button>
+            <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+        </div>
+    </div>
+    </form>
+       
+     <!--**********************************************************************************************************************************-->
+     <div class="container">
+        <div class="row">
+          <!-- Formulaire Intangibles à gauche -->
+          <div class="col-md-6">
+            <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="info-container">
+              <div *ngIf="selectedCategory === 'INTANGIBLES'">
+                <h4 class="form-title mb-4">Intangibles Transaction</h4>
+      
+                <!-- Type of Intangible Asset -->
+                <div class="form-group">
+                  <label for="intangibleAsset" class="form-label">
+                    <i class="fas fa-cubes me-2"></i>Type of Intangible Asset
+                  </label>
+                  <select id="intangibleAsset" formControlName="intangibleAsset" class="form-control">
+                    <option value="" disabled selected>Select an intangible asset</option>
+                    <option value="patent">Patent</option>
+                    <option value="trademark">Trademark</option>
+                    <option value="copyright">Copyright</option>
+                    <option value="brand">Brand</option>
+                    <option value="license">License</option>
+                    <option value="software">Software</option>
+                  </select>
+                  <div *ngIf="transactionForm.get('intangibleAsset')?.invalid && transactionForm.get('intangibleAsset')?.touched">
+                    <small class="text-danger">Please select a valid asset type.</small>
+                  </div>
+                </div>
+      
+                <!-- Other Form Fields -->
+                <div class="form-group mt-3">
+                  <label for="intangibleValue" class="form-label">
+                    <i class="fas fa-dollar-sign me-2"></i>Value
+                  </label>
+                  <input id="intangibleValue" formControlName="intangibleValue" class="form-control" placeholder="Enter the value" required />
+                </div>
+      
+                <div class="form-group mt-3">
+                  <label for="rightsExpiryDate" class="form-label">
+                    <i class="fas fa-calendar-alt me-2"></i>Rights/License Expiry Date
+                  </label>
+                  <input id="rightsExpiryDate" formControlName="rightsExpiryDate" type="date" class="form-control" />
+                </div>
+      
+                <div class="form-group mt-3">
+                  <label for="description" class="form-label">
+                    <i class="fas fa-info-circle me-2"></i>Description
+                  </label>
+                  <textarea id="description" formControlName="description" class="form-control" rows="2" placeholder="Provide a brief description"></textarea>
+                </div>
+      
+                <div class="form-group mt-3">
+                  <label for="ownershipStatus" class="form-label">
+                    <i class="fas fa-user-shield me-2"></i>Ownership Status
+                  </label>
+                  <select id="ownershipStatus" formControlName="ownershipStatus" class="form-control">
+                    <option value="Owner">Owner</option>
+                    <option value="Licensor">Licensor</option>
+                    <option value="Licensee">Licensee</option>
+                  </select>
+                </div>
+      
+                <div class="form-group mt-3">
+                  <label for="marketValue" class="form-label">
+                    <i class="fas fa-chart-line me-2"></i>Market Value
+                  </label>
+                  <input id="marketValue" formControlName="marketValue" type="number" class="form-control" placeholder="Enter market value" />
+                </div>
+      
+                <div class="form-group mt-3">
+                  <label for="investmentAmount" class="form-label">
+                    <i class="fas fa-coins me-2"></i>Investment Amount
+                  </label>
+                  <input id="investmentAmount" formControlName="investmentAmount" type="number" class="form-control" placeholder="Enter investment amount" />
+                </div>
+      
+                <div class="form-group mt-3">
+                  <label for="expectedRevenue" class="form-label">
+                    <i class="fas fa-money-check-alt me-2"></i>Expected Revenue
+                  </label>
+                  <input id="expectedRevenue" formControlName="expectedRevenue" type="number" class="form-control" placeholder="Calculated automatically" readonly />
+                </div>
+      
+                <div class="form-group mt-3">
+                  <label for="roi" class="form-label">
+                    <i class="fas fa-percentage me-2"></i>ROI (%)
+                  </label>
+                  <input id="roi" [value]="roi !== null ? roi + ' %' : ''" class="form-control" readonly />
+                </div>
+      
+                <!-- AI Score Section -->
+                <div class="form-group mt-3">
+                  <label for="aiScore" class="form-label">
+                    <i class="fas fa-robot me-2"></i>AI Asset Score
+                  </label>
+                  <div id="aiScore" class="score-display p-2 border rounded text-center bg-light">
+                    {{ aiScore ? aiScore : 'Calculating...' }}
+                  </div>
+                  <small class="form-text text-muted">
+                    The AI score is calculated based on performance, risks, and strategic importance.
+                  </small>
+                </div>
+      
+                <div class="form-group mt-3">
+                    <label for="transactionDate" class="form-label">Transaction Date</label>
+                    <input id="transactionDate" type="date" formControlName="transactionDate" class="form-control" required />
+                </div>
+        
+                  <div class="form-group mt-3">
+                    <label for="type" class="form-label">Type</label>
+                    <select id="type" formControlName="type" class="form-control" required>
+                        <option value="">Select a type</option>
+                        <option value="BUY">Buy</option>
+                        <option value="SELL">Sell</option>
+                    </select>
+                    <div *ngIf="transactionForm.get('type')?.invalid && transactionForm.get('type')?.touched">
+                        <span class="text-danger">Type est requis</span>
+                    </div>
+                </div>
+        
+                <div class="form-group mt-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select id="status" formControlName="status" class="form-control" required>
+                        <option value="PENDING">PENDING</option>
+                        <option value="COMPLETED">COMPLETED</option>
+                        <option value="FAILED">FAILED</option>
+                    </select>
+                </div>
+        
+
+  
+      
+                <!-- Submit Buttons -->
+                <div class="d-grid mt-4">
+                  <button type="submit" class="btn btn-custom">{{ isEditing ? 'Update' : 'Create' }} Transaction</button>
+                  <button type="button" class="btn btn-secondary mt-2" (click)="resetForm()">Reset</button>
+                </div>
+              </div>
+            </form>
+          </div>
+      
+          <!-- Graphique AI à droite -->
+          <div class="col-md-6" *ngIf="selectedCategory === 'INTANGIBLES'">
+            
+            <div class="recommendation-card mt-4" *ngIf="aiScore !== null" >
+                <div class="card shadow text-center">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="fas fa-lightbulb text-warning me-2"></i>AI Recommendation
+                    </h5>
+                    <p class="card-text text-secondary">
+                      Your AI Asset Score: <span class="fw-bold text-primary">{{ aiScore }}</span>
+                    </p>
+                    <p class="recommendation-message text-dark fw-bold">
+                      {{ recommendationMessage }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+             <div class="chart-container bg-white shadow p-4 rounded mt-4" *ngIf="selectedCategory === 'INTANGIBLES'">
+  <canvas id="combinedChart" width="400" height="400"></canvas>
+</div>
+
+            
+          </div>
+        </div>
+      </div>
+      
+         
+          <!--*******************************************************************************************************-->
+       
+          
+          
+          </div>
+          
+        </div>
+    
+    
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+<!---- <h3>All Transactions</h3>
+                <div class="info-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Price</th>
+                                <th>Currency</th>
+                                <th>Transaction Date</th>
+                                <th>Quantity</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transaction of transactions">
+                                <td>{{ transaction.id }}</td>
+                                <td>{{ transaction.price }}</td>
+                                <td>{{ transaction.currency }}</td>
+                                <td>{{ transaction.transactionDate | date }}</td>
+                                <td>{{ transaction.quantity }}</td>
+                                <td>{{ transaction.type }}</td>
+                                <td class="info-status">
+                                    <span class="status-icon {{ transaction.status === 'COMPLETED' ? 'green-tick' : 'red-cross' }}"></span>
+                                    {{ transaction.status }}
+                                </td>
+                                <td>
+                                    <button (click)="editTransaction(transaction)" class="btn btn-warning">Edit</button>
+                                    <button (click)="deleteTransaction(transaction.id!)" class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>-->

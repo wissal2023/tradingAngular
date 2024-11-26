@@ -7,33 +7,20 @@ import { Transaction } from '../Entity/transaction';
   providedIn: 'root'
 })
 export class TransactionService {
-
-  private baseUrl = 'http://localhost:8090/home/transaction';
-
+  private baseUrl = 'http://localhost:8094/home/transaction';
   constructor(private http: HttpClient) {}
-
-  // Get all transactions
   getAllTransactions(): Observable<Transaction[]> {
+
     return this.http.get<Transaction[]>(`${this.baseUrl}/Get-all-transactions`);
   }
-
-  // Get a transaction by ID
   getTransaction(transactionId: number): Observable<Transaction> {
     return this.http.get<Transaction>(`${this.baseUrl}/Get-transaction/${transactionId}`);
   }
-
-  // Add a transaction
-  addTransaction(transaction: Transaction): Observable<Transaction> {
-    return this.http.post<Transaction>(`${this.baseUrl}/Add-Transaction`, transaction);
+  // Get transactions by portfolio ID
+  getTransactionsByPortfolioId(portfolioId: number): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.baseUrl}/Get-transactions-by-portfolio/${portfolioId}`);
   }
-
-  // Modify a transaction
-  modifyTransaction(transaction: Transaction): Observable<Transaction> {
-    return this.http.put<Transaction>(`${this.baseUrl}/modify-transaction`, transaction);
-  }
-
-  // Remove a transaction by ID
-  removeTransaction(transactionId: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/remove-transaction/${transactionId}`);
-  }
+  
+  
+ 
 }

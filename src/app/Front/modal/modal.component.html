@@ -1,0 +1,58 @@
+<div class="modal-info me-1 mb-1 d-inline-block">
+    <div class="modal fade text-left" id="info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h5 class="modal-title white" id="myModalLabel130">Order Overview</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <i data-feather="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-body">
+                        <div class="row">
+                            <div *ngIf="orderDetails.assetsType === 'STOCKS'">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>{{ orderDetails.assetsType }} : {{ orderDetails.actionType }} at Market</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Symbol: {{ orderDetails.symbol }}</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Quantity: {{ orderDetails.qty }}</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Duration: {{ orderDetails.duration }}</label>
+                                    </div>
+                                </div>
+                                <!-- Order Type Fields -->
+                                <div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Price: {{ orderDetails.price }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1" (click)="onTradeClick()">Trade</button>
+                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Change Order</span>
+                                    </button>
+                                </div >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

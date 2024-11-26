@@ -1,0 +1,54 @@
+<div class="historical-options-container">
+    <!-- Search Input for Symbol -->
+    <div>
+      <input type="text" [(ngModel)]="symbol" (ngModelChange)="onSymbolChange()" placeholder="Enter Symbol" />
+      <button (click)="fetchHistoricalOptions()">Search</button>
+    </div>
+    <!-- Display Historical Options Data in Table -->
+    <h2>Historical Options for Symbol: {{ symbol }}</h2>
+    <table *ngIf="historicalOptions.length > 0" class="options-table">
+      <thead>
+        <tr>
+          <th>Contract ID</th>
+          <th>Expiration</th>
+          <th>Strike</th>
+          <th>Type</th>
+          <th>Last</th>
+          <th>Bid</th>
+          <th>Ask</th>
+          <th>Volume</th>
+          <th>Open Interest</th>
+          <th>Date</th>
+          <th>Implied Volatility</th>
+          <th>Delta</th>
+          <th>Gamma</th>
+          <th>Theta</th>
+          <th>Vega</th>
+          <th>Rho</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let option of historicalOptions">
+          <td>{{ option.contractID }}</td>
+          <td>{{ option.expiration }}</td>
+          <td>{{ option.strike }}</td>
+          <td>{{ option.type }}</td>
+          <td>{{ option.last }}</td>
+          <td>{{ option.bid }}</td>
+          <td>{{ option.ask }}</td>
+          <td>{{ option.volume }}</td>
+          <td>{{ option.open_interest }}</td>
+          <td>{{ option.date }}</td>
+          <td>{{ option.implied_volatility }}</td>
+          <td>{{ option.delta }}</td>
+          <td>{{ option.gamma }}</td>
+          <td>{{ option.theta }}</td>
+          <td>{{ option.vega }}</td>
+          <td>{{ option.rho }}</td>
+        </tr>
+      </tbody>
+    </table>  
+    <!-- If no data available, show a message -->
+    <p *ngIf="historicalOptions.length === 0">No historical options data available.</p>
+  </div>
+  

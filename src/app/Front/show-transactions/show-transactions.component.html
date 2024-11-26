@@ -1,0 +1,13 @@
+<div *ngIf="transactions.length > 0; else noTransactions">
+    <h2>Transactions for Portfolio {{ portfolioId }}</h2>
+    <ul>
+      <li *ngFor="let transaction of transactions">
+        {{ transaction.id }} - {{ transaction.descp }} - {{ transaction.price }}
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noTransactions>
+    <p>No transactions found for this portfolio.</p>
+  </ng-template>
+  

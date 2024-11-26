@@ -1,0 +1,50 @@
+<app-header></app-header>
+<div class="oil-prices">
+    <h2>Brent Crude Oil Prices</h2>
+  
+    <div class="interval-selector">
+      <label for="interval">Select Interval:</label>
+      <select id="interval" [(ngModel)]="interval" (change)="onIntervalChange(interval)">
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+      </select>
+    </div>
+
+    
+  
+    <!-- Display Error Message -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  
+   <!-- Last Date and Value Card -->
+    <div *ngIf="lastPrice" class="last-price-card">
+        <div class="card">
+        <div class="card-header">
+            <h3>Last Recorded Price</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>Date:</strong> {{ lastPrice.date }}</p>
+            <p><strong>value:</strong> {{ lastPrice.value | currency:'USD':'symbol' }}</p>
+        </div>
+        </div>
+    </div>
+  
+    <!-- Bar Chart Display -->
+    <div *ngIf="oilPrices.length > 0">
+      <canvas baseChart
+              [datasets]="barChartData.datasets"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend">
+      </canvas>
+    </div>
+  
+    <!-- No Data Available Message -->
+    <div *ngIf="oilPrices.length === 0 && !errorMessage" class="no-data-message">
+      No oil prices available for the selected interval.
+    </div>
+</div>
+<app-footer-front></app-footer-front>
+  

@@ -1,0 +1,82 @@
+.stock-quote-card {
+  margin: 20px 0;
+}
+
+.stock-quote-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 10px;
+}
+
+.stock-quote-container {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.stock-info-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.stock-price-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2b8a3e; /* Green for positive numbers */
+}
+
+.stock-change {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-top: 5px;
+}
+
+.positive-change {
+  color: #2b8a3e; /* Green */
+}
+
+.negative-change {
+  color: #d93025; /* Red */
+}
+
+.stock-info-details {
+  margin-top: 10px;
+}
+
+.stock-details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stock-details-list li {
+  font-size: 0.95rem;
+  padding: 5px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.stock-details-list li:last-child {
+  border-bottom: none;
+}
+
+
+.custom-header {
+  background: linear-gradient(90deg, #4aa2dc, #3965dc); /* Smooth gradient for a modern look */
+  color: white; /* Clean text color for contrast */
+  font-weight: 600; /* Slightly bold for professional appearance */
+  text-transform: uppercase; /* Capitalize text for emphasis */
+  font-size: 1.2rem; /* Increase font size for readability */
+  padding: 15px; /* Add padding for better spacing */
+  border-radius: 8px 8px 0 0; /* Rounded corners at the top for a sleek card */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  letter-spacing: 1px; /* Slight spacing for refined text appearance */
+  text-align: center; /* Center-align the text */
+}
+
+
+  
