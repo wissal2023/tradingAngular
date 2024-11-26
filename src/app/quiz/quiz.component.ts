@@ -25,9 +25,7 @@ export class QuizComponent implements OnInit {
     private router: Router
   ) {
     // Get the current user ID from AuthService
-    this.authService.currentUser.subscribe(user => {
-      this.userId = user ? user.id : null;
-    });
+
   }
 
   ngOnInit() {
@@ -78,11 +76,7 @@ export class QuizComponent implements OnInit {
     if (error?.error?.error) {
       this.error = error.error.error;
     } else if (error?.message) {
-      if (error.message === 'Unauthorized - Please log in again') {
-        this.authService.logout();
-        this.router.navigate(['/login']);
-        return;
-      }
+     
       this.error = error.message;
     } else {
       this.error = 'An unexpected error occurred. Please try again.';

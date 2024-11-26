@@ -57,8 +57,8 @@ export class ChartComponent implements OnInit {
       }
     };
 
-    const chart = new ApexCharts(document.querySelector("#candle"), options);
-    chart.render();
+    //const chart = new ApexCharts (document.querySelector("#candle"), options);
+   // chart.render();
   }
 }
-  
+

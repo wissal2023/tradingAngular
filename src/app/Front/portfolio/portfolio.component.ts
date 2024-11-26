@@ -34,19 +34,6 @@ export class PortfolioComponent implements OnInit{
               private authService: AuthService,
               private actR:ActivatedRoute) {}
 
-<<<<<<< HEAD
-  constructor(private marketStatusService: MarketStatusService,   
-              private portfolioService: PortfolioService) {}
-
-  ngOnInit() {
-    this.fetchPortfolios();
-    //this.fetchMarketStatus();
-  }
-  fetchPortfolios() {
-    this.portfolioService.getAllPortfolios().subscribe((data: Portfolio[]) => {
-      this.portfolios = data;
-      console.log(this.portfolios); 
-=======
   ngOnInit() {   
     this.actR.params.subscribe((params) => {this.userId = params['userId'];// Extract userId from route parameters
       if (this.userId) {
@@ -56,7 +43,6 @@ export class PortfolioComponent implements OnInit{
         console.error('User ID not found in route parameters');
       }
       this.portfolioId = params['portfolioId'];// If portfolioId is also needed, extract it
->>>>>>> origin/main
     });
 
     this.loadCurrentUser(); 

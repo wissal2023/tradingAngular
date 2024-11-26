@@ -18,9 +18,7 @@ export class QuizService {
     private authService: AuthService
   ) {
     // Subscribe to AuthService's user updates
-    this.authService.currentUser.subscribe(
-      user => this.currentUser = user
-    );
+
   }
   setCurrentUser(user: User) {
     this.currentUser = user;

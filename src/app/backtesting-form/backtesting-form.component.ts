@@ -151,7 +151,7 @@ export class BacktestingFormComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  onSubmit() {
+ onSubmit() {
     if (this.backtestingForm.valid && !this.loading) {
       this.loading = true;
       this.error = null;
@@ -233,18 +233,14 @@ export class BacktestingFormComponent implements OnInit, OnDestroy {
     if (error?.error?.error) {
       this.error = error.error.error;
     } else if (error?.message) {
-      if (error.message === 'Unauthorized - Please log in again') {
-        this.authService.logout();
-        this.router.navigate(['/login']);
-        return;
-      }
+
       this.error = error.message;
     } else {
       this.error = 'An unexpected error occurred. Please try again.';
     }
   }
 
-  private markFormGroupTouched(formGroup: FormGroup) {
+ private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();
 
