@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-export interface User {
-    id: number;
-    username: string;
-    password?: string;
-  }
-
-=======
 import { Portfolio } from './portfolio';
 import { Role } from './role';
 export class User {
@@ -20,9 +12,10 @@ export class User {
     enabled!: boolean;
     createdDate!: Date;          
     lastModifiedDate!: Date;
+    bonusPoints!:number;
     // Ajoutez des propriétés optionnelles si nécessaire
     // registrationDate?: string; 
     // enabled?: boolean; 
     // imageName?: string;
 }
->>>>>>> origin/main
+
