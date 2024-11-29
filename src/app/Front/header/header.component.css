@@ -1,13 +1,10 @@
-/* Container for the carousel */
 .market-status-carousel {
     position: relative;
     overflow: hidden;
     width: 100%;
     height: 150px; /* Adjust height as needed */
   }
-  
-  /* Wrapper for the carousel */
-  .carousel-wrapper {
+   .carousel-wrapper {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -15,21 +12,15 @@
     height: 100%;
     overflow: hidden;
   }
-  
-  /* Track of the carousel, which will animate */
   .carousel-track {
     display: flex;
     animation: scroll 70s linear infinite; /* Increased duration for slower scrolling */
   }
-  
-  /* Individual card */
   .carousel-card {
     width: 250px; /* Set a fixed width */
     height: 100%; /* Full height of the carousel */
     margin-right: 15px; /* Space between cards */
   }
-  
-  /* Card styling */
   .card {
     width: 100%;
     height: 100%; /* Ensure all cards have the same height */
@@ -39,25 +30,86 @@
     flex-direction: column; /* Stack title and text vertically */
     justify-content: center; /* Center content vertically */
     align-items: center; /* Center content horizontally */
-  }
-  
-  /* Keyframes for sliding effect */
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-
-    
-  }
-  
+  }   
   .text-success {
     color: #28a745; /* Green color for open status */
-  }
-  
+  }  
   .text-danger {
     color: #dc3545; /* Red color for closed status */
   }
+.backtest-link {
+  color: rgba(0, 0, 0, .55) !important; /* Ensure the link color is black */
+}
+
+.backtest-link:hover {
+  color: #0056b3 !important; /* A dark color when hovered, adjust as needed */
+}
+
+.dropdown-toggle::after {
+  color: rgba(0, 0, 0, 0.55); /* Set the icon color to dark */
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block; /* Show the dropdown menu */
+}
+.dropdown-menu {
+  display: none; /* Ensure it's hidden by default */
+  position: absolute;
+  z-index: 1000; /* Ensure it appears above other content */
+}
+/* Adjust user menu to be aligned without padding above or below the image */
+.user-menu {
+  display: flex; /* Align items horizontally */
+  align-items: center; /* Ensure the items are centered vertically */
+}
+
+/* Adjust user image container */
+.user-img {
+  margin-left: 10px; /* Space between the image and text */
+  display: flex;
+  align-items: center; /* Vertically align the image with text */
+}
+
+.avatar-md img {
+  width: 40px; /* Set width of the image */
+  height: 40px; /* Set height of the image */
+  object-fit: cover; /* Ensure the image covers the space without stretching */
+  border-radius: 50%; /* Make the image circular */
+}
+
+/* Remove padding/margin on the text */
+.user-name {
+  margin-bottom: 0; /* Remove bottom margin from the text */
+}
+.dropdown-toggle::after {
+  color: rgba(0, 0, 0, 0.55); /* Set the icon color */
+}
+.dropdown:hover .dropdown-menu {
+  display: block; /* Show the dropdown menu */
+}
+.dropdown-menu {
+  display: none; 
+  position: absolute;
+  z-index: 1000; 
+}
+.dropdown-item {
+  padding: 10px 15px;
+}
+.backtest-link:hover {
+  color: #0056b3 !important;
+}
+
+
+
+
+/* Keyframes for sliding effect */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+
   
+}

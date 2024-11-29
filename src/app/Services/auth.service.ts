@@ -4,50 +4,39 @@ import { Observable } from 'rxjs';
 import { LoginResponse } from '../Entity/loginResponse';
 import { RegistrationRequest } from '../Entity/registration-request';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8094/home/auth';
-
   constructor(private http: HttpClient) {}
-
   loginUser(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/authenticate`, { email, password });
   }
-
   registerUser(registerReq: RegistrationRequest): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register`, registerReq);
   }
-
   activateUserAccount(code: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/activate-account?token=${code}`);
   }
-
   storeUserData(user: any): void {
     this.clearUserData();
     localStorage.setItem('user', JSON.stringify(user));
   }
-
   clearUserData(): void {
     localStorage.removeItem('user');
   }
-
   getCurrentUser() {
     const currentUser = localStorage.getItem('user');
     return currentUser ? JSON.parse(currentUser) : null;
   }
-
   storeToken(token: any): void {
     this.clearToken();
     localStorage.setItem('token', token);
   }
-  
   clearToken(): void {
     localStorage.removeItem('token');
   }
-
   private decodeToken(token: string): any {
     try {
       const payload = token.split('.')[1];
@@ -58,16 +47,13 @@ export class AuthService {
       return null;
     }
   }
-
   isTokenExpired(): boolean {
     const token = localStorage.getItem('token');
-    if (!token) return true; // Token does not exist, consider it expired
-
+    if (!token) return true; // Token does not exist, consider it expired 
+    console.error('No token found')
     const decodedToken = this.decodeToken(token);
     if (!decodedToken || !decodedToken.exp) return true; // If decoding fails or no `exp` field, consider it expired
-
-    const currentTime = Math.floor(Date.now() / 1000); 
-    
+    const currentTime = Math.floor(Date.now() / 1000);   
     return decodedToken.exp < currentTime;
   }
 }

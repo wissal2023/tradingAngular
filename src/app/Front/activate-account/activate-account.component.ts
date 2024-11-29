@@ -12,11 +12,8 @@ import { UserService } from 'src/app/Services/user.service';
   styleUrls: ['./activate-account.component.css']
 })
 export class ActivateAccountComponent implements OnInit {
-
   activationform!: FormGroup;
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) { }
-
-
     ngOnInit(): void {
         const formcontrols = {
           code: new FormControl('', [Validators.required]),
@@ -24,12 +21,9 @@ export class ActivateAccountComponent implements OnInit {
         };
         this.activationform = this.fb.group(formcontrols);
     }
-
     get code() {
         return this.activationform.get('code');
     }
-
-
     onSubmit() {
         this.authService.activateUserAccount(this.code?.value).subscribe({
             next: (response) => {
@@ -43,5 +37,4 @@ export class ActivateAccountComponent implements OnInit {
             }
         });
     }
-
 }

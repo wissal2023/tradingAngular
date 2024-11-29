@@ -1,12 +1,16 @@
 
-import { StockQuoteComponent } from './Front/stock-quote/stock-quote.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgChartsModule } from 'ng2-charts';
-import { PortfolioComponent } from './Front/portfolio/portfolio.component';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';  
+import { AppRoutingModule } from './app-routing.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgChartsModule } from 'ng2-charts';
+import { NbAccordionModule, NbAlertModule, NbBadgeModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbFormFieldModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbSelectModule, NbSpinnerModule, NbTabsetModule, NbThemeModule, NbToastrModule, NbToggleModule, NbTreeGridModule } from '@nebular/theme';
+import { BarElement, CategoryScale, Chart, Legend, LinearScale, LineElement, PointElement, TimeScale, Title, Tooltip } from 'chart.js';
+import 'chartjs-adapter-date-fns';
 import { BodyComponent } from './Back/body/body.component';
 import { FooterComponent } from './Back/footer/footer.component';
 import { NavComponent } from './Back/nav/nav.component';
@@ -14,23 +18,18 @@ import { SidebarComponent } from './Back/sidebar/sidebar.component';
 import { LandingComponent } from './Front/landing/landing.component';
 import { FooterFrontComponent } from './Front/footer-Front/footerFront.component';
 import { HeaderComponent } from './Front/header/header.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { PortfolioComponent } from './Front/portfolio/portfolio.component';
+import { StockQuoteComponent } from './Front/stock-quote/stock-quote.component';
 import { HoldingComponent } from './Front/holding/holding.component';
 import { TransactionComponent } from './Front/transaction/transaction.component';
-import { CommonModule } from '@angular/common';
-import { NbAccordionModule, NbAlertModule, NbBadgeModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbFormFieldModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbSelectModule, NbSpinnerModule, NbTabsetModule, NbThemeModule, NbToastrModule, NbToggleModule, NbTreeGridModule } from '@nebular/theme';
-
+import { LoginComponent } from './Front/login/login.component';
 import { BacktestingResultComponent } from './backtesting-result/backtesting-result.component';
 import { BacktestingFormComponent } from './backtesting-form/backtesting-form.component';
 import { StrategyOptimizerComponent } from './strategy-optimizer/strategy-optimizer.component';
 import { StockPreviewComponent } from './stock-preview/stock-preview.component';
-import { BarElement, CategoryScale, Chart, Legend, LinearScale, LineElement, PointElement, TimeScale, Title, Tooltip } from 'chart.js';
 import { PredictionComponent } from './prediction/prediction.component';
-import { enUS } from 'date-fns/locale';
-import 'chartjs-adapter-date-fns';
 import { TooltipDirective } from './tooltip.directive';
 import { AdvancedBacktestingComponent } from './advanced-backtesting/advanced-backtesting.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CompareStrategiesComponent } from './compare-strategies/compare-strategies.component';
 import { WalkForwardComponent } from './walk-forward/walk-forward.component';
 import { MonteCarloComponent } from './monte-carlo/monte-carlo.component';
@@ -41,9 +40,10 @@ import { QuizComponent } from './quiz/quiz.component';
 import { QuizSummaryComponent } from './quiz-summary/quiz-summary.component';
 import { ChallengeComponent } from './Front/challenge/challenge.component';
 import { TraderComponent } from './Front/trader/trader.component';
-import { TransactionchallengeComponent } from './Front/Transactionn/transactionchallenge.component';
 import { CreateChallengeComponent } from './Back/create-challenge/create-challenge/create-challenge.component';
-import { LoginComponent } from './Front/login/login.component';
+import { TransactionchallengeComponent } from './Front/Transactionn/transactionchallenge.component';
+import { WatchlistComponent } from './Front/watchlist/watchlist.component';
+import { ChartComponent } from './Front/chart/chart.component';
 import { OrderFormComponent } from './Front/order-form/order-form.component';
 import { ListPortfolioComponent } from './Back/list-portfolio/list-portfolio.component';
 import { ListOrdersComponent } from './Back/list-orders/list-orders.component';
@@ -53,11 +53,9 @@ import { UserProfileComponent } from './Back/user-profile/user-profile.component
 import { SearchfilterPipe } from './Pipes/searchFilter.pipe';
 import { UserDetailsComponent } from './Back/user-details/user-details.component';
 import { ResetPasswordComponent } from './Front/reset-password/reset-password.component';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NotAuthorizedComponent } from './Front/not-authorized/not-authorized.component';
 import { ActivateAccountComponent } from './Front/activate-account/activate-account.component';
 import { ListTransactionComponent } from './Back/list-transaction/list-transaction.component';
-import { ChartComponent } from './Front/chart/chart.component';
 import { ModalComponent } from './Front/modal/modal.component';
 import { FinancialNewsComponent } from './Front/financial-news/financial-news.component';
 import { ListorderComponent } from './Front/listorder/listorder.component';
@@ -65,8 +63,8 @@ import { OptionQuoteComponent } from './Front/option-quote/option-quote.componen
 import { OilPricesQuoteComponent } from './Front/oil-prices-quote/oil-prices-quote.component';
 import { PerformanceChartComponent } from './Front/performance-chart/performance-chart.component';
 import { ShowTransactionsComponent } from './Front/show-transactions/show-transactions.component';
-import { WatchlistComponent } from './Front/watchlist/watchlist.component';
-
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { MatTabsModule } from '@angular/material/tabs';
 
 Chart.register(
   CategoryScale,
@@ -82,13 +80,11 @@ Chart.register(
 
 @NgModule({
   declarations: [
-    AppComponent,
-//---------------- back
+  AppComponent,
   BodyComponent,
   FooterComponent,
   NavComponent,
   SidebarComponent,
-//------------ front
   LandingComponent,
   FooterFrontComponent,  
   HeaderComponent,  
@@ -114,8 +110,8 @@ Chart.register(
   QuizSummaryComponent,  
   ChallengeComponent,
   TraderComponent,  
-  TransactionchallengeComponent,  
   CreateChallengeComponent,
+  TransactionchallengeComponent,
   WatchlistComponent,  
   ChartComponent,  
   OrderFormComponent,  
@@ -137,46 +133,40 @@ Chart.register(
   OilPricesQuoteComponent,  
   BodyComponent,  
   PerformanceChartComponent,  
-  ShowTransactionsComponent,
-  WatchlistComponent
- 
+  ShowTransactionsComponent
   ],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule, 
+    HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    MatTabsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbInputModule,
     NbButtonModule,
     NbSelectModule,
     NbCardModule,
-    NgChartsModule,
-    NbAlertModule, 
-    CommonModule,
+    NbAlertModule,
     NbIconModule,
     NbBadgeModule,
     NbTreeGridModule,
-    ReactiveFormsModule,
     NbAccordionModule,
     NbSpinnerModule,
-    NbFormFieldModule,  
-    NbDatepickerModule.forRoot(),  
-    NbToggleModule, 
+    NbFormFieldModule,
+    NbToggleModule,
     NbToastrModule.forRoot(),
     NbTabsetModule,
     NbListModule,
-    NbDatepickerModule,
-    BrowserAnimationsModule,
-    MatTabsModule,
-    ReactiveFormsModule,   
-    NgChartsModule
-
-    
-      
+    NbDatepickerModule.forRoot(),
+    NgChartsModule,
   ],
+  
+  
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

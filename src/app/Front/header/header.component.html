@@ -8,18 +8,56 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav ms-auto py-0">
       <a [routerLink]="['/home']" class="nav-item nav-link ">Home</a> 
-      <a [routerLink]="['/portfolio/:userId/:portfolioId']" class="nav-item nav-link ">Portfolio</a>            
-      <a [routerLink]="['/']" class="nav-item nav-link">Market</a>   
+      <!-- Portfolio and Holdings links visible only when user is logged in -->
+      <a *ngIf="isLoggedIn" [routerLink]="['/portfolio', portfolioId]" class="nav-item nav-link">Portfolio</a>
+      <a *ngIf="isLoggedIn" [routerLink]="['/holding', portfolioId]" class="nav-item nav-link">Holdings</a>
       <a [routerLink]="['/market']" class="nav-item nav-link">Market</a>   
       <a [routerLink]="['/watchlist']" class="nav-item nav-link">Watchlist</a>  
       <a [routerLink]="['/news']" class="nav-item nav-link">News</a>
-      <a [routerLink]="['/holding', portfolioId]" class="nav-item nav-link">Holdings</a>
-      <a [routerLink]="" class="nav-item nav-link">page</a>
-      <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+      <div class="nav-item dropdown">
+        <a href="#" class=" nav-link backtest-link" data-bs-toggle="dropdown">
+          <span class="dropdown-toggle">Backtest</span>
+        </a>
+        <div class="dropdown-menu m-0">
+            <a [routerLink]="['/backtest-form']" routerLinkActive="active" class="dropdown-item">Simple Backtest</a>
+            <a [routerLink]="['/optim']" routerLinkActive="active"  class="dropdown-item">Optimization Strategy</a>
+            <a [routerLink]="['/predict']" routerLinkActive="active"  class="dropdown-item">Price Prediction</a>
+            <a [routerLink]="['/advancebacktest']" routerLinkActive="active"  class="dropdown-item">advanced backtest</a>
+            <a [routerLink]="['/quizzes']" routerLinkActive="active"  class="dropdown-item">Quiz</a>
+          </div>
+      </div>
+      <!-- User Profile Dropdown, visible only when logged in -->
+      <div class="dropdown" *ngIf="isLoggedIn" style="position: relative; z-index: 1050;"> 
+        <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="user-menu d-flex align-items-center">
+            <div class="user-name text-end me-3">
+              <h6 class="mb-0 text-gray-600">{{ user.fullname }}</h6>
+              <p class="mb-0 text-sm text-gray-600">{{ user.roles }}</p>
+            </div>
+            <div class="user-img">
+              <div class="avatar avatar-md">
+                <img src="assets/Back/images/faces/1.jpg" alt="User Avatar">
+              </div>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Dropdown menu -->
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+          <li>
+            <h6 class="dropdown-header">Hello, {{ user.fullname || 'User' }}!</h6>
+          </li>
+          <li><a class="dropdown-item" [routerLink]="['/portfolio', portfolioId]"><i class="icon-mid bi bi-person me-2"></i> My Portfolio</a></li>
+          <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i> Settings</a></li>
+          <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i> Wallet</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
+        </ul>
+      </div>
+           
     </div>
   </div>
 </nav>
-
 
 
 <!-- Carousel with repeated cards for smooth loop -->

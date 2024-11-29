@@ -5,18 +5,7 @@ import { BacktestingService } from './backtesting.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-  constructor(
-    private backtestingService: BacktestingService,
-    private router: Router
-  ) {}
+export class AuthGuard  {
 
-  canActivate(): boolean {
-    if (this.backtestingService.getCurrentUser()) {
-      return true;
-    }
-    
-    this.router.navigate(['/login']);
-    return false;
-  }
+  
 }

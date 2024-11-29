@@ -32,7 +32,6 @@ export class RegisterComponent implements OnInit {
   get email() {
     return this.registerform.get('email');
   }
-
   get password() {
     return this.registerform.get('password');
   }
@@ -42,37 +41,30 @@ export class RegisterComponent implements OnInit {
   get acceptTerms() {
     return this.registerform.get('acceptTerms');
   }
-
   register() {
     this.registerReq.username = this.fullname?.value;
     this.registerReq.email = this.email?.value;
-    this.registerReq.password = this.password?.value;
-    
-    this.authService.registerUser(this.registerReq).subscribe(
+    this.registerReq.password = this.password?.value;    
+    this.authService.registerUser (this.registerReq).subscribe(
       {
         next: (response) => {
           console.log(response);
+          this.router.navigate(['/activate-account']);
         },
         error: (error) => {
           console.log(error);
         }
       });
-      this.router.navigate(['/activate-account']);
-
-  }
-
-  passwordMatchValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: boolean } | null => {
-      const password = control.get('password');
-      const confirmPassword = control.get('confirmPassword');
-  
-      // Check if passwords match
-      if (password && confirmPassword && password.value !== confirmPassword.value) {
-        confirmPassword.setErrors({ passwordMismatch: true });
-        return { passwordMismatch: true };
-      }
-      return null;
-    };
-  }
-
+}
+passwordMatchValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: boolean } | null => {
+    const password = control.get('password');
+    const confirmPassword = control.get('confirmPassword');
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+      confirmPassword.setErrors({ passwordMismatch: true });
+      return { passwordMismatch: true };
+    }
+    return null;
+  };
+}
 }
