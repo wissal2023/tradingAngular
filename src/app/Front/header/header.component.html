@@ -12,7 +12,8 @@
       <a *ngIf="isLoggedIn" [routerLink]="['/portfolio', portfolioId]" class="nav-item nav-link">Portfolio</a>
       <a *ngIf="isLoggedIn" [routerLink]="['/holding', portfolioId]" class="nav-item nav-link">Holdings</a>
       <a [routerLink]="['/market']" class="nav-item nav-link">Market</a>   
-      <a [routerLink]="['/watchlist']" class="nav-item nav-link">Watchlist</a>  
+      <a [routerLink]="['/watchlist']" class="nav-item nav-link">Watchlist</a>      
+      <a [routerLink]="['/challenge']" class="nav-item nav-link">Challenges</a> 
       <a [routerLink]="['/news']" class="nav-item nav-link">News</a>
       <div class="nav-item dropdown">
         <a href="#" class=" nav-link backtest-link" data-bs-toggle="dropdown">
@@ -54,7 +55,6 @@
           <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-box-arrow-left me-2"></i> Logout</a></li>
         </ul>
       </div>
-           
     </div>
   </div>
 </nav>
