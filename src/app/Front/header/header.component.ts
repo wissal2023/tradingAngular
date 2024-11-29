@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/Entity/user';
+import { AuthService } from 'src/app/Services/auth.service';
 import { StockQuoteService } from 'src/app/Services/stock-quote-service.service';
 
 @Component({
@@ -7,18 +9,26 @@ import { StockQuoteService } from 'src/app/Services/stock-quote-service.service'
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent  {
+export class HeaderComponent implements OnInit {
 
   @Input() portfolioId!: number; 
   marketStatus: any[] = [];
+  isLoggedIn: boolean = false;  // To track the login status
+  user!:User;
 
   constructor(private stockQuoteService: StockQuoteService, 
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute, 
+              private authService: AuthService) {}  // Inject AuthService here
 
   ngOnInit(): void {
+    // Check if the user is logged in by checking user data in localStorage
+    this.isLoggedIn = !!this.authService.getCurrentUser();  // Use injected authService
+
     this.route.params.subscribe((params) => {
       this.portfolioId = +params['portfolioId']; // Fetch portfolioId from route
     });
+
+    // Optionally, call the market status service
     //this.getMarketStatus();
   }
 
@@ -27,7 +37,7 @@ export class HeaderComponent  {
       if (response && response.markets) {
         this.marketStatus = response.markets;
       }
-    }, (error) => {"see the heaser component ts"
+    }, (error) => {
       console.error('Error fetching market status:', error);
     });
   }
