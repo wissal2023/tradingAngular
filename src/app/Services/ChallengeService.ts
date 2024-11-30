@@ -11,7 +11,7 @@ import { Challenge } from 'src/app/Entity/Challenge';  // Assurez-vous que le mo
 })
 export class ChallengeService {
 
-  private apiUrl = 'http://localhost:8089/home/api/challenges'; // L'URL de votre API Spring
+  private apiUrl = 'http://localhost:8094/home/api/challenges'; // L'URL de votre API Spring
 
   constructor(private http: HttpClient) {}
 
@@ -32,10 +32,19 @@ export class ChallengeService {
 
   // Créer un challenge
   createChallenge(challenge: Challenge): Observable<Challenge> {
-    return this.http.post<Challenge>(`${this.apiUrl}/create`, challenge,{
-        headers: { 'Accept': '*/*' }
-      });
+    return this.http.post<Challenge>(`${this.apiUrl}/create`, challenge, {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      })
+    }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error occurred during challenge creation:', error);
+        return throwError(error);
+      })
+    );
   }
+  
 
   // Supprimer un challenge
   deleteChallenge(id: number): Observable<void> {

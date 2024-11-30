@@ -25,6 +25,7 @@
     "brain.js": "^2.0.0-beta.24",
     "chart.js": "^3.9.1",
     "chartjs-chart-financial": "^0.2.1",
+    "chartjs-plugin-annotation": "^1.3.0",
     "date-fns": "^4.1.0",
     "long": "^5.2.3",
     "ml": "^8.0.0",

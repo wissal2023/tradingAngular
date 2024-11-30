@@ -320,7 +320,7 @@
                 </form>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6" *ngIf="selectedCategory === 'CRYPTOCURRENCY'">
                 <div class="chart-container">
                     <canvas id="myChart"></canvas>
                 </div>
@@ -334,37 +334,65 @@
 
     
 <!--******************************************************************************************************-->
+<div class="container">
+  <div class="row">
+    <!-- Formulaire Intangibles à gauche -->
+    <div class="col-md-6">
 <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="info-container">
     <div *ngIf="selectedCategory === 'OBLIGATIONS'">
         <h4>Obligations Transaction</h4>
         <div class="mb-3">
-            <label for="obligationType" class="form-label">Type of Obligation</label>
-            <select id="obligationType" class="form-control" required>
-              <option value="" disabled selected>Select an obligation type</option>
-              <option value="government-bond">Government Bond</option>
-              <option value="corporate-bond">Corporate Bond</option>
-              <option value="municipal-bond">Municipal Bond</option>
-              <option value="convertible-bond">Convertible Bond</option>
-              <option value="zero-coupon-bond">Zero-Coupon Bond</option>
-              <option value="junk-bond">Junk Bond</option>
-            </select>
+            <label for="obligationType" class="form-label">Type of Obligation</label>           
+            <select
+            id="obligationType"
+            class="form-control"
+            required
+            (change)="onObligationTypeChange($event)"
+          >
+            <option value="" disabled selected>Select an obligation type</option>
+            <option *ngFor="let obligation of obligations" [value]="obligation.type">
+              {{ obligation.name }}
+            </option>
+          </select>
+        
+          </div>
+      
+          <!-- Affichage du prix actuel -->
+          <div class="mb-3">
+            <label for="bondAmount" class="form-label">Bond Amount</label>
+            <div *ngIf="selectedObligationPrice !== null">
+                {{ selectedObligationPrice | number: '1.2-2' }} {{ selectedObligationCurrency }}
+              </div>
+              <div *ngIf="selectedObligationPrice === null" class="text-muted">
+                Please select an obligation type.
+              </div>
+          </div>
+      
+          <div class="mb-3">
+            <label for="interestRate" class="form-label">Interest Rate (%)</label>
+            <input
+              id="interestRate"
+              class="form-control"
+              formControlName="interestRate" 
+              readonly
+            />
           </div>
           
+          
+          
+      
+        <div class="mb-3">
+          <label for="maturityYears" class="form-label">Maturity Years</label>
+          <input
+          id="maturityYears"
+          formControlName="maturityYears"
+          type="number"
+          class="form-control"
+          placeholder="Maturity years will be auto-filled"
+          readonly
+        />
+      </div>
         
-        <div class="mb-3">
-          <label for="bondAmount" class="form-label">Bond Amount</label>
-          <input id="bondAmount" formControlName="bondAmount" type="number" class="form-control" required />
-        </div>
-      
-        <div class="mb-3">
-          <label for="interestRate" class="form-label">Interest Rate (%)</label>
-          <input id="interestRate" formControlName="interestRate" type="number" class="form-control" required />
-        </div>
-      
-        <div class="mb-3">
-          <label for="maturityDate" class="form-label">Maturity Date</label>
-          <input id="maturityDate" formControlName="maturityDate" type="date" class="form-control" required />
-        </div>
       
         <div class="mb-3">
           <label for="issuer" class="form-label">Issuer</label>
@@ -373,7 +401,14 @@
       
         <div class="mb-3">
           <label for="faceValue" class="form-label">Face Value</label>
-          <input id="faceValue" formControlName="faceValue" type="number" class="form-control" required />
+          <input
+    id="faceValue"
+    formControlName="faceValue"
+    type="number"
+    class="form-control"
+    placeholder="Face value will be auto-filled"
+    readonly
+  />
         </div>
         <div class="form-group mt-3">
             <label for="transactionDate" class="form-label">Transaction Date</label>
@@ -404,9 +439,25 @@
         <div class="mt-4">
             <button type="submit" class="btn btn-custom">{{ isEditing ? 'Update' : 'Create' }} Transaction</button>
             <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+           
         </div>
+     
+         
+
     </div>
     </form>
+    </div>
+    <div class="col-md-6" *ngIf="selectedCategory === 'OBLIGATIONS'">
+      <button (click)="simulateInterestRateScenarios()">Simuler</button>
+    <div class="chart-container" style="position: relative; height: 400px; width: 100%;">
+        <canvas id="professionalChart"></canvas>
+      </div>
+    </div>
+    </div>
+    </div>
+    
+      
+      
        
      <!--**********************************************************************************************************************************-->
      <div class="container">

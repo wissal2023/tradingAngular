@@ -9,7 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
 import { ChartData } from 'chart.js';
 import { ChartOptions } from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
 //import { BaseChartDirective } from 'ng2-charts';
+
 
 
 
@@ -46,6 +48,7 @@ export class TransactionchallengeComponent implements OnInit {
   roi: number | null = null;
   aiScore: number | null = null;
   recommendationMessage: string = '';
+ 
 
 
   predictedPriceTomorrow: number = 0;
@@ -67,11 +70,328 @@ volatility: number | null = null;
 challengeType: string | null = null;
 selectedCategory: string = '';
 
+
 intangibleTypes = ['Patent', 'Trademark', 'Copyright', 'License', 'Software'];
   marketValue: number | null = null;
   ownershipStatus: string | null = null;
   selectedAsset: string = '';  // L'actif intangible sélectionné
   Description: string = '';  // Description de l'actif intangible
+calculatedInterestRate: number | null = null;
+  obligations = [
+    { type: 'government-bond', name: 'US 10Y Treasury Bond',  price: 1000, currency: 'USD' },
+    { type: 'corporate-bond', name: 'Corporate Bond A', price: 1500, currency: 'USD'},
+    { type: 'municipal-bond', name: 'Municipal Bond B', price: 800, currency: 'USD' },
+    { type: 'convertible-bond', name: 'Convertible Bond C', price: 2000, currency: 'USD' },
+    { type: 'zero-coupon-bond', name: 'Zero-Coupon Bond D', price: 1200, currency: 'USD'},
+    { type: 'junk-bond', name: 'Junk Bond E', price: 700, currency: 'USD'},
+  ];
+
+  selectedObligationPrice: number | null = null;
+  selectedObligationCurrency: string | null = null;
+  simulateInterestRateScenarios(): void {
+    const currentPrice = this.transactionForm.get('bondAmount')?.value;
+    const faceValue = this.transactionForm.get('faceValue')?.value;
+    const maturityYears = this.transactionForm.get('maturityYears')?.value;
+
+    if (!currentPrice || !faceValue || !maturityYears) {
+        console.warn('Les valeurs nécessaires pour générer le graphique ne sont pas disponibles.');
+        return;
+    }
+
+    const scenarios = [-0.02, -0.01, 0, 0.01, 0.02]; // Variations des taux d'intérêt
+    const prices = scenarios.map(rateChange => 
+        this.calculatePrice(faceValue, currentPrice, maturityYears, rateChange)
+    );
+
+    console.log('Simulating scenarios:', scenarios);
+    console.log('Calculated prices:', prices);
+
+    this.generateProfessionalChart();
+}
+simulateEconomicScenario(event: Event): void {
+  const scenario = (event.target as HTMLSelectElement).value;
+
+  const baseRate = this.transactionForm.get('interestRate')?.value || 0;
+  let adjustedRate: number;
+
+  switch (scenario) {
+    case 'low_inflation':
+      adjustedRate = baseRate - 0.5;
+      break;
+    case 'high_inflation':
+      adjustedRate = baseRate + 1.5;
+      break;
+    case 'stable_economy':
+      adjustedRate = baseRate;
+      break;
+    case 'recession':
+      adjustedRate = baseRate + 2.0;
+      break;
+    default:
+      adjustedRate = baseRate;
+  }
+
+  const faceValue = this.transactionForm.get('faceValue')?.value || 0;
+  const maturityYears = this.transactionForm.get('maturityYears')?.value || 0;
+
+  const predictedPrices = this.simulatePrices(faceValue, maturityYears, adjustedRate);
+  this.generateAdvancedChart(predictedPrices);
+}
+
+simulatePrices(faceValue: number, maturityYears: number, rate: number): number[] {
+  const scenarios = [-0.02, -0.01, 0, 0.01, 0.02]; // Variations des taux d'intérêt
+  return scenarios.map(change => this.calculatePrice(faceValue, faceValue * 0.9, maturityYears, rate + change));
+}
+
+generateAdvancedChart(prices: number[]): void {
+  const canvas = document.getElementById('predictionChart') as HTMLCanvasElement | null;
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const labels = ['Scenario 1', 'Scenario 2', 'Scenario 3', 'Scenario 4', 'Scenario 5'];
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Predicted Bond Prices',
+        data: prices,
+        borderColor: '#007bff',
+        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+        borderWidth: 2,
+      }],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: {
+            color: '#fff',
+          },
+        },
+        tooltip: {
+          callbacks: {
+            label: (tooltipItem: any) => `$${tooltipItem.raw.toFixed(2)}`,
+          },
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Economic Scenarios',
+            color: '#fff',
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Bond Prices ($)',
+            color: '#fff',
+          },
+          ticks: {
+            callback: value => `$${value}`,
+          },
+        },
+      },
+    },
+  });
+}
+
+  
+  calculatePrice(faceValue: number, currentPrice: number, maturityYears: number, rateChange: number): number {
+    const adjustedRate = rateChange + (faceValue / currentPrice - 1) / maturityYears;
+    return faceValue / Math.pow(1 + adjustedRate, maturityYears);
+  }
+  generateProfessionalChart(): void {
+    const faceValue = this.transactionForm.get('faceValue')?.value || 0;
+    const bondAmount = this.transactionForm.get('bondAmount')?.value || 0;
+    const maturityYears = this.transactionForm.get('maturityYears')?.value || 0;
+
+    if (!faceValue || !bondAmount || !maturityYears) {
+        console.error('Données manquantes pour générer le graphique.');
+        return;
+    }
+
+    const scenarios = [-0.02, -0.01, 0, 0.01, 0.02];
+    const prices = scenarios.map(rateChange =>
+        this.calculatePrice(faceValue, bondAmount, maturityYears, rateChange)
+    );
+
+    const canvas = document.getElementById('professionalChart') as HTMLCanvasElement | null;
+    if (!canvas) {
+        console.error('Canvas introuvable.');
+        return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+        console.error('Impossible d\'obtenir le contexte 2D.');
+        return;
+    }
+
+    // Détruire l'ancien graphique s'il existe
+    if (this.chart) {
+        this.chart.destroy();
+    }
+
+    this.chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: scenarios.map(rate => `${(rate * 100).toFixed(2)}%`), // Labels pour les taux
+            datasets: [
+                {
+                    label: 'Prix des obligations',
+                    data: prices,
+                    borderColor: '#4CAF50', // Ligne verte élégante
+                    backgroundColor: 'rgba(76, 175, 80, 0.1)', // Fond vert léger
+                    borderWidth: 2,
+                    pointBackgroundColor: '#4CAF50', // Points verts
+                    pointBorderColor: '#ffffff', // Bordure des points en blanc
+                    pointHoverBackgroundColor: '#F44336', // Points rouges au survol
+                    pointHoverBorderColor: '#ffffff', // Bordure blanche au survol
+                    pointRadius: 5,
+                    pointHoverRadius: 8, // Points agrandis au survol
+                    tension: 0.3, // Ligne légèrement incurvée
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#E0E0E0', // Couleur de la légende en gris clair
+                        font: {
+                            family: 'Arial',
+                            size: 14,
+                        },
+                    },
+                },
+                tooltip: {
+                    backgroundColor: '#1E1E1E', // Fond noir
+                    titleColor: '#FFD700', // Titre doré
+                    bodyColor: '#FFFFFF', // Texte blanc
+                    borderColor: '#4CAF50', // Bordure verte
+                    borderWidth: 1,
+                    callbacks: {
+                        label: (tooltipItem: any) =>
+                            `Prix : $${tooltipItem.raw.toFixed(2)}`, // Infobulle formatée
+                    },
+                },
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Variation des taux d\'intérêt (%)',
+                        color: '#E0E0E0',
+                        font: {
+                            family: 'Arial',
+                            size: 16,
+                            weight: 'bold',
+                        },
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)', // Ligne discrète
+                    },
+                    ticks: {
+                        color: '#B0BEC5', // Couleur des ticks
+                        font: {
+                            size: 12,
+                        },
+                    },
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Prix des obligations ($)',
+                        color: '#E0E0E0',
+                        font: {
+                            family: 'Arial',
+                            size: 16,
+                            weight: 'bold',
+                        },
+                    },
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)', // Ligne discrète
+                    },
+                    ticks: {
+                        color: '#B0BEC5', // Couleur des ticks
+                        callback: (tickValue: string | number) => {
+                          if (typeof tickValue === 'number') {
+                              return `$${tickValue}`;
+                          }
+                          return undefined; // Aucun traitement pour les chaînes
+                        },
+                    },
+                },
+            },
+        },
+    });
+}
+
+
+
+
+
+  
+  onObligationTypeChange(event: Event): void {
+    const selectedType = (event.target as HTMLSelectElement).value;
+    const obligation = this.obligations.find(ob => ob.type === selectedType);
+  
+    if (obligation) {
+      const { faceValue, maturityYears } = this.obligationData[selectedType] || {};
+  
+      this.transactionForm.patchValue({
+        faceValue: faceValue || null,
+        maturityYears: maturityYears || null,
+        bondAmount: obligation.price || null
+      });
+  
+      this.selectedObligationPrice = obligation.price;
+      this.selectedObligationCurrency = obligation.currency;
+  
+      // Calculer immédiatement le taux d'intérêt
+      this.calculateInterestRate();
+    } else {
+      this.transactionForm.patchValue({ faceValue: null, maturityYears: null });
+      this.selectedObligationPrice = null;
+      this.selectedObligationCurrency = null;
+    }
+  }
+  
+  calculateInterestRate(): void {
+    const faceValue = this.transactionForm.get('faceValue')?.value || 0;
+    const bondAmount = this.transactionForm.get('bondAmount')?.value || 0;
+    const maturityYears = this.transactionForm.get('maturityYears')?.value || 0;
+  
+    console.log('Calculating Interest Rate with:', { faceValue, bondAmount, maturityYears });
+  
+    if (faceValue > 0 && bondAmount > 0 && maturityYears > 0) {
+      this.calculatedInterestRate = this.computeInterestRate(faceValue, bondAmount, maturityYears);
+  
+      console.log('Calculated Interest Rate:', this.calculatedInterestRate);
+  
+      // Mettre à jour le champ du formulaire sans émettre d'événement supplémentaire
+      this.transactionForm.patchValue({
+        interestRate: this.calculatedInterestRate.toFixed(2) // Met à jour en tant que string formatée
+      }, { emitEvent: false });
+    } else {
+      console.warn('Invalid values for interest rate calculation');
+    }
+  }
+  
+  
+  
+  
+
+
+  
 
   calculateAIScore(): void {
     const investmentAmount = this.transactionForm.get('investmentAmount')?.value || 0;
@@ -132,7 +452,15 @@ getCryptoIconUrl(symbol: string | undefined): string {
   return url;
 }
 
- 
+obligationData: any = {
+  "government-bond": { faceValue: 10000, maturityYears: 10 },
+  "corporate-bond": { faceValue: 10000, maturityYears: 5 },
+  "municipal-bond": { faceValue: 5000, maturityYears: 15 },
+  "convertible-bond": { faceValue: 10000, maturityYears: 7 },
+  "zero-coupon-bond": { faceValue: 10000, maturityYears: 20 },
+  "junk-bond": { faceValue: 1000, maturityYears: 3 }
+};
+
   cryptoData: any = {};
 
 
@@ -155,8 +483,8 @@ getCryptoIconUrl(symbol: string | undefined): string {
       status: ['PENDING'], // Default value
       // Attributs pour la catégorie OBLIGATIONS
      bondAmount: [null, [Validators.required]],
-      interestRate: [null, [Validators.required]],
-      maturityDate: ['', Validators.required],
+     interestRate: [{ value: null, disabled: true }], // Champ calculé, désactivé
+      maturityYears: ['', Validators.required],
       issuer: ['', Validators.required],
       faceValue: [null, [Validators.required]],
        // Attributs pour la catégorie INTANGIBLES
@@ -168,11 +496,43 @@ getCryptoIconUrl(symbol: string | undefined): string {
     marketValue: [null, [Validators.required]], // Valeur marchande de l'actif intangible
     investmentAmount: [null, [Validators.required, Validators.min(1)]],
     expectedRevenue: [null, [Validators.required, Validators.min(0)]]
+
+    
   
       
     });
-    Chart.register(...registerables);
+     // Surveiller les changements dans les champs nécessaires pour le calcul
+     this.transactionForm.valueChanges.subscribe(values => {
+      console.log('Form values:', values);
+      
+    
+     
+      const { faceValue, bondAmount, maturityYears } = values;
+
+      
+
+      if (faceValue && bondAmount && maturityYears) {
+        this.calculateInterestRate();
+      }
+    });
+    
+    Chart.register(...registerables, annotationPlugin);
   }
+  computeInterestRate(faceValue: number, bondAmount: number, maturityYears: number): number {
+    console.log('Computing Interest Rate with:', {
+      faceValue, 
+      bondAmount, 
+      maturityYears
+    });
+  
+    if (faceValue && bondAmount && maturityYears > 0) {
+      const rate = Math.pow(faceValue / bondAmount, 1 / maturityYears) - 1;
+      console.log('Computed Rate:', rate);
+      return rate * 100;
+    }
+    return 0; // Retourne 0 si les valeurs sont invalides
+  }
+  
 
 
 
@@ -199,6 +559,10 @@ getCryptoIconUrl(symbol: string | undefined): string {
     
       // Mettre à jour le formulaire selon la catégorie
       this.updateFormForCategory();
+      this.transactionForm.valueChanges.subscribe(() => {
+       
+      });
+      
       
     });
     
@@ -314,7 +678,7 @@ updateFormValidators(): void {
   } else if (this.selectedCategory === 'OBLIGATIONS') {
       this.transactionForm.get('bondAmount')?.setValidators([Validators.required]);
       this.transactionForm.get('interestRate')?.setValidators([Validators.required]);
-      this.transactionForm.get('maturityDate')?.setValidators([Validators.required]);
+      this.transactionForm.get('maturityYears')?.setValidators([Validators.required]);
       this.transactionForm.get('issuer')?.setValidators([Validators.required]);
       this.transactionForm.get('faceValue')?.setValidators([Validators.required]);
   } else if (this.selectedCategory === 'INTANGIBLES') {

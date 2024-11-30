@@ -22,7 +22,7 @@ export interface Transaction {
   // Attributs pour la catégorie OBLIGATIONS
   bondAmount: number ; // Montant de l'obligation
   interestRate: number ; // Taux d'intérêt
-  maturityDate: Date ; // Date d'échéance
+  maturityYears: number ; // Date d'échéance
   issuer: string ; // Émetteur de l'obligation
   faceValue: number ; // Valeur nominale
     

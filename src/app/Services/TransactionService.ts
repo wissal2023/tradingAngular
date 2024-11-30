@@ -26,7 +26,7 @@ export class TransactionService {
     return of(this.description[intangibleAsset] || 'Description not available.');
   }
 createTransaction(challengeId: number, transaction: Transaction): Observable<Transaction> {
-  const apiUrl = `http://localhost:8089/home/api/transactions/${challengeId}/transactions`; // Inclure l'ID du challenge dans l'URL
+  const apiUrl = `http://localhost:8094/home/api/transactions/${challengeId}/transactions`; // Inclure l'ID du challenge dans l'URL
   return this.http.post<Transaction>(apiUrl, transaction,{
     headers: { 'Accept': '*/*' }
   });
