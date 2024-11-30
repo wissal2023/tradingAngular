@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IntradayService } from 'src/app/Services/IntradayService';
 
 @Component({
   selector: 'app-intra-day',
@@ -9,13 +8,11 @@ import { IntradayService } from 'src/app/Services/IntradayService';
 export class IntraDayComponent implements OnInit {
 
   stockData: any;
-  symbol: string = 'MSFT';  // Example
-  interval!: string;
-  constructor(private stockService: IntradayService) {}
+  symbol: string = 'MSFT';  
+  interval: string= '5min';
+  constructor() {}
 
   ngOnInit(): void {
-    this.stockService.getStockData(this.symbol, this.interval).subscribe((data) => {
-      this.stockData = data;
-    });
+    
   }
 }

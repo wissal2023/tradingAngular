@@ -1,0 +1,122 @@
+/* General styles for the page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Search Section */
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .search-input {
+    padding: 15px;
+    font-size: 18px;
+    width: 350px;
+    border: 2px solid #007bff;
+    border-radius: 25px;
+    box-sizing: border-box;
+  }
+  
+  .search-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* News container and individual news card */
+  .news-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));  /* Increase min width of cards */
+    gap: 30px;
+    padding: 30px;
+  }
+  
+  .news-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease-in-out;
+    max-width: 700px; /* Make cards larger */
+  }
+  
+  .news-card:hover {
+    transform: translateY(-10px);  /* Slightly bigger hover effect */
+  }
+  
+  .news-header {
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  
+  .news-title {
+    font-size: 24px;  /* Larger title */
+    font-weight: bold;
+    margin: 0;
+    color: #343a40;
+    line-height: 1.4;
+  }
+  
+  .news-date {
+    font-size: 16px;
+    color: #6c757d;
+    margin-top: 8px;
+  }
+  
+  .news-content {
+    padding: 20px;
+    font-size: 16px;  /* Slightly larger content font */
+    color: #495057;
+    line-height: 1.8;
+  }
+  
+  .read-more {
+    align-self: flex-end;
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    margin: 20px;
+    transition: background-color 0.3s;
+  }
+  
+  .read-more:hover {
+    background-color: #0056b3;
+  }
+  
+  /* No news message */
+  .no-news-message {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+    font-size: 18px;
+  }
+  
+  /* Error message */
+  .error-message {
+    text-align: center;
+    color: red;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
