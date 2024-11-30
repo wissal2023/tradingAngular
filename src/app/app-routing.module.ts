@@ -35,27 +35,29 @@ import { AdvancedBacktestingComponent } from './Front/BacktestComponent/advanced
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },    
   { path: 'home', component: LandingComponent }, 
-  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'reset-pwd', component: ResetPasswordComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'reset-pwd', component: ResetPasswordComponent },  
+  { path: 'activate-account', component: ActivateAccountComponent }, 
   { path: 'dash', component: BodyComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'ADMIN' } },
   { path: 'list-user', component: ListUsersComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'ADMIN' } },
+  
   { path: 'portfolio/:userId/:portfolioId', component: PortfolioComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'CUSTOMER' } },
-  { path: 'not-authorized', component: NotAuthorizedComponent },
-  { path: 'activate-account', component: ActivateAccountComponent }, 
   { path: 'form/:portfolioId', component: OrderFormComponent },
   { path: 'holding/:portfolioId', component: HoldingComponent },
-  { path: 'transaction', component: TransactionComponent }, 
   { path: 'news', component: FinancialNewsComponent }, 
   { path: 'option', component: OptionQuoteComponent }, 
   { path: 'oil', component: OilPricesQuoteComponent },
   { path: 'transactions/:portfolioId', component: ShowTransactionsComponent },
+  { path: 'watchlist', component: WatchlistComponent },
+
   { path: 'challenge', component: ChallengeComponent },
   { path: 'Transaction', component: TransactionchallengeComponent },
+  { path: 'transaction', component: TransactionComponent }, 
   { path: 'Transactions', component: TransactionchallengeComponent },
   { path: 'Transactions/:challengeId', component: TransactionchallengeComponent },
   { path: 'createchallenge', component: CreateChallengeComponent },
-  { path: 'watchlist', component: WatchlistComponent },
+
   { path: 'predict', component: PredictionComponent },
   { path: 'quizzes', component: QuizListComponent },
   { path: 'quiz/:id', component: QuizComponent },
@@ -64,7 +66,10 @@ const routes: Routes = [
   { path: 'optim', component: StrategyOptimizerComponent, canActivate: [AuthGuard] },
   { path: 'strategy-results', component: StrategyResultsComponent, canActivate: [AuthGuard] },
   { path: 'backtest-form', component: BacktestingFormComponent },
-  { path: 'backtest-results', component: BacktestingResultComponent }    
+  { path: 'backtest-results', component: BacktestingResultComponent },  
+
+  { path: 'not-authorized', component: NotAuthorizedComponent },
+
 ];
 
 @NgModule({

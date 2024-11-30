@@ -8,14 +8,14 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav ms-auto py-0">
       <a [routerLink]="['/home']" class="nav-item nav-link ">Home</a> 
-      <!-- Portfolio and Holdings links visible only when user is logged in -->
-      <a *ngIf="isLoggedIn" [routerLink]="['/portfolio', portfolioId]" class="nav-item nav-link">Portfolio</a>
+      <!-- Portfolio and Holdings links visible only when user is logged in  /portfolio/${user.id}/${user.portfolio.id} -->
+      <a *ngIf="isLoggedIn" [routerLink]="['/portfolio', user.id, portfolioId]" class="nav-item nav-link">Portfolio</a>
       <a *ngIf="isLoggedIn" [routerLink]="['/holding', portfolioId]" class="nav-item nav-link">Holdings</a>
       <a [routerLink]="['/market']" class="nav-item nav-link">Market</a>   
       <a [routerLink]="['/watchlist']" class="nav-item nav-link">Watchlist</a>      
-      <a [routerLink]="['/challenge']" class="nav-item nav-link">Challenges</a> 
+      <a *ngIf="isLoggedIn" [routerLink]="['/challenge']" class="nav-item nav-link">Challenges</a> 
       <a [routerLink]="['/news']" class="nav-item nav-link">News</a>
-      <div class="nav-item dropdown">
+      <div class="nav-item dropdown" *ngIf="isLoggedIn" >
         <a href="#" class=" nav-link backtest-link" data-bs-toggle="dropdown">
           <span class="dropdown-toggle">Backtest</span>
         </a>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TransactionService } from 'src/app/Services/TransactionService';
 import { Transaction } from 'src/app/Entity/Transactionn';
@@ -7,8 +7,6 @@ import { HttpClient } from '@angular/common/http';
 import { Chart, registerables } from 'chart.js';
 import { ActivatedRoute } from '@angular/router'; 
 import { debounceTime } from 'rxjs/operators';
-import { ChartData } from 'chart.js';
-import { ChartOptions } from 'chart.js';
 //import { BaseChartDirective } from 'ng2-charts';
 
 @Component({

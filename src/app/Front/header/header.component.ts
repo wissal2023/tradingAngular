@@ -15,17 +15,24 @@ export class HeaderComponent implements OnInit {
   marketStatus: any[] = [];
   isLoggedIn: boolean = false;  // To track the login status
   user!:User;
+
   constructor(private stockQuoteService: StockQuoteService, 
               private route: ActivatedRoute, 
-              private authService: AuthService) {}  // Inject AuthService here
+              private authService: AuthService) {}  
   ngOnInit(): void {
-    // Check if the user is logged in by checking user data in localStorage
-    this.isLoggedIn = !!this.authService.getCurrentUser();  // Use injected authService
+    this.isLoggedIn = !!this.authService.getCurrentUser(); // Check if user data exists in localStorage
     this.route.params.subscribe((params) => {
-      this.portfolioId = +params['portfolioId']; // Fetch portfolioId from route
+      this.portfolioId = +params['portfolioId'];
     });
+    // Fetch the logged-in user details
+  const currentUser = this.authService.getCurrentUser();
+  if (currentUser) {
+    this.user = currentUser;
+  }
     
   }
+
+  
 
   getMarketStatus(): void {
     this.stockQuoteService.getMarketStatus(this.stockQuoteService.apiKey).subscribe((response: any) => {

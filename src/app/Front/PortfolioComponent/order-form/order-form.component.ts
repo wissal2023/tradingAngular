@@ -1,12 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OrderType, PlacingOrder, Status, ActionType, AssetsType } from 'src/app/Entity/placing-order';
+import { OrderType, PlacingOrder, ActionType, AssetsType } from 'src/app/Entity/placing-order';
 import { PlacingOrderService } from 'src/app/Services/placing-order.service';
 import { StockQuoteService } from 'src/app/Services/stock-quote-service.service';
-import { Chart, registerables } from 'chart.js';
-import { HttpClient } from '@angular/common/http';
-import { ModalComponent } from '../modal/modal.component';
 
 
 
@@ -230,4 +227,5 @@ transformDataForChart(timeSeries: any): any[] {
     };
   }).reverse(); // Reverse to get chronological order
 }
+
 }
