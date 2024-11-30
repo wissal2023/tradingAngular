@@ -94,7 +94,7 @@
                                         <label class="input-group-text" for="duration">Duration</label>
                                         <select formControlName="duration" id="duration" class="form-select">
                                             <option value="Day only">day only</option>
-                                                <option value="GTC">Good till cancelled</option>
+                                            <option value="GTC">Good till cancelled</option>
                                         </select>
                                     </div>
                                 </div>
@@ -135,8 +135,7 @@
                                             <option value="%">%</option>
                                         </select>
                                     </div>
-                                </div>   
-
+                                </div> 
                                 <!--the rest of the tradeType-->                              
                                 <div *ngIf="orderForm.value.assetsType === 'COMMODITIES'">
                                     <div class="col-md-6 col-12">
@@ -157,8 +156,7 @@
                                             <input type="date" class="form-control" formControlName="expiryDate">
                                         </div>
                                     </div>
-                                </div> 
-                                                                           
+                                </div>                                                                            
                                 <div *ngIf="orderForm.value.assetsType === 'OPTIONS'">
                                     <div class="row">
                                         <div class="col-md-6 col-12">
@@ -175,17 +173,14 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>  
-
-                            
-                            
                             <!--the modal-->
                             <div class="row mt-3" *ngIf="isOrderTypeSelected">
                                 <div class="col">
                                     <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#info" (click)="onPreview()">Preview order</button>
                                 </div>
                             </div>
+
                             <app-modal [orderDetails]="orderDetails" (submitOrder)="onSubmit($event)"></app-modal>                                       
                         </div>
                     </form>

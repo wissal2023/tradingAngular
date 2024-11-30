@@ -12,8 +12,6 @@ export class OilPricesQuoteComponent implements OnInit {
   lastPrice: { date: string; value: number } | null = null;
   interval: string = 'monthly';
   errorMessage: string = '';
-
-  // Chart.js properties
   public barChartData: ChartData = { datasets: [] };
   public barChartLabels: string[] = [];
   public barChartOptions: ChartOptions = {
@@ -29,13 +27,10 @@ export class OilPricesQuoteComponent implements OnInit {
   };
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
-
   constructor(private stockQuoteService: StockQuoteService) {}
-
   ngOnInit(): void {
     //this.fetchBrentCrudePrices();
   }
-
   fetchBrentCrudePrices(): void {
     this.stockQuoteService.getBrentCrudePrices(this.interval).subscribe(
       (response: any) => {
@@ -43,12 +38,10 @@ export class OilPricesQuoteComponent implements OnInit {
           (a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime()
         ); // Sort by ascending date
         this.errorMessage = '';
-
         if (this.oilPrices.length > 0) {
           // Update lastPrice with the most recent data
           this.lastPrice = this.oilPrices[this.oilPrices.length - 1];
         }
-
         // Prepare chart data
         this.barChartLabels = this.oilPrices.map(price => price.date);
         this.barChartData = {
@@ -69,13 +62,8 @@ export class OilPricesQuoteComponent implements OnInit {
       }
     );
   }
-
   onIntervalChange(newInterval: string): void {
     this.interval = newInterval;
     this.fetchBrentCrudePrices();
   }
-
-
-
-
 }

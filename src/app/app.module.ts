@@ -50,7 +50,6 @@ import { ActivateAccountComponent } from './Front/UserComponent/activate-account
 import { ListTransactionComponent } from './Back/list-transaction/list-transaction.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { PortfolioComponent } from './Front/PortfolioComponent/portfolio/portfolio.component';
-import { StockQuoteComponent } from './Front/PortfolioComponent/stock-quote/stock-quote.component';
 import { HoldingComponent } from './Front/PortfolioComponent/holding/holding.component';
 import { WatchlistComponent } from './Front/PortfolioComponent/watchlist/watchlist.component';
 import { ChartComponent } from './Front/PortfolioComponent/chart/chart.component';
@@ -91,7 +90,6 @@ Chart.register(
   FooterFrontComponent,  
   HeaderComponent,  
   PortfolioComponent,  
-  StockQuoteComponent,  
   HoldingComponent,  
   TransactionComponent,
   LoginComponent,  

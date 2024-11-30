@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { StockQuoteService } from 'src/app/Services/stock-quote-service.service';
+import ApexCharts from 'apexcharts'; // Import ApexCharts
 
 @Component({
   selector: 'app-chart',
@@ -7,21 +7,16 @@ import { StockQuoteService } from 'src/app/Services/stock-quote-service.service'
   styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit {
-
   @Input() data: any[] = [];
   isCandlestickChart: boolean = true;  // Track current chart type
-
   constructor() {}
-
   ngOnInit() {
     this.renderChart(this.isCandlestickChart);
   }
-
   toggleChartType() {
     this.isCandlestickChart = !this.isCandlestickChart;
     this.renderChart(this.isCandlestickChart);  // Re-render chart with updated type
   }
-
   renderChart(isCandlestick: boolean) {
     const options = {
       chart: {
@@ -56,9 +51,8 @@ export class ChartComponent implements OnInit {
         align: 'left'
       }
     };
-
-    //const chart = new ApexCharts (document.querySelector("#candle"), options);
-   // chart.render();
+    const chart = new ApexCharts (document.querySelector("#candle"), options);
+    chart.render();
   }
 }
 

@@ -10,16 +10,6 @@ export class StockQuoteService {
   apiKey: string = 'GB675A5CC0KN3LWL';
   constructor(private http: HttpClient) {}
 
- // Get Brent crude oil prices
- getBrentCrudePrices(interval: string = 'monthly'): Observable<any> {
-  const params = new HttpParams()
-    .set('function', 'BRENT')         // Set the function to 'BRENT'
-    .set('interval', interval)        // Set the interval as a query parameter (default is 'monthly')
-    .set('apikey', this.apiKey)        // Set the datatype to 'json'
-
-  return this.http.get(this.apiUrl, { params });  // Perform the GET request to Alpha Vantage API
-}
-
    // Get historical options data
    getHistoricalOptions(symbol: string, date?: string): Observable<any> {
     const params = new HttpParams()
@@ -29,7 +19,15 @@ export class StockQuoteService {
 
     return this.http.get(this.apiUrl, { params }); // Perform the GET request to Alpha Vantage API
   }
+ // Get Brent crude oil prices
+ getBrentCrudePrices(interval: string = 'monthly'): Observable<any> {
+  const params = new HttpParams()
+    .set('function', 'BRENT')         // Set the function to 'BRENT'
+    .set('interval', interval)        // Set the interval as a query parameter (default is 'monthly')
+    .set('apikey', this.apiKey)        // Set the datatype to 'json'
 
+  return this.http.get(this.apiUrl, { params });  // Perform the GET request to Alpha Vantage API
+}
    // get stock data
    getStockQuote(symbol: string, apiKey: string): Observable<any> {
     const params = {
@@ -38,16 +36,7 @@ export class StockQuoteService {
       apikey: apiKey
     };
     return this.http.get(this.apiUrl, { params });
-  }
-
-  private eodhUrl = 'http://localhost:8094/home/API/financial-news';
-  apiToken: string = '6719a97987dbd2.59347935';   
-  getFinancialNews(ticker: string, limit: number = 10, offset: number = 0): Observable<any> {
-    const params = new HttpParams()
-      .set('limit', limit.toString())
-      .set('offset', offset.toString());
-    return this.http.get(`${this.eodhUrl}/${ticker}`, { params });
-  }
+  }  
   // search glabal Market
   searchStockSymbols(keywords: string, apiKey: string): Observable<any> {
     const params = {
@@ -66,8 +55,7 @@ export class StockQuoteService {
 
     return this.http.get(this.apiUrl, { params });
   }
-
-// search, for the chart in the order form
+// chart in the order form
 getDailyTimeSeries(symbol: string, apiKey: string): Observable<any> {
   const params = {
     function: 'TIME_SERIES_DAILY',
@@ -79,5 +67,16 @@ getDailyTimeSeries(symbol: string, apiKey: string): Observable<any> {
 }
 
 
+private eodhUrl = 'http://localhost:8094/home/API/financial-news';
+  apiToken: string = '6719a97987dbd2.59347935';   
+  getFinancialNews(ticker: string, limit: number = 10, offset: number = 0): Observable<any> {
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('offset', offset.toString());
+    return this.http.get(`${this.eodhUrl}/${ticker}`, { params });
+  }
 }
+
+
+
 
