@@ -8,7 +8,7 @@ import { PlacingOrder } from '../Entity/placing-order';
 })
 export class PlacingOrderService {
   // url in spring:  http://localhost:8090/home/placingOrder/{{portfolioId}}/add-order
-  private baseUrl = 'http://localhost:8090/home/placingOrder';
+  private baseUrl = 'http://localhost:8094/home/placingOrder';
   constructor(private http: HttpClient) {}
 
   addPlacingOrder(portfolioId: string, order: PlacingOrder): Observable<PlacingOrder> {

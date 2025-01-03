@@ -7,7 +7,7 @@ import { Transaction } from '../Entity/transaction';
   providedIn: 'root'
 })
 export class TransactionService {
-  private baseUrl = 'http://localhost:8090/home/transaction';
+  private baseUrl = 'http://localhost:8094/home/transaction';
   constructor(private http: HttpClient) {}
   getAllTransactions(): Observable<Transaction[]> {
 

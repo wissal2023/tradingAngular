@@ -1,0 +1,115 @@
+<div *ngIf="!isAdmin" class="mb-2">
+    <app-header ></app-header>
+    <div class="row mt-4" [ngStyle]="{'margin-left': '1rem'}">
+        <div class="col-6 col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body px-3 py-4-5 tags">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="stats-icon purple userfav">
+                                <i class="iconly-boldHeart"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h6 class="text-muted font-semibold">User Favourite</h6>
+                            <h6 class="font-extrabold mb-0">{{ mostPurchasedPolicy.name ? mostPurchasedPolicy.name : 'No policies purchased' }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body px-3 py-4-5 tags">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="stats-icon blue bestvalue">
+                                <i class="iconly-boldStar"></i> 
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h6 class="text-muted font-semibold">Best Value</h6>
+                            <h6 class="font-extrabold mb-0">{{ bestValuePolicy.name ? bestValuePolicy.name : 'No policies available' }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Policies List</h2>
+                    </div>
+                    <div class="card-body mt-3">
+                        <input type="search" [(ngModel)]="search" class="form-control" placeholder="Search..." />
+                    </div>
+                    <table id="example1" class="table table-borderless table-hover">
+                        <thead class="thead-list">
+                            <tr>
+                                <th>Name</th>
+                                <th>Premium</th>
+                                <th>Max Coverage Amount</th>
+                                <th>Duration (DAYS)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let policy of policies | searchfilter: search">
+                            <tr>
+                                <td>{{ policy.name }}</td>
+                                <td>{{ policy.premium }}</td>
+                                <td>{{ policy.maxCoverageAmount }}</td>
+                                <td>{{ policy.durationInDays }}</td>
+                                <td>
+                                    <button *ngIf="!isAdmin" class="btn btn-primary" [routerLink]="['/policy-details', policy.id]" [ngStyle]="{'margin-right': '1rem'}">
+                                        Details
+                                    </button>
+                                    <button *ngIf="!isAdmin" class="btn btn-success">
+                                        Purchase
+                                    </button>
+                                    <button *ngIf="isAdmin" class="btn btn-primary" (click)="detailsPolicy(policy)" [ngStyle]="{'margin-right': '1rem'}">
+                                        Details
+                                    </button>
+                                    <button *ngIf="isAdmin" 
+                                        class="btn btn-danger"
+                                        (click)="selectedPolicy = policy"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Policy Deletion Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this user's account ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="deletePolicy(selectedPolicy.id)">
+                    Delete 
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

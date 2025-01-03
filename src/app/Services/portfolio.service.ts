@@ -7,7 +7,7 @@ import { Portfolio } from '../Entity/portfolio';
   providedIn: 'root'
 })
 export class PortfolioService {
-  private baseUrl = 'http://localhost:8090/home/portfolio';
+  private baseUrl = 'http://localhost:8094/home/portfolio';
   constructor(private http: HttpClient) {}
   
   getAllPortfolios(): Observable<Portfolio[]> {

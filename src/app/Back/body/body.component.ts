@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import * as ApexCharts from 'apexcharts';
 import { ComponentStateService } from 'src/app/component-state.service';
 
@@ -14,7 +14,7 @@ export class BodyComponent implements OnInit{
 
   ngOnInit() {
       this.componentStateService.currentComponent$.subscribe(component => {
-          this.currentComponent = component;
+          this.currentComponent = component;         
       });
   }
 

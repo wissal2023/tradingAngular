@@ -1,0 +1,86 @@
+<div class="card">
+    <div class="card-header">
+        <h2>{{selectedPolicy.name}}</h2>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                    <form [formGroup]="updateForm">
+                        <div [formGroupName]="'policyData'">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" class="form-control" [formControlName]="'name'">
+                                <div class="help-block"
+                                    *ngIf="updateForm.get('policyData.name')!.invalid && updateForm.get('policyData.name')!.touched">
+                                    <span *ngIf="updateForm.hasError('required','policyData.name')">Please enter the policy name!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea name="description" id="description" class="form-control"
+                                    [formControlName]="'description'"></textarea>
+                                <div class="help-block"
+                                    *ngIf="updateForm.get('policyData.description')!.invalid && updateForm.get('policyData.description')!.touched">
+                                    <span *ngIf="updateForm.hasError('required','policyData.description')">Please enter the policy's description!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="premium">Premium</label>
+                                <input type="text" id="premium" class="form-control" [formControlName]="'premium'">
+                                <div class="help-block"
+                                    *ngIf="updateForm.get('policyData.premium')!.invalid && updateForm.get('policyData.premium')!.touched">
+                                    <span *ngIf="updateForm.hasError('required','policyData.premium')">Please enter the policy's premium value!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="coverageDetails">Coverage Details</label>
+                                <textarea name="coverageDetails" id="coverageDetails" class="form-control"
+                                    [formControlName]="'coverageDetails'"></textarea>
+                                <div class="help-block"
+                                    *ngIf="updateForm.get('policyData.coverageDetails')!.invalid && updateForm.get('policyData.coverageDetails')!.touched">
+                                    <span *ngIf="updateForm.hasError('required','policyData.coverageDetails')">Please enter the policy's coverage details!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="maxCoverageAmount">Maximum Covered Amount</label>
+                                <input type="number" id="maxCoverageAmount" class="form-control"
+                                    [formControlName]="'maxCoverageAmount'">
+                                <div class="help-block"
+                                    *ngIf="updateForm.get('policyData.maxCoverageAmount')!.invalid && updateForm.get('policyData.maxCoverageAmount')!.touched">
+                                    <span *ngIf="updateForm.hasError('required','policyData.maxCoverageAmount')">Please enter the policy's max covered amount!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="conditions">Conditions</label>
+                                <textarea name="conditions" id="conditions" class="form-control"
+                                    [formControlName]="'conditions'"></textarea>
+                                <div class="help-block"
+                                    *ngIf="updateForm.get('policyData.conditions')!.invalid && updateForm.get('policyData.conditions')!.touched">
+                                    <span *ngIf="updateForm.hasError('required','policyData.conditions')">Please enter the policy's conditions!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="durationInDays">Duration (Days)</label>
+                                <input type="text" id="durationInDays" class="form-control" [formControlName]="'durationInDays'">
+                                <div class="help-block"
+                                    *ngIf="updateForm.get('policyData.durationInDays')!.invalid && updateForm.get('policyData.durationInDays')!.touched">
+                                    <span *ngIf="updateForm.hasError('required','policyData.durationInDays')">Please enter the policy duration!</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <button class="btn btn-primary" type="submit" [disabled]="updateForm.invalid"
+                            (click)="onSubmit()" [ngStyle]="{'margin-right': '1rem'}">Update</button> 
+                        <button class="btn btn-secondary" (click)="detailPolicy()">
+                            Back
+                        </button>
+                        <div class="help-block" *ngIf="errorOccured">
+                            <span>{{errorMessage}}</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

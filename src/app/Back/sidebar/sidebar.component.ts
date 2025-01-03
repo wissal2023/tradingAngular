@@ -8,6 +8,7 @@ import { ComponentStateService } from 'src/app/component-state.service';
 })
 export class SidebarComponent {
   activeComponent: string = 'dash';
+  activeSubmenu: string | null = null;
 
   constructor(private componentStateService: ComponentStateService) {
     this.componentStateService.currentComponent$.subscribe(component => {
@@ -16,6 +17,11 @@ export class SidebarComponent {
 }
 
 setComponent(component: string) {
-    this.componentStateService.changeComponent(component);
+    this.componentStateService.changeComponent(component);    
+}
+
+toggleSubMenu(event: Event, submenu: string) {
+  event.preventDefault();
+  this.activeSubmenu = this.activeSubmenu === submenu ? null : submenu;
 }
 }

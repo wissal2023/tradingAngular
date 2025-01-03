@@ -1,0 +1,50 @@
+<div *ngIf="!isAdmin" class="mb-4">
+    <app-header ></app-header>
+</div>
+<div class="container">
+    <div class="row">
+        <h4>Policy Details</h4>
+        <hr>
+        <table class="table table-borderless info">
+            <tr>
+                <th>Name :</th>
+                <td>{{selectedPolicy.name}}</td>
+            </tr>
+            <tr>
+                <th>Description :</th>
+                <td>{{selectedPolicy.description}}</td>
+            </tr>
+            <tr>
+                <th>Premium :</th>
+                <td>{{selectedPolicy.premium}}</td>
+            </tr>
+            <tr>
+                <th>Coverage Details :</th>
+                <td>{{selectedPolicy.coverageDetails}}</td>
+            </tr>
+            <tr>
+                <th>Maximum Amount Covered :</th>
+                <td>${{selectedPolicy.maxCoverageAmount}}</td>
+            </tr>
+            <tr>
+                <th>Conditions :</th>
+                <td>{{selectedPolicy.conditions}}</td>
+            </tr>
+            <tr>
+                <th>Duration (Days) :</th>
+                <td>{{selectedPolicy.durationInDays}} days</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <button *ngIf="isAdmin" class="btn btn-primary" (click)="updatePolicy()" [ngStyle]="{'margin-right': '1rem'}">
+            Update Policy
+        </button>
+        <button *ngIf="isAdmin" class="btn btn-secondary" (click)="listPolicies()">
+            Back
+        </button>
+        <button *ngIf="!isAdmin" class="btn btn-secondary" [routerLink]="['/list-policies']">
+            Back
+        </button>
+    </div>
+</div>

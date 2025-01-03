@@ -1,0 +1,32 @@
+.userfav i {
+    font-size: 36px;
+    color: #b60110;   
+}
+
+.userfav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff94a6;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.bestvalue i {
+    font-size: 36px;
+    color: #e7c300;   
+}
+
+.bestvalue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffeba4;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+.tags {
+    padding: 1rem !important;
+}

@@ -1,6 +1,7 @@
 import { User } from './user';
 import { Transaction } from './transaction';
 import { Holding } from './holding';
+import { UserInsurance } from './UserInsurance';
 
 export class Portfolio {
     id!: number;
@@ -16,4 +17,5 @@ export class Portfolio {
     user!: User;
     transactions!: Transaction[];
     holdings!: Holding[];
+    userInsurances!: UserInsurance[];
 }

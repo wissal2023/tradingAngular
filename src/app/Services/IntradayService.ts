@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class IntradayService {
 
-  private apiUrl = 'http://localhost:8080/api/stocks';
+  private apiUrl = 'http://localhost:8094/api/stocks';
 
   constructor(private http: HttpClient) { }
 

@@ -1,0 +1,80 @@
+<div class="card">
+    <div class="card-header">
+        <h2>Add new Policy</h2>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                    <form [formGroup]="addForm">
+                        <div [formGroupName]="'policyData'">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" class="form-control" [formControlName]="'name'">
+                                <div class="help-block"
+                                    *ngIf="addForm.get('policyData.name')!.invalid && addForm.get('policyData.name')!.touched">
+                                    <span *ngIf="addForm.hasError('required','policyData.name')">Please enter the policy name!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea name="description" id="description" class="form-control"
+                                    [formControlName]="'description'"></textarea>
+                                <div class="help-block"
+                                    *ngIf="addForm.get('policyData.description')!.invalid && addForm.get('policyData.description')!.touched">
+                                    <span *ngIf="addForm.hasError('required','policyData.description')">Please enter the policy's description!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="premium">Premium</label>
+                                <input type="text" id="premium" class="form-control" [formControlName]="'premium'">
+                                <div class="help-block"
+                                    *ngIf="addForm.get('policyData.premium')!.invalid && addForm.get('policyData.premium')!.touched">
+                                    <span *ngIf="addForm.hasError('required','policyData.premium')">Please enter the policy's premium value!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="coverageDetails">Coverage Details</label>
+                                <textarea name="coverageDetails" id="coverageDetails" class="form-control"
+                                    [formControlName]="'coverageDetails'"></textarea>
+                                <div class="help-block"
+                                    *ngIf="addForm.get('policyData.coverageDetails')!.invalid && addForm.get('policyData.coverageDetails')!.touched">
+                                    <span *ngIf="addForm.hasError('required','policyData.coverageDetails')">Please enter the policy's coverage details!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="maxCoverageAmount">Maximum Covered Amount</label>
+                                <input type="number" id="maxCoverageAmount" class="form-control"
+                                    [formControlName]="'maxCoverageAmount'">
+                                <div class="help-block"
+                                    *ngIf="addForm.get('policyData.maxCoverageAmount')!.invalid && addForm.get('policyData.maxCoverageAmount')!.touched">
+                                    <span *ngIf="addForm.hasError('required','policyData.maxCoverageAmount')">Please enter the policy's max covered amount!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="conditions">Conditions</label>
+                                <textarea name="conditions" id="conditions" class="form-control"
+                                    [formControlName]="'conditions'"></textarea>
+                                <div class="help-block"
+                                    *ngIf="addForm.get('policyData.conditions')!.invalid && addForm.get('policyData.conditions')!.touched">
+                                    <span *ngIf="addForm.hasError('required','policyData.conditions')">Please enter the policy's conditions!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="durationInDays">Duration (Days)</label>
+                                <input type="text" id="durationInDays" class="form-control" [formControlName]="'durationInDays'">
+                                <div class="help-block"
+                                    *ngIf="addForm.get('policyData.durationInDays')!.invalid && addForm.get('policyData.durationInDays')!.touched">
+                                    <span *ngIf="addForm.hasError('required','policyData.durationInDays')">Please enter the policy duration!</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <button class="btn btn-primary" type="submit" [disabled]="addForm.invalid"
+                            (click)="onSubmit()" [ngStyle]="{'margin-right': '1rem'}">Add</button> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
